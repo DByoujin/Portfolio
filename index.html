@@ -125,7 +125,7 @@
             <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
                 
                 <!-- Column 1: 프로필 -->
-                <div class="card p-6 flex flex-col h-full">
+                <div class="card p-6 flex flex-col">
                     <div class="flex flex-col items-center text-center">
                         <img class="w-72 h-72 rounded-full mb-4 object-cover ring-4 ring-white/50 shadow-lg" src="images/1.webp" alt="프로필 사진">
                         <h1 class="text-2xl font-bold text-gray-900">김정혁</h1>
@@ -376,6 +376,7 @@
         const toggleBtn = document.getElementById('toggle-experience-btn');
         const moreContent = document.getElementById('more-experience');
 
+    if (toggleBtn) {
         toggleBtn.addEventListener('click', () => {
             const isHidden = moreContent.classList.contains('show');
             
@@ -387,6 +388,7 @@
                 toggleBtn.textContent = '접기';
             }
         });
+    }
 
         // 페이지 로딩 스크립트
         window.onload = () => {
