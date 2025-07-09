@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeonghyeok Kim - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans KR', sans-serif;
+            background-color: #f0f2f5; /* 기본 배경색 */
+        }
+        .contact-link {
+            transition: color 0.2s;
+        }
+        .contact-link:hover {
+            color: #3b82f6;
+        }
+        /* 글래스모피즘 카드 스타일 */
+        .card {
+            background-color: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 1rem; /* rounded-2xl */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.15);
+        }
+        .portfolio-card img {
+            transition: transform 0.3s ease;
+            border-radius: 1rem 1rem 0 0; /* 상단 모서리 둥글게 처리 */
+        }
+        .portfolio-card:hover img {
+            transform: scale(1.05);
+        }
+        #modal-panel.hidden {
+            display: none;
+        }
+        /* 더보기 콘텐츠를 위한 스타일 */
+        #more-experience {
+            transition: max-height 0.7s ease-in-out, opacity 0.5s ease-in-out;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+        #more-experience.show {
+            max-height: 1000px; /* 충분한 높이 값 */
+            opacity: 1;
+        }
+        /* 움직이는 배경 블롭 스타일 */
+        .animate-blob {
+            animation: blob 10s infinite;
+        }
+        .animation-delay-2000 {
+            animation-delay: -2s;
+        }
+        .animation-delay-4000 {
+            animation-delay: -4s;
+        }
+        @keyframes blob {
+            0%, 100% { transform: translate(0px, 0px) scale(1); }
+            33% { transform: translate(80px, -100px) scale(1.2); }
+            66% { transform: translate(-60px, 40px) scale(0.9); }
+        }
+        /* 로딩 스피너 */
+        #loader {
+            transition: opacity 0.5s ease-out;
+        }
+        /* 모달 애니메이션 스타일 */
+        #modal-panel {
+            transition: opacity 0.3s ease-in-out;
+        }
+        #modal-container {
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+        }
+        /* 스크롤 헤더 스타일 */
+        #main-header {
+            transition: all 0.3s ease-in-out;
+        }
+        #main-header.scrolled {
+            background-color: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- 로딩 스피너 -->
+    <div id="loader" class="fixed inset-0 z-50 flex items-center justify-center bg-f0f2f5">
+        <div class="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+    </div>
+
+    <!-- 실제 페이지 콘텐츠 (초기에는 숨김) -->
+    <div id="page-content" class="opacity-0 transition-opacity duration-500">
+        <!-- 움직이는 배경 -->
+        <div class="fixed inset-0 -z-10 overflow-hidden">
+            <div class="absolute top-0 -left-20 w-96 h-96 bg-purple-200 rounded-full mix-blend-multiply filter blur-2xl opacity-40 animate-blob"></div>
+            <div class="absolute top-0 -right-20 w-96 h-96 bg-yellow-200 rounded-full mix-blend-multiply filter blur-2xl opacity-40 animate-blob animation-delay-2000"></div>
+            <div class="absolute -bottom-20 left-1/3 w-96 h-96 bg-pink-200 rounded-full mix-blend-multiply filter blur-2xl opacity-40 animate-blob animation-delay-4000"></div>
+        </div>
+
+        <!-- 상단 고정 헤더 -->
+        <header id="main-header" class="fixed top-0 left-0 right-0 z-40">
+            <div class="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+                <h1 class="text-xl font-bold text-gray-800 py-3 flex items-center">
+                    <span class="text-2xl mr-3">👋</span>
+                    <span>김정혁 포트폴리오</span>
+                </h1>
+            </div>
+        </header>
+
+        <!-- 메인 컨테이너 -->
+        <div class="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 pt-24 pb-16 sm:pb-24">
+            
+            <!-- 상단 그리드 섹션 -->
+            <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
+                
+                <!-- Column 1: 프로필 -->
+                <div class="card p-6 flex flex-col h-full">
+                    <div class="flex flex-col items-center text-center">
+                        <img class="w-48 h-48 rounded-full mb-4 object-cover ring-4 ring-white/50 shadow-lg" src="https://placehold.co/200x200/e2e8f0/334155?text=Profile" alt="김정혁 프로필 사진">
+                        <h1 class="text-2xl font-bold text-gray-900">김정혁</h1>
+                        <h2 class="text-md text-gray-700 mb-4">Product Designer</h2>
+                        <p class="text-gray-600 leading-relaxed text-sm mb-6">
+                            사용자 경험을 중심으로 문제를 해결하고 가치를 만드는 프로덕트 디자이너입니다. 비즈니스와 사용자 모두를 만족시키는 직관적이고 아름다운 제품을 디자인합니다.
+                        </p>
+                        <div class="flex justify-center flex-wrap gap-x-5 gap-y-2 text-gray-500 font-medium mt-auto pt-4">
+                            <a href="mailto:dbyoujin@gmail.com" class="contact-link flex items-center gap-1.5">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                                <span>Email</span>
+                            </a>
+                            <a href="https://www.instagram.com/your_username" target="_blank" rel="noopener noreferrer" class="contact-link flex items-center gap-1.5">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                                <span>Instagram</span>
+                            </a>
+                            <a href="https://github.com/dbyoujin" target="_blank" rel="noopener noreferrer" class="contact-link flex items-center gap-1.5">
+                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                                <span>GitHub</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Column 2: 보유 기술 -->
+                <div class="card p-6">
+                    <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center"><span class="text-2xl mr-3">🛠️</span>보유 기술</h3>
+                    <div class="space-y-4 text-sm">
+                        <div>
+                            <h4 class="font-semibold text-gray-700">Design & Prototyping</h4>
+                            <p class="text-gray-600">Figma, Sketch, Adobe XD, ProtoPie, Framer</p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-700">User Research</h4>
+                            <p class="text-gray-600">Interview, Survey, Usability Test, Persona</p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-700">Collaboration</h4>
+                            <p class="text-gray-600">Jira, Confluence, Slack</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Column 3: 경력 -->
+                <div class="card p-6 flex flex-col">
+                    <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center"><span class="text-2xl mr-3">📄</span>경력</h3>
+                    <div class="space-y-5 text-sm flex-grow">
+                        <!-- 항상 보이는 항목 -->
+                        <div>
+                            <h4 class="font-bold text-gray-800 mb-2">개발 경력</h4>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">카카오 (Kakao Corp)</h4>
+                                <p class="text-gray-600">Product Designer</p>
+                                <p class="text-xs text-gray-500 mt-1">2021 - 현재</p>
+                            </div>
+                        </div>
+                        <!-- '더보기'로 숨겨질 부분 -->
+                        <div id="more-experience" class="space-y-5">
+                             <div class="pt-5 border-t border-gray-200/60">
+                                <h4 class="font-bold text-gray-800 mb-3">문학 활동 경력</h4>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">네이버 (Naver Corp)</h4>
+                                    <p class="text-gray-600">UX/UI Designer</p>
+                                    <p class="text-xs text-gray-500 mt-1">2019 - 2021</p>
+                                </div>
+                            </div>
+                             <div class="pt-5 border-t border-gray-200/60">
+                                <h4 class="font-bold text-gray-800 mb-3">예술인 교육 수료</h4>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">라인 (Line Plus)</h4>
+                                    <p class="text-gray-600">Intern</p>
+                                    <p class="text-xs text-gray-500 mt-1">2017 - 2019</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 더보기 버튼 -->
+                    <div class="mt-4 text-center">
+                        <button id="toggle-experience-btn" class="text-sm font-bold text-blue-600 hover:text-blue-800 transition-colors">
+                            더보기
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 구분선 -->
+            <hr class="border-t-2 border-gray-300/30 my-16">
+
+            <!-- 포트폴리오 섹션 -->
+            <section id="portfolio">
+                <h2 class="text-3xl font-bold mb-12 text-gray-900 text-center flex items-center justify-center"><span class="text-3xl mr-3">✨</span>Projects</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                     <!-- 포트폴리오 아이템 1 -->
+                    <div class="card portfolio-card cursor-pointer" onclick="openModal('project1')">
+                        <img src="https://placehold.co/600x400/a5b4fc/1e293b?text=Kakao+Gift" alt="카카오톡 선물하기 '선물홈' 개편" class="w-full h-48 object-cover">
+                        <div class="p-5">
+                            <h4 class="font-bold text-lg mb-1">카카오톡 선물하기 > ‘선물홈’ 개편</h4>
+                            <p class="text-gray-600 text-sm mb-3">선물하기의 첫인상인 ‘선물홈’의 탐색 경험을 개선하여, 더 높은 탐색 효율과 만족도를 제공하고자 했습니다.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">UX/UI Design</span>
+                                <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Interaction</span>
+                                <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded-full">User Research</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 포트폴리오 아이템 2 -->
+                    <div class="card portfolio-card cursor-pointer" onclick="openModal('project2')">
+                        <img src="https://placehold.co/600x400/93c5fd/1e293b?text=Kakao+Shopping" alt="카카오톡 쇼핑하기 '마이스토어' 개편" class="w-full h-48 object-cover">
+                        <div class="p-5">
+                            <h4 class="font-bold text-lg mb-1">카카오톡 쇼핑하기 > ‘마이스토어’ 개편</h4>
+                            <p class="text-gray-600 text-sm mb-3">쇼핑하기 내 개인화 영역인 ‘마이스토어’의 정보 구조를 개편하여, 유저의 쇼핑 편의성을 증대시키고자 했습니다.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">UX/UI Design</span>
+                                <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Interaction</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Awards 섹션 -->
+            <section id="awards" class="mt-16">
+                <hr class="border-t-2 border-gray-300/30 my-16">
+                <h2 class="text-3xl font-bold mb-12 text-gray-900 text-center flex items-center justify-center"><span class="text-3xl mr-3">🏆</span>Awards</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                     <!-- Award 아이템 1 -->
+                    <div class="card portfolio-card cursor-pointer" onclick="openModal('award1')">
+                        <img src="https://placehold.co/600x400/fde047/1e293b?text=Award+1" alt="디자인 우수상" class="w-full h-48 object-cover">
+                        <div class="p-5">
+                            <h4 class="font-bold text-lg mb-1">디자인 우수상</h4>
+                            <p class="text-gray-600 text-sm mb-3">한국 디자인 진흥원 (2023)</p>
+                        </div>
+                    </div>
+
+                     <!-- Award 아이템 2 -->
+                    <div class="card portfolio-card cursor-pointer" onclick="openModal('award2')">
+                        <img src="https://placehold.co/600x400/f9a8d4/1e293b?text=Award+2" alt="올해의 아티스트 위촉장" class="w-full h-48 object-cover">
+                        <div class="p-5">
+                            <h4 class="font-bold text-lg mb-1">올해의 아티스트 위촉장</h4>
+                            <p class="text-gray-600 text-sm mb-3">서울문화재단 (2022)</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 푸터 -->
+            <footer class="text-center text-gray-500 mt-20 pt-8 border-t-2 border-gray-300/30">
+                <p>&copy; 2024 Jeonghyeok Kim. All Rights Reserved.</p>
+            </footer>
+        </div>
+    </div>
+
+    <!-- 모달 (팝업) 창 -->
+    <div id="modal-panel" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 opacity-0">
+        <div id="modal-backdrop" class="fixed inset-0 bg-black bg-opacity-60" onclick="closeModal()"></div>
+        
+        <!-- 모달 컨텐츠 -->
+        <div id="modal-container" class="bg-white rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto relative z-10 opacity-0 scale-95">
+            <div class="p-6 sm:p-8">
+                <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+                <div id="modal-content"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 프로젝트 및 Award 상세 정보
+        const itemDetails = {
+            project1: {
+                title: "카카오톡 선물하기 > ‘선물홈’ 개편",
+                image: "https://placehold.co/800x500/a5b4fc/1e293b?text=Kakao+Gift+Detail",
+                description: "<h4>프로젝트 목표</h4><p>선물하기의 첫인상인 ‘선물홈’의 탐색 경험을 개선하여, 더 높은 탐색 효율과 만족도를 제공하는 것을 목표로 했습니다. 사용자가 선물을 고르는 과정 자체에서 즐거움을 느낄 수 있도록 개인화 추천과 트렌드 탐색 기능을 강화했습니다.</p><br><h4>주요 역할 및 성과</h4><p>사용자 리서치를 통해 기존 선물홈의 문제점을 파악하고, 이를 바탕으로 새로운 정보 구조를 설계했습니다. A/B 테스트를 통해 제안된 디자인이 기존 대비 탐색 시간을 15% 단축시키고, 구매 전환율을 5% 향상시키는 성과를 거두었습니다.</p>"
+            },
+            project2: {
+                title: "카카오톡 쇼핑하기 > ‘마이스토어’ 개편",
+                image: "https://placehold.co/800x500/93c5fd/1e293b?text=Kakao+Shopping+Detail",
+                description: "<h4>프로젝트 목표</h4><p>쇼핑하기 내 개인화 영역인 ‘마이스토어’의 정보 구조를 개편하여, 유저의 쇼핑 편의성을 증대시키는 것을 목표로 했습니다. 찜한 상품, 최근 본 상품, 단골 스토어 등 흩어져 있던 개인화 정보를 한 곳에서 쉽게 관리할 수 있도록 개선했습니다.</p><br><h4>주요 역할 및 성과</h4><p>UI/UX 설계를 주도하며, 사용자가 원하는 정보에 빠르게 접근할 수 있는 탭 구조를 제안하고 구현했습니다. 개편 후 '마이스토어'의 월간 활성 사용자(MAU)가 30% 증가하는 유의미한 성과를 달성했습니다.</p>"
+            },
+            award1: {
+                title: "디자인 우수상",
+                image: "https://placehold.co/800x600/fde047/1e293b?text=Certificate+Image",
+                description: "<h4>한국 디자인 진흥원 (2023)</h4><p>창의적인 디자인과 사용자 중심의 접근 방식을 인정받아 디자인 우수상을 수상했습니다.</p>"
+            },
+            award2: {
+                title: "올해의 아티스트 위촉장",
+                image: "https://placehold.co/800x600/f9a8d4/1e293b?text=Certificate+Image",
+                description: "<h4>서울문화재단 (2022)</h4><p>문화 예술 발전에 기여한 공로를 인정받아 올해의 아티스트로 위촉되었습니다.</p>"
+            }
+        };
+
+        // 모달 제어 스크립트
+        const modalPanel = document.getElementById('modal-panel');
+        const modalContainer = document.getElementById('modal-container');
+        const modalContent = document.getElementById('modal-content');
+
+        function openModal(itemId) {
+            const details = itemDetails[itemId];
+            if (!details) return;
+
+            modalContent.innerHTML = `
+                <img src="${details.image}" alt="${details.title}" class="w-full h-auto object-contain rounded-lg mb-6 max-h-[60vh]">
+                <h3 class="text-2xl sm:text-3xl font-bold mb-4 text-center">${details.title}</h3>
+                <div class="prose max-w-none text-gray-600 text-center">${details.description}</div>
+            `;
+            
+            modalPanel.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+
+            // 애니메이션을 위한 약간의 지연
+            setTimeout(() => {
+                modalPanel.classList.remove('opacity-0');
+                modalContainer.classList.remove('opacity-0', 'scale-95');
+            }, 10);
+        }
+
+        function closeModal() {
+            modalPanel.classList.add('opacity-0');
+            modalContainer.classList.add('opacity-0', 'scale-95');
+            
+            setTimeout(() => {
+                modalPanel.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }, 300); // transition 시간과 일치
+        }
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && !modalPanel.classList.contains('hidden')) {
+                closeModal();
+            }
+        });
+
+        // '더보기' 기능 스크립트
+        const toggleBtn = document.getElementById('toggle-experience-btn');
+        const moreContent = document.getElementById('more-experience');
+
+        toggleBtn.addEventListener('click', () => {
+            const isHidden = moreContent.classList.contains('show');
+            
+            if (isHidden) {
+                moreContent.classList.remove('show');
+                toggleBtn.textContent = '더보기';
+            } else {
+                moreContent.classList.add('show');
+                toggleBtn.textContent = '접기';
+            }
+        });
+
+        // 페이지 로딩 스크립트
+        window.onload = () => {
+            const loader = document.getElementById('loader');
+            const pageContent = document.getElementById('page-content');
+
+            // 로더를 서서히 사라지게 함
+            loader.style.opacity = '0';
+            setTimeout(() => {
+                loader.style.display = 'none';
+            }, 500); // opacity transition 시간과 일치
+
+            // 페이지 콘텐츠를 서서히 나타나게 함
+            pageContent.style.opacity = '1';
+        };
+
+        // 상단 헤더 스크롤 효과
+        const header = document.getElementById('main-header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    </script>
+
+</body>
+</html>
