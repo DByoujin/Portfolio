@@ -282,8 +282,9 @@
     <!-- AOS (Animate On Scroll) 라이브러리 JS 추가 -->
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
-        // AOS 초기화
+        // AOS 초기화 (모바일에서는 비활성화)
         AOS.init({
+            disable: 'mobile', // 모바일 기기에서 비활성화
             duration: 800, // 애니메이션 지속 시간 (밀리초)
             once: true      // 애니메이션이 한 번만 실행되도록 설정
         });
