@@ -1,0 +1,81 @@
+body {
+    font-family: 'Inter', 'Noto Sans KR', sans-serif;
+    background-color: #f0f2f5; /* 기본 배경색 */
+}
+.contact-link {
+    transition: color 0.2s;
+}
+.contact-link:hover {
+    color: #3b82f6;
+}
+/* 글래스모피즘 카드 스타일 */
+.card {
+    background-color: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 1rem; /* rounded-2xl */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+}
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.15);
+}
+.portfolio-card img {
+    transition: transform 0.3s ease;
+    border-radius: 1rem 1rem 0 0; /* 상단 모서리 둥글게 처리 */
+}
+.portfolio-card:hover img {
+    transform: scale(1.05);
+}
+#modal-panel.hidden {
+    display: none;
+}
+/* 더보기 콘텐츠를 위한 스타일 */
+#more-experience {
+    transition: max-height 0.7s ease-in-out, opacity 0.5s ease-in-out;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+}
+#more-experience.show {
+    max-height: 1000px; /* 충분한 높이 값 */
+    opacity: 1;
+}
+/* 움직이는 배경 블롭 스타일 */
+.animate-blob {
+    animation: blob 10s infinite;
+}
+.animation-delay-2000 {
+    animation-delay: -2s;
+}
+.animation-delay-4000 {
+    animation-delay: -4s;
+}
+@keyframes blob {
+    0%, 100% { transform: translate(0px, 0px) scale(1); }
+    33% { transform: translate(80px, -100px) scale(1.2); }
+    66% { transform: translate(-60px, 40px) scale(0.9); }
+}
+/* 로딩 스피너 */
+#loader {
+    transition: opacity 0.5s ease-out;
+}
+/* 모달 애니메이션 스타일 */
+#modal-panel {
+    transition: opacity 0.3s ease-in-out;
+}
+#modal-container {
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+/* 스크롤 헤더 스타일 */
+#main-header {
+    transition: all 0.3s ease-in-out;
+}
+#main-header.scrolled {
+    background-color: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
