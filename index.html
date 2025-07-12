@@ -8,7 +8,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
-    <!-- 분리된 CSS 파일을 연결합니다. -->
+    <!-- AOS (Animate On Scroll) 라이브러리 CSS 추가 -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <!-- CSS 파일 경로 -->
     <link rel="stylesheet" href="assets/style.css">
 </head>
 <body class="text-gray-800">
@@ -30,8 +32,8 @@
         <!-- 상단 고정 헤더 -->
         <header id="main-header" class="fixed top-0 left-0 right-0 z-40">
             <div class="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-                <h1 class="text-xl font-bold text-gray-800 py-3 flex items-center">
-                    <span class="text-2xl mr-3">🙋🏻​</span>
+                <h1 class="text-xl sm:text-2xl font-bold text-gray-800 py-3 flex items-center">
+                    <span class="text-2xl sm:text-3xl mr-3">🙋🏻​</span>
                     <span>김정혁(Kim Jeong Hyeok)</span>
                 </h1>
             </div>
@@ -44,14 +46,13 @@
             <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
                 
                 <!-- Column 1: 프로필 -->
-                <div class="card p-6 flex flex-col">
+                <div class="card p-6 flex flex-col" data-aos="fade-up">
                     <div class="flex flex-col items-center text-center">
                         <img class="w-72 h-72 rounded-full mb-4 object-cover ring-4 ring-white/50 shadow-lg" src="images/1.webp" alt="프로필 사진">
-                        <h1 class="text-2xl font-bold text-gray-900">김정혁</h1>
+                        <h1 class="text-2xl sm:text-3xl font-bold text-gray-900">김정혁</h1>
                         <h2 class="text-md text-gray-700 mb-4">Kim Jeong Hyeok</h2>
                         <p class="text-gray-600 leading-relaxed text-sm mb-6">
                             세상에는 재밌는 것들이 많습니다. 저는 제가 관심을 보이고 좋아하는 분야라면 밤을 새더라도 완성하려는 집착과 집념이 있어요.<br><br>그런 결과 저는 개발자 이기도 하며, 작가이기도 하며, 특허를 낸 학생이기 하며, 경기문화재단 예술인 정책패널인 이기도 해요.<br><br>항상 더 재밌고 흥미진진한 삶을 만들어 나갈게요!
-
                         </p>
                         <div class="flex justify-center flex-wrap gap-x-5 gap-y-2 text-gray-500 font-medium mt-auto pt-4">
                             <a href="mailto:dbyoujin@dbyoujin.kr" class="contact-link flex items-center gap-1.5">
@@ -71,7 +72,7 @@
                 </div>
 
                 <!-- Column 2: 보유 기술 -->
-                <div class="card p-6">
+                <div class="card p-6" data-aos="fade-up" data-aos-delay="100">
                     <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center"><span class="text-2xl mr-3">🛠️</span>보유 기술</h3>
                     <div class="space-y-4 text-sm">
                         <div>
@@ -90,7 +91,7 @@
                 </div>
                 
                 <!-- Column 3: 경력 -->
-                <div class="card p-6 flex flex-col">
+                <div class="card p-6 flex flex-col" data-aos="fade-up" data-aos-delay="200">
                     <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center"><span class="text-2xl mr-3">📄</span>경력</h3>
                     <div class="space-y-5 text-sm flex-grow">
                         <!-- 항상 보이는 항목 -->
@@ -102,25 +103,26 @@
                             </div>
                         </div>
 
-                    <div class="space-y-5 text-sm flex-grow">
-                        <div>
+                        <div class="space-y-5 text-sm flex-grow">
                             <div>
-                                <h4 class="font-semibold text-gray-800">디스코드 봇 메이커 개발 및 운영</h4>
-                                <p class="text-gray-600">(2020.04 - 2020.10)</p>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">디스코드 봇 메이커 개발 및 운영</h4>
+                                    <p class="text-gray-600">(2020.04 - 2020.10)</p>
+                                </div>
                             </div>
                         </div>
 
-                    <div class="space-y-5 text-sm flex-grow">
-                        <div>
+                        <div class="space-y-5 text-sm flex-grow">
                             <div>
-                                <h4 class="font-semibold text-gray-800">무료 파일 호스팅 개발 및 운영</h4>
-                                <p class="text-gray-600">(2020.01 - 2023.08)</p>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">무료 파일 호스팅 개발 및 운영</h4>
+                                    <p class="text-gray-600">(2020.01 - 2023.08)</p>
+                                </div>
                             </div>
                         </div>
 
                         <!-- '더보기'로 숨겨질 부분 -->
                         <div id="more-experience" class="space-y-5">
-
                              <div class="pt-5 border-t border-gray-200/60">
                                 <h4 class="font-bold text-gray-800 mb-3">문학 활동 경력</h4>
                                 <div>
@@ -128,31 +130,26 @@
                                     <p class="text-gray-600">(2023.02.14)</p>
                                 </div>
                             </div>
-
-                                <div>
-                                    <h4 class="font-semibold text-gray-800">한국저작권위원회 단편소설 책 등록</h4>
-                                    <p class="text-gray-600">(2023.02.27)</p>
-                                </div>
-
-                                <div>
-                                    <h4 class="font-semibold text-gray-800">한국예술인복지재단 예술활동증명</h4>
-                                    <p class="text-gray-600">(2023.08.14 - 2028.08.13)</p>
-                                </div>
-
-                                <div>
-                                    <h4 class="font-semibold text-gray-800">경기문화재단 예술인 정책패널인 위촉</h4>
-                                    <p class="text-gray-600">(2024.09.20 - 2025.12.31)</p>
-                                </div>
-
-                                <div>
-                                    <h4 class="font-semibold text-gray-800">문화체육관광부 2024년 예술인 실태조사 대상자</h4>
-                                    <p class="text-gray-600">(2024.12 - 2025.01)</p>
-                                </div>
-
-                                <div>
-                                    <h4 class="font-semibold text-gray-800">경기문화재단 청소년 자문위원단 위원</h4>
-                                    <p class="text-gray-600">(2025.07.07 - )</p>
-                                </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">한국저작권위원회 단편소설 책 등록</h4>
+                                <p class="text-gray-600">(2023.02.27)</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">한국예술인복지재단 예술활동증명</h4>
+                                <p class="text-gray-600">(2023.08.14 - 2028.08.13)</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">경기문화재단 예술인 정책패널인 위촉</h4>
+                                <p class="text-gray-600">(2024.09.20 - 2025.12.31)</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">문화체육관광부 2024년 예술인 실태조사 대상자</h4>
+                                <p class="text-gray-600">(2024.12 - 2025.01)</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">경기문화재단 청소년 자문위원단 위원</h4>
+                                <p class="text-gray-600">(2025.07.07 - )</p>
+                            </div>
 
                              <div class="pt-5 border-t border-gray-200/60">
                                 <h4 class="font-bold text-gray-800 mb-3">예술인 교육 수료</h4>
@@ -161,26 +158,22 @@
                                     <p class="text-gray-600">(2023.02.14 - 2023.11.30)</p>
                                 </div>
                             </div>
-
-                                <div>
-                                    <h4 class="font-semibold text-gray-800">한국콘텐츠진흥원 예술인 복지법과 정책 수료</h4>
-                                    <p class="text-gray-600">(2025.01.01 - 2023.05.21)</p>
-                                </div>
-
-                                <div>
-                                    <h4 class="font-semibold text-gray-800">한국예술인복지재단 문화예술분야 성희롱·성폭력 예방교육 수료</h4>
-                                    <p class="text-gray-600">(2025.01.01 - 2023.05.20)</p>
-                                </div>
-
-                                <div>
-                                    <h4 class="font-semibold text-gray-800">한국예술인복지재단 공연예술 표준계약서 활용의 이해(출연·창작) 수료</h4>
-                                    <p class="text-gray-600">(2025.01.01 - 2023.05.21)</p>
-                                </div>
-
-                                <div>
-                                    <h4 class="font-semibold text-gray-800">한국예술인복지재단 예술인권리보장법 예술인편 수료</h4>
-                                    <p class="text-gray-600">(2025.01.01 - 2023.05.25)</p>
-                                </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">한국콘텐츠진흥원 예술인 복지법과 정책 수료</h4>
+                                <p class="text-gray-600">(2025.01.01 - 2023.05.21)</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">한국예술인복지재단 문화예술분야 성희롱·성폭력 예방교육 수료</h4>
+                                <p class="text-gray-600">(2025.01.01 - 2023.05.20)</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">한국예술인복지재단 공연예술 표준계약서 활용의 이해(출연·창작) 수료</h4>
+                                <p class="text-gray-600">(2025.01.01 - 2023.05.21)</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">한국예술인복지재단 예술인권리보장법 예술인편 수료</h4>
+                                <p class="text-gray-600">(2025.01.01 - 2023.05.25)</p>
+                            </div>
 
                              <div class="pt-5 border-t border-gray-200/60">
                                 <h4 class="font-bold text-gray-800 mb-3">기타 활동 경력</h4>
@@ -189,7 +182,6 @@
                                     <p class="text-gray-600">(2023.10.29 - )</p>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                     <!-- 더보기 버튼 -->
@@ -201,15 +193,15 @@
                 </div>
             </section>
             
-<!-- 구분선 -->
-            <hr class="border-t-2 border-gray-300/30 my-16">
+            <!-- 구분선 -->
+            <hr class="border-t-2 border-gray-300/30 my-16" data-aos="fade-in">
 
             <!-- 포트폴리오 섹션 -->
             <section id="portfolio">
-                <h2 class="text-3xl font-bold mb-12 text-gray-900 text-center flex items-center justify-center"><span class="text-3xl mr-3">✨</span>Projects</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <h2 class="text-3xl sm:text-4xl font-bold mb-12 text-gray-900 text-center flex items-center justify-center" data-aos="fade-up"><span class="text-3xl mr-3">✨</span>Projects</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
                      <!-- 포트폴리오 아이템 1 -->
-                    <div class="card portfolio-card cursor-pointer" onclick="openModal('project1')">
+                    <div class="card portfolio-card cursor-pointer" onclick="openModal('project1')" data-aos="fade-up">
                         <img src="https://placehold.co/600x400/a5b4fc/1e293b?text=Discord+Bot+Maker" alt="디스코드 봇 메이커" class="w-full h-48 object-cover">
                         <div class="p-5">
                             <h4 class="font-bold text-lg mb-1">디스코드 봇 메이커</h4>
@@ -223,7 +215,7 @@
                     </div>
 
                     <!-- 포트폴리오 아이템 2 -->
-                    <div class="card portfolio-card cursor-pointer" onclick="openModal('project2')">
+                    <div class="card portfolio-card cursor-pointer" onclick="openModal('project2')" data-aos="fade-up" data-aos-delay="100">
                         <img src="https://placehold.co/600x400/93c5fd/1e293b?text=File+Upload" alt="File Upload(파일 업로드)" class="w-full h-48 object-cover">
                         <div class="p-5">
                             <h4 class="font-bold text-lg mb-1">File Upload(파일 업로드)</h4>
@@ -240,11 +232,11 @@
 
             <!-- Awards 섹션 -->
             <section id="awards" class="mt-16">
-                <hr class="border-t-2 border-gray-300/30 my-16">
-                <h2 class="text-3xl font-bold mb-12 text-gray-900 text-center flex items-center justify-center"><span class="text-3xl mr-3">🏆</span>Awards</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <hr class="border-t-2 border-gray-300/30 my-16" data-aos="fade-in">
+                <h2 class="text-3xl sm:text-4xl font-bold mb-12 text-gray-900 text-center flex items-center justify-center" data-aos="fade-up"><span class="text-3xl mr-3">🏆</span>Awards</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
                      <!-- Award 아이템 1 -->
-                    <div class="card portfolio-card cursor-pointer" onclick="openModal('award1')">
+                    <div class="card portfolio-card cursor-pointer" onclick="openModal('award1')" data-aos="fade-up">
                         <img src="images/kawf.jpg" alt="한국예술인복지재단 예술활동증명" class="w-full h-48 object-cover">
                         <div class="p-5">
                             <h4 class="font-bold text-lg mb-1">예술활동증명</h4>
@@ -253,7 +245,7 @@
                     </div>
 
                      <!-- Award 아이템 2 -->
-                    <div class="card portfolio-card cursor-pointer" onclick="openModal('award2')">
+                    <div class="card portfolio-card cursor-pointer" onclick="openModal('award2')" data-aos="fade-up" data-aos-delay="100">
                         <img src="images/ggcf.jpg" alt="경기문화재단 예술인 정책패널 위촉장" class="w-full h-48 object-cover">
                         <div class="p-5">
                             <h4 class="font-bold text-lg mb-1">예술인 정책패널 위촉장</h4>
@@ -264,7 +256,7 @@
             </section>
 
             <!-- 푸터 -->
-            <footer class="text-center text-gray-500 mt-20 pt-8 border-t-2 border-gray-300/30">
+            <footer class="text-center text-gray-500 mt-20 pt-8 border-t-2 border-gray-300/30" data-aos="fade-in">
                 <p>&copy; 2025 Jeong Hyeok Kim. All Rights Reserved.</p>
             </footer>
         </div>
@@ -287,7 +279,15 @@
         </div>
     </div>
 
+    <!-- AOS (Animate On Scroll) 라이브러리 JS 추가 -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
+        // AOS 초기화
+        AOS.init({
+            duration: 800, // 애니메이션 지속 시간 (밀리초)
+            once: true      // 애니메이션이 한 번만 실행되도록 설정
+        });
+
         // 프로젝트 및 Award 상세 정보
         const itemDetails = {
             project1: {
