@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
     <!-- 분리된 CSS 파일을 연결합니다. -->
-    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body class="text-gray-800">
 
@@ -280,7 +280,9 @@
                 <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
                 </button>
-                <div id="modal-content"></div>
+                <div id="modal-content">
+                    <!-- 모달 컨텐츠가 여기에 동적으로 삽입됩니다. -->
+                </div>
             </div>
         </div>
     </div>
@@ -319,20 +321,49 @@
             const details = itemDetails[itemId];
             if (!details) return;
 
+            // 1. 모달을 열고 스피너를 먼저 보여줍니다.
             modalContent.innerHTML = `
-                <img src="${details.image}" alt="${details.title}" class="w-full h-auto object-contain rounded-lg mb-6 max-h-[60vh]">
-                <h3 class="text-2xl sm:text-3xl font-bold mb-4 text-center">${details.title}</h3>
-                <div class="prose max-w-none text-gray-600 text-center">${details.description}</div>
+                <div class="flex justify-center items-center h-48">
+                    <div class="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+                </div>
             `;
             
             modalPanel.classList.remove('hidden');
             document.body.style.overflow = 'hidden';
+            modalContainer.dataset.currentItem = itemId;
 
             // 애니메이션을 위한 약간의 지연
             setTimeout(() => {
                 modalPanel.classList.remove('opacity-0');
                 modalContainer.classList.remove('opacity-0', 'scale-95');
             }, 10);
+
+            // 2. 이미지를 미리 로드합니다.
+            const img = new Image();
+            img.src = details.image;
+
+            // 3. 이미지 로딩이 완료되면 모달 내용을 업데이트합니다.
+            img.onload = () => {
+                // 모달이 여전히 현재 항목에 대해 열려 있는지 확인합니다.
+                if (modalContainer.dataset.currentItem === itemId) {
+                    modalContent.innerHTML = `
+                        <img src="${details.image}" alt="${details.title}" class="w-full h-auto object-contain rounded-lg mb-6 max-h-[60vh]">
+                        <h3 class="text-2xl sm:text-3xl font-bold mb-4 text-center">${details.title}</h3>
+                        <div class="prose max-w-none text-gray-600 text-center">${details.description || ''}</div>
+                    `;
+                }
+            };
+
+            // 이미지 로딩 실패 시 에러 메시지를 표시합니다.
+            img.onerror = () => {
+                if (modalContainer.dataset.currentItem === itemId) {
+                    modalContent.innerHTML = `
+                        <div class="text-center text-red-500 p-8">
+                            <p>이미지를 불러오는 데 실패했습니다.</p>
+                        </div>
+                    `;
+                }
+            };
         }
 
         function closeModal() {
@@ -342,6 +373,9 @@
             setTimeout(() => {
                 modalPanel.classList.add('hidden');
                 document.body.style.overflow = 'auto';
+                // 모달이 닫힐 때 내용을 비우고 현재 아이템 ID를 제거합니다.
+                modalContent.innerHTML = '';
+                modalContainer.dataset.currentItem = '';
             }, 300); // transition 시간과 일치
         }
 
@@ -355,19 +389,19 @@
         const toggleBtn = document.getElementById('toggle-experience-btn');
         const moreContent = document.getElementById('more-experience');
 
-    if (toggleBtn) {
-        toggleBtn.addEventListener('click', () => {
-            const isHidden = moreContent.classList.contains('show');
-            
-            if (isHidden) {
-                moreContent.classList.remove('show');
-                toggleBtn.textContent = '더보기';
-            } else {
-                moreContent.classList.add('show');
-                toggleBtn.textContent = '접기';
-            }
-        });
-    }
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', () => {
+                const isHidden = moreContent.classList.contains('show');
+                
+                if (isHidden) {
+                    moreContent.classList.remove('show');
+                    toggleBtn.textContent = '더보기';
+                } else {
+                    moreContent.classList.add('show');
+                    toggleBtn.textContent = '접기';
+                }
+            });
+        }
 
         // 페이지 로딩 스크립트
         window.onload = () => {
