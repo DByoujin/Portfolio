@@ -118,6 +118,11 @@
                         <input type="number" id="interval" value="12" min="1" max="24" step="1" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
                     </div>
                 </div>
+
+                <div class="mt-6 p-4 text-center text-sm bg-yellow-50 border border-yellow-200 text-yellow-800 rounded-lg">
+                    <p><strong>주의:</strong> 본 시뮬레이터는 아목시실린(항생제)의 체내 약물 농도를 이해하기 위한 교육용 도구입니다. 실제 처방 및 복용은 반드시 의사 또는 약사의 지시에 따라야 합니다.</p>
+                </div>
+
                 <div class="mt-6 flex justify-center">
                     <button id="simulateBtn" class="w-48 h-10 flex items-center justify-center bg-blue-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-blue-700 transition-colors shadow-md disabled:opacity-75">
                         <svg id="spinner" class="animate-spin h-5 w-5 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -152,9 +157,6 @@
                         <table id="resultTable" class="w-full border-collapse result-table">
                         </table>
                     </div>
-                </div>
-                 <div class="mt-6 text-xs text-gray-500 text-center">
-                    <p><strong>주의:</strong> 본 시뮬레이터는 아목시실린(항생제)의 체내 약물 농도를 이해하기 위한 교육용 도구입니다. 실제 처방 및 복용은 반드시 의사 또는 약사의 지시에 따라야 합니다.</p>
                 </div>
             </div>
         </main>
