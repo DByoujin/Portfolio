@@ -171,8 +171,21 @@
         const spinner = document.getElementById('spinner');
         const formulaSectionDiv = document.getElementById('formula-section');
         const resultsDiv = document.getElementById('results');
+        const inputs = document.querySelectorAll('#dose, #weight, #mic, #interval');
         let concentrationChart = null;
         
+        // --- START: Added Code ---
+        // Add event listener to all input fields to handle 'Enter' key press
+        inputs.forEach(input => {
+            input.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter') {
+                    event.preventDefault(); // Prevent default action
+                    simulateBtn.click(); // Trigger simulation button click
+                }
+            });
+        });
+        // --- END: Added Code ---
+
         simulateBtn.addEventListener('click', () => {
             const dose = parseFloat(document.getElementById('dose').value);
             const weight = parseFloat(document.getElementById('weight').value);
