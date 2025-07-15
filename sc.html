@@ -55,9 +55,10 @@
         .tooltip::after { /* 툴팁 박스 */
             content: attr(data-tooltip);
             position: absolute;
-            bottom: calc(100% + 10px); /* 텍스트 위로 10px 이동 */
+            bottom: 100%;
             left: 50%;
             transform: translateX(-50%);
+            margin-bottom: 5px;
             min-width: 250px;
             padding: 10px 12px;
             border-radius: 8px;
@@ -76,9 +77,9 @@
         .tooltip::before { /* 툴팁 화살표 */
             content: '';
             position: absolute;
-            bottom: calc(100% + 2px); /* 텍스트와 툴팁 박스 사이 */
+            bottom: 100%;
             left: 50%;
-            transform: translateX(-50%);
+            transform: translateX(-50%) translateY(5px);
             border: 8px solid transparent;
             border-top-color: #1f2937;
             visibility: hidden;
@@ -125,8 +126,12 @@
                     </div>
                 </div>
                 <div class="mt-6 text-center">
-                    <button id="simulateBtn" class="bg-blue-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-blue-700 transition-colors shadow-md">
-                        시뮬레이션 시작
+                    <button id="simulateBtn" class="w-48 h-10 flex items-center justify-center bg-blue-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-blue-700 transition-colors shadow-md disabled:opacity-75">
+                        <svg id="spinner" class="animate-spin h-5 w-5 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        <span id="buttonText">시뮬레이션 시작</span>
                     </button>
                 </div>
             </div>
@@ -164,6 +169,8 @@
 
     <script>
         const simulateBtn = document.getElementById('simulateBtn');
+        const buttonText = document.getElementById('buttonText');
+        const spinner = document.getElementById('spinner');
         const formulaSectionDiv = document.getElementById('formula-section');
         const resultsDiv = document.getElementById('results');
         let concentrationChart = null;
@@ -179,19 +186,33 @@
             if (isNaN(mic) || mic < 0.01 || mic > 5) { alert("목표 MIC는 0.01에서 5 사이의 값으로 입력해주세요."); return; }
             if (isNaN(customInterval) || customInterval < 1 || customInterval > 24) { alert("사용자 설정 간격은 1에서 24 사이의 값으로 입력해주세요."); return; }
             
-            const halfLife = 1.5;
-            const totalHours = 48;
-            const timeStep = 0.5;
-            const cMax = (dose / 500) * (70 / weight) * 7.0;
+            // 로딩 시작
+            simulateBtn.disabled = true;
+            buttonText.classList.add('hidden');
+            spinner.classList.remove('hidden');
+            formulaSectionDiv.classList.add('hidden');
+            resultsDiv.classList.add('hidden');
 
-            const standardResults = runSimulation(cMax, 8, halfLife, totalHours, timeStep);
-            const customResults = runSimulation(cMax, customInterval, halfLife, totalHours, timeStep);
-            
-            displayFormulas(dose, weight, halfLife);
-            displayResults(standardResults, customResults, mic, customInterval);
+            setTimeout(() => {
+                const halfLife = 1.5;
+                const totalHours = 48;
+                const timeStep = 0.5;
+                const cMax = (dose / 500) * (70 / weight) * 7.0;
 
-            formulaSectionDiv.classList.remove('hidden');
-            resultsDiv.classList.remove('hidden');
+                const standardResults = runSimulation(cMax, 8, halfLife, totalHours, timeStep);
+                const customResults = runSimulation(cMax, customInterval, halfLife, totalHours, timeStep);
+                
+                displayFormulas(dose, weight, halfLife);
+                displayResults(standardResults, customResults, mic, customInterval);
+
+                // 로딩 종료 및 결과 표시
+                formulaSectionDiv.classList.remove('hidden');
+                resultsDiv.classList.remove('hidden');
+                simulateBtn.disabled = false;
+                buttonText.classList.remove('hidden');
+                spinner.classList.add('hidden');
+
+            }, 1000); // 1초 딜레이
         });
 
         function runSimulation(cMax, interval, halfLife, totalHours, timeStep) {
