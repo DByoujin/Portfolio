@@ -46,7 +46,7 @@
             background-color: #fee2e2; /* red-100 */
         }
 
-        /* Tooltip 스타일 */
+        /* Tooltip 스타일 (초기 버전) */
         .tooltip {
             position: relative;
             cursor: help;
@@ -55,9 +55,10 @@
         .tooltip::after { /* 툴팁 박스 */
             content: attr(data-tooltip);
             position: absolute;
-            bottom: calc(100% + 10px); /* 텍스트 위로 10px 이동 */
+            bottom: 100%;
             left: 50%;
             transform: translateX(-50%);
+            margin-bottom: 5px; /* 텍스트와의 간격 */
             min-width: 250px;
             padding: 10px 12px;
             border-radius: 8px;
@@ -76,9 +77,9 @@
         .tooltip::before { /* 툴팁 화살표 */
             content: '';
             position: absolute;
-            bottom: calc(100% + 2px); /* 텍스트와 툴팁 박스 사이 */
+            bottom: 100%;
             left: 50%;
-            transform: translateX(-50%);
+            transform: translateX(-50%) translateY(5px); /* 화살표를 박스 아래로 이동 */
             border: 8px solid transparent;
             border-top-color: #1f2937;
             visibility: hidden;
