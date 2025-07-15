@@ -95,12 +95,12 @@
                 <div id="result-summary" class="mb-8 text-center"></div>
 
                 <div class="mb-8">
-                    <h3 class="text-lg font-semibold mb-2 text-center">농도 변화 그래프</h3>
+                    <h3 class="text-lg font-semibold mb-2 text-center">농도 변화 그래프 (최대 24시간)</h3>
                     <canvas id="concentrationChart"></canvas>
                 </div>
 
                 <div>
-                    <h3 class="text-lg font-semibold mb-2 text-center">시간대별 농도 변화표</h3>
+                    <h3 class="text-lg font-semibold mb-2 text-center">시간대별 농도 변화표 (최대 48시간)</h3>
                     <div class="overflow-x-auto">
                         <table id="resultTable" class="w-full border-collapse result-table">
                         </table>
@@ -189,7 +189,7 @@
         }
 
         function displayResults(standardData, customData, mic, customInterval) {
-            // 1. 결과 요약 생성
+            // 1. 결과 요약 생성 (전체 48시간 기준)
             const summaryDiv = document.getElementById('result-summary');
             const stdSuccessTime = standardData.filter(d => d.concentration >= mic).length * 0.5;
             const customSuccessTime = customData.filter(d => d.concentration >= mic).length * 0.5;
@@ -214,7 +214,7 @@
                 </div>
             `;
 
-            // 2. 테이블 생성
+            // 2. 테이블 생성 (48시간 전체 데이터)
             const table = document.getElementById('resultTable');
             let tableHTML = `
                 <thead>
@@ -241,7 +241,6 @@
                 const stdStatus = stdConcentration >= mic;
                 const customStatus = customConcentration >= mic;
 
-                // 각 셀에 적용할 클래스를 개별적으로 정의
                 const stdDoseClass = standardData[i].isDoseTime ? 'std-dose-highlight' : '';
                 const customDoseClass = customData[i].isDoseTime ? 'custom-dose-highlight' : '';
 
@@ -258,7 +257,10 @@
             tableHTML += '</tbody>';
             table.innerHTML = tableHTML;
 
-            // 3. 차트 생성
+            // 3. 차트 생성 (최대 24시간 데이터만 필터링)
+            const chartDataStd = standardData.filter(d => d.time <= 24);
+            const chartDataCustom = customData.filter(d => d.time <= 24);
+
             const ctx = document.getElementById('concentrationChart').getContext('2d');
             if (concentrationChart) {
                 concentrationChart.destroy();
@@ -266,11 +268,11 @@
             concentrationChart = new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: standardData.map(d => d.time),
+                    labels: chartDataStd.map(d => d.time),
                     datasets: [
                         {
                             label: '8시간 간격',
-                            data: standardData.map(d => d.concentration),
+                            data: chartDataStd.map(d => d.concentration),
                             borderColor: 'rgb(59, 130, 246)',
                             backgroundColor: 'rgba(59, 130, 246, 0.1)',
                             borderWidth: 2,
@@ -279,7 +281,7 @@
                         },
                         {
                             label: `${customInterval}시간 간격`,
-                            data: customData.map(d => d.concentration),
+                            data: chartDataCustom.map(d => d.concentration),
                             borderColor: 'rgb(239, 68, 68)',
                             backgroundColor: 'rgba(239, 68, 68, 0.1)',
                             borderWidth: 2,
@@ -288,7 +290,7 @@
                         },
                         {
                             label: '목표 MIC',
-                            data: Array(standardData.length).fill(mic),
+                            data: Array(chartDataStd.length).fill(mic),
                             borderColor: 'rgb(22, 163, 74)',
                             borderWidth: 2,
                             pointRadius: 0,
@@ -300,8 +302,14 @@
                 options: {
                     responsive: true,
                     scales: {
-                        x: { title: { display: true, text: '시간 (Hours)' } },
-                        y: { title: { display: true, text: '혈중 농도 (µg/mL)' }, beginAtZero: true }
+                        x: { 
+                            title: { display: true, text: '시간 (Hours)' },
+                            max: 24 // X축 최대값을 24로 고정
+                        },
+                        y: { 
+                            title: { display: true, text: '혈중 농도 (µg/mL)' }, 
+                            beginAtZero: true 
+                        }
                     },
                     plugins: {
                         tooltip: { mode: 'index', intersect: false, },
