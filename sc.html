@@ -114,7 +114,7 @@
                         <input type="number" id="mic" step="0.01" value="0.1" min="0.01" max="5" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
                     </div>
                     <div>
-                        <label for="interval" class="block text-sm font-medium text-gray-700 mb-1">사용자 설정 간격 (1 ~ 24시간, 자연수)</label>
+                        <label for="interval" class="block text-sm font-medium text-gray-700 mb-1">사용자 설정 복용 간격 (1 ~ 24시간)</label>
                         <input type="number" id="interval" value="12" min="1" max="24" step="1" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
                     </div>
                 </div>
@@ -140,24 +140,29 @@
                 <div id="result-summary" class="mb-8 text-center"></div>
 
                 <div class="mb-8">
-                    <h3 class="text-lg font-semibold mb-2 text-center">농도 변화 그래프 (최대 24시간)</h3>
+                    <h3 class="text-lg font-semibold mb-2 text-center">채내 농도 변화 그래프 (최대 24시간)</h3>
                     <div class="relative h-96">
                         <canvas id="concentrationChart"></canvas>
                     </div>
                 </div>
 
                 <div>
-                    <h3 class="text-lg font-semibold mb-2 text-center">시간대별 농도 변화표 (최대 48시간)</h3>
+                    <h3 class="text-lg font-semibold mb-2 text-center">시간대별 채내 농도 변화표 (최대 48시간)</h3>
                     <div class="overflow-x-auto rounded-lg">
                         <table id="resultTable" class="w-full border-collapse result-table">
                         </table>
                     </div>
                 </div>
                  <div class="mt-6 text-xs text-gray-500 text-center">
-                    <p><strong>주의:</strong> 본 시뮬레이터는 약동학의 기본 원리를 이해하기 위한 교육용 도구입니다. 실제 처방 및 복용은 반드시 의사 또는 약사의 지시에 따라야 합니다.</p>
+                    <p><strong>주의:</strong> 본 시뮬레이터는 아목시실린(항생제)의 채내 약물 농도를 이해하기 위한 교육용 도구입니다. 실제 처방 및 복용은 반드시 의사 또는 약사의 지시에 따라야 합니다.</p>
                 </div>
             </div>
         </main>
+        
+        <footer class="mt-12 text-center text-sm text-gray-500">
+             <p>&copy; 2025 김정혁. All Rights Reserved.</p>
+        </footer>
+
     </div>
 
     <script>
@@ -176,8 +181,8 @@
 
             if (isNaN(dose) || dose < 1 || dose > 2000) { alert("복용량은 1에서 2000 사이의 값으로 입력해주세요."); return; }
             if (isNaN(weight) || weight < 40 || weight > 80) { alert("체중은 40에서 80 사이의 값으로 입력해주세요."); return; }
-            if (isNaN(mic) || mic < 0.01 || mic > 5) { alert("목표 MIC는 0.01에서 5 사이의 값으로 입력해주세요."); return; }
-            if (isNaN(customInterval) || customInterval < 1 || customInterval > 24 || !Number.isInteger(customInterval)) { alert("사용자 설정 간격은 1에서 24 사이의 자연수만 입력할 수 있습니다."); return; }
+            if (isNaN(mic) || mic < 0.01 || mic > 5) { alert("목표 최소 약물 농도(MIC)는 0.01에서 5 사이의 값으로 입력해주세요."); return; }
+            if (isNaN(customInterval) || customInterval < 1 || customInterval > 24 || !Number.isInteger(customInterval)) { alert("사용자 설정 복용 간격은 1에서 24 사이의 자연수만 입력할 수 있습니다."); return; }
             
             // 로딩 시작
             simulateBtn.disabled = true;
@@ -238,7 +243,7 @@
                 <p><strong><span class="tooltip" data-tooltip="약을 복용한 후 체내 약물 농도가 가장 높을 때의 수치입니다. 복용량, 체중 등에 따라 달라집니다.">최고 혈중 농도 (Cmax)</span>:</strong><br>${cMaxFormula}</p>
                 <p class="mt-2 text-xs">${cMaxExplanation}</p>
                 <p class="mt-4"><strong><span class="tooltip" data-tooltip="반감기(Half-life)는 체내 약물 농도가 절반으로 줄어드는 데 걸리는 시간입니다. 이 시뮬레이터에서는 1.5시간으로 고정되어 있습니다.">농도 감소 (반감기)</span>:</strong><br>${decayFormula}</p>
-                <p class="mt-4"><strong><span class="tooltip" data-tooltip="전체 시뮬레이션 시간 중 약물 농도가 목표 MIC 이상으로 유지된 시간의 비율을 계산합니다.">MIC 유지 시간 비율</span>:</strong><br>${micRatioFormula}</p>
+                <p class="mt-4"><strong><span class="tooltip" data-tooltip="전체 시뮬레이션 시간 중 약물 농도가 목표 최소 약물 농도(MIC) 이상으로 유지된 시간의 비율을 계산합니다.">최소 약물 농도(MIC) 유지 시간 비율</span>:</strong><br>${micRatioFormula}</p>
             `;
         }
 
