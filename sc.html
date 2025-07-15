@@ -39,13 +39,6 @@
             line-height: 1.6;
             color: #1e40af;
         }
-        .std-dose-highlight {
-            background-color: #dbeafe; /* blue-100 */
-        }
-        .custom-dose-highlight {
-            background-color: #fee2e2; /* red-100 */
-        }
-
         /* Tooltip 스타일 */
         .tooltip {
             position: relative;
@@ -59,7 +52,7 @@
             left: 50%;
             transform: translateX(-50%);
             margin-bottom: 5px;
-            min-width: 250px;
+            min-width: 280px; /* 너비 조정 */
             padding: 10px 12px;
             border-radius: 8px;
             background-color: #1f2937;
@@ -108,11 +101,11 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div>
                         <label for="dose" class="block text-sm font-medium text-gray-700 mb-1">복용량 (1 ~ 2000mg)</label>
-                        <input type="number" id="dose" value="500" min="1" max="2000" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                        <input type="number" id="dose" value="500" min="1" max="2000" step="0.1" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
                     </div>
                     <div>
                         <label for="weight" class="block text-sm font-medium text-gray-700 mb-1">체중 (40 ~ 80kg)</label>
-                        <input type="number" id="weight" value="70" min="40" max="80" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                        <input type="number" id="weight" value="70" min="40" max="80" step="0.1" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
                     </div>
                     <div>
                         <label for="mic" class="block text-sm font-medium text-gray-700 mb-1">
@@ -121,11 +114,11 @@
                         <input type="number" id="mic" step="0.01" value="0.1" min="0.01" max="5" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
                     </div>
                     <div>
-                        <label for="interval" class="block text-sm font-medium text-gray-700 mb-1">사용자 설정 간격 (1 ~ 24시간)</label>
-                        <input type="number" id="interval" value="12" min="1" max="24" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                        <label for="interval" class="block text-sm font-medium text-gray-700 mb-1">사용자 설정 간격 (1 ~ 24시간, 자연수)</label>
+                        <input type="number" id="interval" value="12" min="1" max="24" step="1" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
                     </div>
                 </div>
-                <div class="mt-6 text-center">
+                <div class="mt-6 flex justify-center">
                     <button id="simulateBtn" class="w-48 h-10 flex items-center justify-center bg-blue-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-blue-700 transition-colors shadow-md disabled:opacity-75">
                         <svg id="spinner" class="animate-spin h-5 w-5 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
@@ -184,7 +177,7 @@
             if (isNaN(dose) || dose < 1 || dose > 2000) { alert("복용량은 1에서 2000 사이의 값으로 입력해주세요."); return; }
             if (isNaN(weight) || weight < 40 || weight > 80) { alert("체중은 40에서 80 사이의 값으로 입력해주세요."); return; }
             if (isNaN(mic) || mic < 0.01 || mic > 5) { alert("목표 MIC는 0.01에서 5 사이의 값으로 입력해주세요."); return; }
-            if (isNaN(customInterval) || customInterval < 1 || customInterval > 24) { alert("사용자 설정 간격은 1에서 24 사이의 값으로 입력해주세요."); return; }
+            if (isNaN(customInterval) || customInterval < 1 || customInterval > 24 || !Number.isInteger(customInterval)) { alert("사용자 설정 간격은 1에서 24 사이의 자연수만 입력할 수 있습니다."); return; }
             
             // 로딩 시작
             simulateBtn.disabled = true;
@@ -255,18 +248,20 @@
             const stdSuccessRate = (stdSuccessTime / totalTime) * 100;
             const customSuccessRate = (customSuccessTime / totalTime) * 100;
 
+            const successTooltip = "총 시뮬레이션 시간(48시간) 중에서 혈중 약물 농도가 목표 MIC 이상으로 유지된 시간의 비율입니다. 이 비율이 95% 이상일 때 이상적인 치료 효과를 기대할 수 있습니다.";
+
             summaryDiv.innerHTML = `
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div class="p-4 rounded-lg ${stdSuccessRate > 95 ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}">
                         <h4 class="font-bold text-lg">8시간 간격</h4>
                         <p class="text-3xl font-bold">${stdSuccessRate.toFixed(1)}%</p>
-                        <p><span class="tooltip" data-tooltip="총 시뮬레이션 시간(48시간) 중에서 혈중 약물 농도가 목표 MIC 이상으로 유지된 시간의 비율입니다. 이 비율이 높을수록 치료 효과가 안정적으로 유지됩니다.">MIC 유지 시간 비율</span></p>
+                        <p><span class="tooltip" data-tooltip="${successTooltip}">MIC 유지 시간 비율</span></p>
                         <p class="mt-1 font-semibold">${stdSuccessRate > 95 ? '치료 성공' : '치료 실패 위험'}</p>
                     </div>
                     <div class="p-4 rounded-lg ${customSuccessRate > 95 ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}">
                         <h4 class="font-bold text-lg">${customInterval}시간 간격</h4>
                         <p class="text-3xl font-bold">${customSuccessRate.toFixed(1)}%</p>
-                        <p><span class="tooltip" data-tooltip="총 시뮬레이션 시간(48시간) 중에서 혈중 약물 농도가 목표 MIC 이상으로 유지된 시간의 비율입니다. 이 비율이 높을수록 치료 효과가 안정적으로 유지됩니다.">MIC 유지 시간 비율</span></p>
+                        <p><span class="tooltip" data-tooltip="${successTooltip}">MIC 유지 시간 비율</span></p>
                         <p class="mt-1 font-semibold">${customSuccessRate > 95 ? '치료 성공' : '치료 실패 위험'}</p>
                     </div>
                 </div>
@@ -297,16 +292,17 @@
                 const customConcentration = customData[i].concentration;
                 const stdStatus = stdConcentration >= mic;
                 const customStatus = customConcentration >= mic;
-                const stdDoseClass = standardData[i].isDoseTime ? 'std-dose-highlight' : '';
-                const customDoseClass = customData[i].isDoseTime ? 'custom-dose-highlight' : '';
+
+                const stdDoseText = standardData[i].isDoseTime ? " <span class='text-xs text-gray-500 font-normal'>(복용)</span>" : "";
+                const customDoseText = customData[i].isDoseTime ? " <span class='text-xs text-gray-500 font-normal'>(복용)</span>" : "";
 
                 tableHTML += `
                     <tr>
                         <td>${time}</td>
-                        <td class="${stdDoseClass} ${stdStatus ? 'mic-success' : 'mic-fail'}">${stdConcentration.toFixed(3)}</td>
-                        <td class="${stdDoseClass} ${stdStatus ? 'mic-success' : 'mic-fail'}">${stdStatus ? '성공' : '실패'}</td>
-                        <td class="${customDoseClass} ${customStatus ? 'mic-success' : 'mic-fail'}">${customConcentration.toFixed(3)}</td>
-                        <td class="${customDoseClass} ${customStatus ? 'mic-success' : 'mic-fail'}">${customStatus ? '성공' : '실패'}</td>
+                        <td class="${stdStatus ? 'mic-success' : 'mic-fail'}">${stdConcentration.toFixed(3)}${stdDoseText}</td>
+                        <td class="${stdStatus ? 'mic-success' : 'mic-fail'}">${stdStatus ? '성공' : '실패'}</td>
+                        <td class="${customStatus ? 'mic-success' : 'mic-fail'}">${customConcentration.toFixed(3)}${customDoseText}</td>
+                        <td class="${customStatus ? 'mic-success' : 'mic-fail'}">${customStatus ? '성공' : '실패'}</td>
                     </tr>
                 `;
             }
