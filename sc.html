@@ -231,12 +231,14 @@
             const formulasDiv = document.getElementById('formulas');
             const cMaxFormula = `Cmax = (${dose}mg / 500mg) * (70kg / ${weight}kg) * 7.0 µg/mL`;
             const decayFormula = `다음 농도 = 현재 농도 * 0.5 ^ (시간 간격 / ${halfLife}h)`;
+            const micRatioFormula = `비율(%) = (MIC 유지 시간 / 총 시간) * 100`;
             const cMaxExplanation = `* 7.0 µg/mL은 70kg 표준 체중의 성인이 아목시실린 500mg을 복용했을 때 나타나는 평균적인 최고 혈중 농도로, 여러 임상 연구 데이터를 기반으로 설정된 기준값입니다.`;
 
             formulasDiv.innerHTML = `
                 <p><strong><span class="tooltip" data-tooltip="약을 복용한 후 체내 약물 농도가 가장 높을 때의 수치입니다. 복용량, 체중 등에 따라 달라집니다.">최고 혈중 농도 (Cmax)</span>:</strong><br>${cMaxFormula}</p>
                 <p class="mt-2 text-xs">${cMaxExplanation}</p>
                 <p class="mt-4"><strong><span class="tooltip" data-tooltip="반감기(Half-life)는 체내 약물 농도가 절반으로 줄어드는 데 걸리는 시간입니다. 이 시뮬레이터에서는 1.5시간으로 고정되어 있습니다.">농도 감소 (반감기)</span>:</strong><br>${decayFormula}</p>
+                <p class="mt-4"><strong><span class="tooltip" data-tooltip="전체 시뮬레이션 시간 중 약물 농도가 목표 MIC 이상으로 유지된 시간의 비율을 계산합니다.">MIC 유지 시간 비율</span>:</strong><br>${micRatioFormula}</p>
             `;
         }
 
