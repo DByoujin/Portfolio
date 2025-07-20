@@ -15,6 +15,14 @@
 </head>
 <body class="text-gray-800">
 
+    <!-- Announcement Banner -->
+    <div id="announcement-banner" class="bg-blue-600 text-white p-3 text-center flex justify-center items-center gap-4 fixed top-0 w-full z-50 shadow-md">
+        <span class="font-medium">📢 통합관리전산망 오픈!</span>
+        <a href="https://imcn.dbyoujin.kr" target="_blank" rel="noopener noreferrer" class="bg-white text-blue-700 font-bold py-1 px-3 rounded-full hover:bg-blue-100 transition-colors text-sm">
+            접속하기
+        </a>
+    </div>
+
     <!-- 로딩 스피너 -->
     <div id="loader" class="fixed inset-0 z-50 flex items-center justify-center bg-f0f2f5">
         <div class="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
@@ -40,7 +48,7 @@
         </header>
 
         <!-- 메인 컨테이너 -->
-        <div class="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 pt-24 pb-16 sm:pb-24">
+        <div id="main-container" class="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 pt-24 pb-16 sm:pb-24">
             
             <!-- 상단 그리드 섹션 -->
             <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
@@ -48,7 +56,7 @@
                 <!-- Column 1: 프로필 -->
                 <div class="card p-6 flex flex-col" data-aos="fade-up">
                     <div class="flex flex-col items-center text-center">
-                        <img class="w-72 h-72 rounded-full mb-4 object-cover ring-4 ring-white/50 shadow-lg" src="images/1.webp" alt="프로필 사진">
+                        <img class="w-72 h-72 rounded-full mb-4 object-cover ring-4 ring-white/50 shadow-lg" src="images/1.webp" alt="프로필 사진" onerror="this.onerror=null;this.src='https://placehold.co/288x288/e0e0e0/757575?text=Image';">
                         <h1 class="text-2xl sm:text-3xl font-bold text-gray-900">김정혁</h1>
                         <h2 class="text-md text-gray-700 mb-4">Kim Jeong Hyeok</h2>
                         <p class="text-gray-600 leading-relaxed text-sm mb-6">
@@ -237,7 +245,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
                      <!-- Award 아이템 1 -->
                     <div class="card portfolio-card cursor-pointer" onclick="openModal('award1')" data-aos="fade-up">
-                        <img src="images/kawf.jpg" alt="한국예술인복지재단 예술활동증명" class="w-full h-48 object-cover">
+                        <img src="images/kawf.jpg" alt="한국예술인복지재단 예술활동증명" class="w-full h-48 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x192/e0e0e0/757575?text=Image';">
                         <div class="p-5">
                             <h4 class="font-bold text-lg mb-1">예술활동증명</h4>
                             <p class="text-gray-600 text-sm mb-3">한국예술인복지재단 (2023)</p>
@@ -246,7 +254,7 @@
 
                      <!-- Award 아이템 2 -->
                     <div class="card portfolio-card cursor-pointer" onclick="openModal('award2')" data-aos="fade-up" data-aos-delay="100">
-                        <img src="images/ggcf.jpg" alt="경기문화재단 예술인 정책패널 위촉장" class="w-full h-48 object-cover">
+                        <img src="images/ggcf.jpg" alt="경기문화재단 예술인 정책패널 위촉장" class="w-full h-48 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x192/e0e0e0/757575?text=Image';">
                         <div class="p-5">
                             <h4 class="font-bold text-lg mb-1">예술인 정책패널 위촉장</h4>
                             <p class="text-gray-600 text-sm mb-3">경기문화재단 (2024)</p>
@@ -406,8 +414,19 @@
 
         // 페이지 로딩 스크립트
         window.onload = () => {
+            const banner = document.getElementById('announcement-banner');
+            const header = document.getElementById('main-header');
+            const mainContainer = document.getElementById('main-container');
             const loader = document.getElementById('loader');
             const pageContent = document.getElementById('page-content');
+
+            // 배너 높이만큼 헤더와 메인 컨텐츠를 조정합니다.
+            if (banner && header && mainContainer) {
+                const bannerHeight = banner.offsetHeight;
+                header.style.top = `${bannerHeight}px`;
+                // pt-24 클래스는 6rem (96px)의 패딩을 가집니다. 여기에 배너 높이를 더합니다.
+                mainContainer.style.paddingTop = `${96 + bannerHeight}px`;
+            }
 
             // 로더를 서서히 사라지게 함
             loader.style.opacity = '0';
