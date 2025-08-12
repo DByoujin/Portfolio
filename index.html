@@ -15,12 +15,19 @@
 </head>
 <body class="text-gray-800">
 
-    <!-- Announcement Banner -->
-    <div id="announcement-banner" class="bg-blue-600 text-white p-3 text-center flex justify-center items-center gap-4 fixed top-0 w-full z-50 shadow-md">
-        <span class="font-medium">📢 통합관리전산망 오픈!</span>
-        <a href="https://s2.imcn.dbyoujin.kr" target="_blank" rel="noopener noreferrer" class="bg-white text-blue-700 font-bold py-1 px-3 rounded-full hover:bg-blue-100 transition-colors text-sm">
-            접속하기
-        </a>
+    <!-- Banner Container -->
+    <div id="banner-container" class="fixed top-0 w-full z-50 shadow-md">
+        <!-- Server Check Banner -->
+        <div id="server-check-banner" class="bg-red-600 text-white p-3 text-center flex justify-center items-center gap-4">
+            <span class="font-medium">🚨 서버 점검 중입니다. (오전 02:00 ~ 04:00)</span>
+        </div>
+        <!-- Announcement Banner -->
+        <div id="announcement-banner" class="bg-blue-600 text-white p-3 text-center flex justify-center items-center gap-4">
+            <span class="font-medium">📢 통합관리전산망 오픈!</span>
+            <a href="https://s2.imcn.dbyoujin.kr" target="_blank" rel="noopener noreferrer" class="bg-white text-blue-700 font-bold py-1 px-3 rounded-full hover:bg-blue-100 transition-colors text-sm">
+                접속하기
+            </a>
+        </div>
     </div>
 
     <!-- 로딩 스피너 -->
@@ -414,15 +421,15 @@
 
         // 페이지 로딩 스크립트
         window.onload = () => {
-            const banner = document.getElementById('announcement-banner');
+            const bannerContainer = document.getElementById('banner-container');
             const header = document.getElementById('main-header');
             const mainContainer = document.getElementById('main-container');
             const loader = document.getElementById('loader');
             const pageContent = document.getElementById('page-content');
 
             // 배너 높이만큼 헤더와 메인 컨텐츠를 조정합니다.
-            if (banner && header && mainContainer) {
-                const bannerHeight = banner.offsetHeight;
+            if (bannerContainer && header && mainContainer) {
+                const bannerHeight = bannerContainer.offsetHeight;
                 header.style.top = `${bannerHeight}px`;
                 // pt-24 클래스는 6rem (96px)의 패딩을 가집니다. 여기에 배너 높이를 더합니다.
                 mainContainer.style.paddingTop = `${96 + bannerHeight}px`;
