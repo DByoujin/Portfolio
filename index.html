@@ -7,27 +7,24 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
     <!-- AOS (Animate On Scroll) 라이브러리 CSS 추가 -->
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <!-- CSS 파일 경로 -->
     <link rel="stylesheet" href="assets/style.css">
-    <style>
-        /* 일본어 폰트가 Noto Sans JP로 적용되도록 스타일 추가 */
-        :lang(ja) {
-            font-family: 'Inter', 'Noto Sans JP', sans-serif;
-        }
-    </style>
 </head>
 <body class="text-gray-800">
 
     <!-- Banner Container -->
     <div id="banner-container" class="fixed top-0 w-full z-50 shadow-md">
-
+        <!-- Server Check Banner -->
+        <div id="server-check-banner" class="bg-red-600 text-white p-3 text-center flex justify-center items-center gap-4">
+            <span class="font-medium">🚨 통합관리전산망 서버 점검중!</span>
+        </div>
         <!-- Announcement Banner -->
         <div id="announcement-banner" class="bg-blue-600 text-white p-3 text-center flex justify-center items-center gap-4">
-            <span class="font-medium" data-lang-key="announcementBanner">📢 통합관리전산망 오픈!</span>
-            <a href="https://s2.imcn.dbyoujin.kr" target="_blank" rel="noopener noreferrer" class="bg-white text-blue-700 font-bold py-1 px-3 rounded-full hover:bg-blue-100 transition-colors text-sm" data-lang-key="announcementButton">
+            <span class="font-medium">📢 통합관리전산망 오픈!</span>
+            <a href="https://s2.imcn.dbyoujin.kr" target="_blank" rel="noopener noreferrer" class="bg-white text-blue-700 font-bold py-1 px-3 rounded-full hover:bg-blue-100 transition-colors text-sm">
                 접속하기
             </a>
         </div>
@@ -49,23 +46,11 @@
 
         <!-- 상단 고정 헤더 -->
         <header id="main-header" class="fixed top-0 left-0 right-0 z-40">
-            <div class="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+            <div class="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
                 <h1 class="text-xl sm:text-2xl font-bold text-gray-800 py-3 flex items-center">
                     <span class="text-2xl sm:text-3xl mr-3">🙋🏻​</span>
-                    <span data-lang-key="headerTitle">김정혁(Kim Jeong Hyeok)</span>
+                    <span>김정혁(Kim Jeong Hyeok)</span>
                 </h1>
-                <!-- Language Switcher -->
-                <div class="relative">
-                    <button id="lang-switcher-btn" class="flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors p-2 rounded-md">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
-                        <span id="current-lang-text" class="font-semibold text-sm">KO</span>
-                    </button>
-                    <div id="lang-switcher-dropdown" class="hidden absolute right-0 mt-2 w-28 bg-white rounded-md shadow-lg py-1 z-20 ring-1 ring-black ring-opacity-5">
-                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" data-lang="ko">한국어</a>
-                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" data-lang="en">English</a>
-                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" data-lang="ja">日本語</a>
-                    </div>
-                </div>
             </div>
         </header>
 
@@ -79,23 +64,23 @@
                 <div class="card p-6 flex flex-col" data-aos="fade-up">
                     <div class="flex flex-col items-center text-center">
                         <img class="w-72 h-72 rounded-full mb-4 object-cover ring-4 ring-white/50 shadow-lg" src="images/1.webp" alt="프로필 사진" onerror="this.onerror=null;this.src='https://placehold.co/288x288/e0e0e0/757575?text=Image';">
-                        <h1 class="text-2xl sm:text-3xl font-bold text-gray-900" data-lang-key="profileName">김정혁</h1>
-                        <h2 class="text-md text-gray-700 mb-4" data-lang-key="profileSubName">Kim Jeong Hyeok</h2>
-                        <p class="text-gray-600 leading-relaxed text-sm mb-6" data-lang-key="profileDescription">
+                        <h1 class="text-2xl sm:text-3xl font-bold text-gray-900">김정혁</h1>
+                        <h2 class="text-md text-gray-700 mb-4">Kim Jeong Hyeok</h2>
+                        <p class="text-gray-600 leading-relaxed text-sm mb-6">
                             세상에는 재밌는 것들이 많습니다. 저는 제가 관심을 보이고 좋아하는 분야라면 밤을 새더라도 완성하려는 집착과 집념이 있어요.<br><br>그런 결과 저는 개발자 이기도 하며, 작가이기도 하며, 특허를 낸 학생이기 하며, 경기문화재단 예술인 정책패널인 이기도 해요.<br><br>항상 더 재밌고 흥미진진한 삶을 만들어 나갈게요!
                         </p>
                         <div class="flex justify-center flex-wrap gap-x-5 gap-y-2 text-gray-500 font-medium mt-auto pt-4">
                             <a href="mailto:dbyoujin@dbyoujin.kr" class="contact-link flex items-center gap-1.5">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                                <span data-lang-key="contactEmail">Email</span>
+                                <span>Email</span>
                             </a>
                             <a href="https://www.instagram.com/1h1i01" target="_blank" rel="noopener noreferrer" class="contact-link flex items-center gap-1.5">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-                                <span data-lang-key="contactInstagram">Instagram</span>
+                                <span>Instagram</span>
                             </a>
                             <a href="https://github.com/dbyoujin" target="_blank" rel="noopener noreferrer" class="contact-link flex items-center gap-1.5">
                                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-                                <span data-lang-key="contactGithub">GitHub</span>
+                                <span>GitHub</span>
                             </a>
                         </div>
                     </div>
@@ -103,18 +88,18 @@
 
                 <!-- Column 2: 보유 기술 -->
                 <div class="card p-6" data-aos="fade-up" data-aos-delay="100">
-                    <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center"><span class="text-2xl mr-3">🛠️</span><span data-lang-key="skillsTitle">보유 기술</span></h3>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center"><span class="text-2xl mr-3">🛠️</span>보유 기술</h3>
                     <div class="space-y-4 text-sm">
                         <div>
-                            <h4 class="font-semibold text-gray-700" data-lang-key="skillsDesign">Design & Prototyping</h4>
+                            <h4 class="font-semibold text-gray-700">Design & Prototyping</h4>
                             <p class="text-gray-600">Figma, Sketch, Adobe XD, ProtoPie, Framer</p>
                         </div>
                         <div>
-                            <h4 class="font-semibold text-gray-700" data-lang-key="skillsResearch">User Research</h4>
+                            <h4 class="font-semibold text-gray-700">User Research</h4>
                             <p class="text-gray-600">Interview, Survey, Usability Test, Persona</p>
                         </div>
                         <div>
-                            <h4 class="font-semibold text-gray-700" data-lang-key="skillsCollab">Collaboration</h4>
+                            <h4 class="font-semibold text-gray-700">Collaboration</h4>
                             <p class="text-gray-600">Jira, Confluence, Slack</p>
                         </div>
                     </div>
@@ -122,29 +107,31 @@
                 
                 <!-- Column 3: 경력 -->
                 <div class="card p-6 flex flex-col" data-aos="fade-up" data-aos-delay="200">
-                    <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center"><span class="text-2xl mr-3">📄</span><span data-lang-key="careerTitle">경력</span></h3>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center"><span class="text-2xl mr-3">📄</span>경력</h3>
                     <div class="space-y-5 text-sm flex-grow">
                         <!-- 항상 보이는 항목 -->
                         <div>
-                            <h4 class="font-bold text-gray-800 mb-2" data-lang-key="careerDevTitle">개발 경력</h4>
+                            <h4 class="font-bold text-gray-800 mb-2">개발 경력</h4>
                             <div>
-                                <h4 class="font-semibold text-gray-800" data-lang-key="careerEsoft">이소프트, 코리아(Esoft, korea) 대표</h4>
-                                <p class="text-gray-600" data-lang-key="careerEsoftDate">(2020.06.09 - 2023.08.25)</p>
+                                <h4 class="font-semibold text-gray-800">이소프트, 코리아(Esoft, korea) 대표</h4>
+                                <p class="text-gray-600">(2020.06.09 - 2023.08.25)</p>
                             </div>
                         </div>
+
                         <div class="space-y-5 text-sm flex-grow">
                             <div>
                                 <div>
-                                    <h4 class="font-semibold text-gray-800" data-lang-key="careerDiscord">디스코드 봇 메이커 개발 및 운영</h4>
-                                    <p class="text-gray-600" data-lang-key="careerDiscordDate">(2020.04 - 2020.10)</p>
+                                    <h4 class="font-semibold text-gray-800">디스코드 봇 메이커 개발 및 운영</h4>
+                                    <p class="text-gray-600">(2020.04 - 2020.10)</p>
                                 </div>
                             </div>
                         </div>
+
                         <div class="space-y-5 text-sm flex-grow">
                             <div>
                                 <div>
-                                    <h4 class="font-semibold text-gray-800" data-lang-key="careerHosting">무료 파일 호스팅 개발 및 운영</h4>
-                                    <p class="text-gray-600" data-lang-key="careerHostingDate">(2020.01 - 2023.08)</p>
+                                    <h4 class="font-semibold text-gray-800">무료 파일 호스팅 개발 및 운영</h4>
+                                    <p class="text-gray-600">(2020.01 - 2023.08)</p>
                                 </div>
                             </div>
                         </div>
@@ -152,67 +139,69 @@
                         <!-- '더보기'로 숨겨질 부분 -->
                         <div id="more-experience" class="space-y-5">
                              <div class="pt-5 border-t border-gray-200/60">
-                                <h4 class="font-bold text-gray-800 mb-3" data-lang-key="careerLiteratureTitle">문학 활동 경력</h4>
+                                <h4 class="font-bold text-gray-800 mb-3">문학 활동 경력</h4>
                                 <div>
-                                    <h4 class="font-semibold text-gray-800" data-lang-key="careerNovel">단편소설 책 발간</h4>
-                                    <p class="text-gray-600" data-lang-key="careerNovelDate">(2023.02.14)</p>
+                                    <h4 class="font-semibold text-gray-800">단편소설 책 발간</h4>
+                                    <p class="text-gray-600">(2023.02.14)</p>
                                 </div>
                             </div>
                             <div>
-                                <h4 class="font-semibold text-gray-800" data-lang-key="careerCopyright">한국저작권위원회 단편소설 책 등록</h4>
-                                <p class="text-gray-600" data-lang-key="careerCopyrightDate">(2023.02.27)</p>
+                                <h4 class="font-semibold text-gray-800">한국저작권위원회 단편소설 책 등록</h4>
+                                <p class="text-gray-600">(2023.02.27)</p>
                             </div>
                             <div>
-                                <h4 class="font-semibold text-gray-800" data-lang-key="careerArtistCert">한국예술인복지재단 예술활동증명</h4>
-                                <p class="text-gray-600" data-lang-key="careerArtistCertDate">(2023.08.14 - 2028.08.13)</p>
+                                <h4 class="font-semibold text-gray-800">한국예술인복지재단 예술활동증명</h4>
+                                <p class="text-gray-600">(2023.08.14 - 2028.08.13)</p>
                             </div>
                             <div>
-                                <h4 class="font-semibold text-gray-800" data-lang-key="careerGgcfPanel">경기문화재단 예술인 정책패널인 위촉</h4>
-                                <p class="text-gray-600" data-lang-key="careerGgcfPanelDate">(2024.09.20 - 2025.12.31)</p>
+                                <h4 class="font-semibold text-gray-800">경기문화재단 예술인 정책패널인 위촉</h4>
+                                <p class="text-gray-600">(2024.09.20 - 2025.12.31)</p>
                             </div>
                             <div>
-                                <h4 class="font-semibold text-gray-800" data-lang-key="careerMcstSurvey">문화체육관광부 2024년 예술인 실태조사 대상자</h4>
-                                <p class="text-gray-600" data-lang-key="careerMcstSurveyDate">(2024.12 - 2025.01)</p>
+                                <h4 class="font-semibold text-gray-800">문화체육관광부 2024년 예술인 실태조사 대상자</h4>
+                                <p class="text-gray-600">(2024.12 - 2025.01)</p>
                             </div>
                             <div>
-                                <h4 class="font-semibold text-gray-800" data-lang-key="careerGgcfYouth">경기문화재단 청소년 자문위원단 위원</h4>
-                                <p class="text-gray-600" data-lang-key="careerGgcfYouthDate">(2025.07.07 - )</p>
+                                <h4 class="font-semibold text-gray-800">경기문화재단 청소년 자문위원단 위원</h4>
+                                <p class="text-gray-600">(2025.07.07 - )</p>
                             </div>
+
                              <div class="pt-5 border-t border-gray-200/60">
-                                <h4 class="font-bold text-gray-800 mb-3" data-lang-key="careerEduTitle">예술인 교육 수료</h4>
+                                <h4 class="font-bold text-gray-800 mb-3">예술인 교육 수료</h4>
                                 <div>
-                                    <h4 class="font-semibold text-gray-800" data-lang-key="careerKocca1">한국콘텐츠진흥원 예술인 권익보호의 이해 수료</h4>
-                                    <p class="text-gray-600" data-lang-key="careerKocca1Date">(2023.02.14 - 2023.11.30)</p>
+                                    <h4 class="font-semibold text-gray-800">한국콘텐츠진흥원 예술인 권익보호의 이해 수료</h4>
+                                    <p class="text-gray-600">(2023.02.14 - 2023.11.30)</p>
                                 </div>
                             </div>
                             <div>
-                                <h4 class="font-semibold text-gray-800" data-lang-key="careerKocca2">한국콘텐츠진흥원 예술인 복지법과 정책 수료</h4>
-                                <p class="text-gray-600" data-lang-key="careerKocca2Date">(2025.01.01 - 2023.05.21)</p>
+                                <h4 class="font-semibold text-gray-800">한국콘텐츠진흥원 예술인 복지법과 정책 수료</h4>
+                                <p class="text-gray-600">(2025.01.01 - 2023.05.21)</p>
                             </div>
                             <div>
-                                <h4 class="font-semibold text-gray-800" data-lang-key="careerKawf1">한국예술인복지재단 문화예술분야 성희롱·성폭력 예방교육 수료</h4>
-                                <p class="text-gray-600" data-lang-key="careerKawf1Date">(2025.01.01 - 2023.05.20)</p>
+                                <h4 class="font-semibold text-gray-800">한국예술인복지재단 문화예술분야 성희롱·성폭력 예방교육 수료</h4>
+                                <p class="text-gray-600">(2025.01.01 - 2023.05.20)</p>
                             </div>
                             <div>
-                                <h4 class="font-semibold text-gray-800" data-lang-key="careerKawf2">한국예술인복지재단 공연예술 표준계약서 활용의 이해(출연·창작) 수료</h4>
-                                <p class="text-gray-600" data-lang-key="careerKawf2Date">(2025.01.01 - 2023.05.21)</p>
+                                <h4 class="font-semibold text-gray-800">한국예술인복지재단 공연예술 표준계약서 활용의 이해(출연·창작) 수료</h4>
+                                <p class="text-gray-600">(2025.01.01 - 2023.05.21)</p>
                             </div>
                             <div>
-                                <h4 class="font-semibold text-gray-800" data-lang-key="careerKawf3">한국예술인복지재단 예술인권리보장법 예술인편 수료</h4>
-                                <p class="text-gray-600" data-lang-key="careerKawf3Date">(2025.01.01 - 2023.05.25)</p>
+                                <h4 class="font-semibold text-gray-800">한국예술인복지재단 예술인권리보장법 예술인편 수료</h4>
+                                <p class="text-gray-600">(2025.01.01 - 2023.05.25)</p>
                             </div>
+
                              <div class="pt-5 border-t border-gray-200/60">
-                                <h4 class="font-bold text-gray-800 mb-3" data-lang-key="careerOtherTitle">기타 활동 경력</h4>
+                                <h4 class="font-bold text-gray-800 mb-3">기타 활동 경력</h4>
                                 <div>
-                                    <h4 class="font-semibold text-gray-800" data-lang-key="careerPatent">특수 생수병 뚜껑 개발 및 특허 출원</h4>
-                                    <p class="text-gray-600" data-lang-key="careerPatentDate">(2023.10.29 - )</p>
+                                    <h4 class="font-semibold text-gray-800">특수 생수병 뚜껑 개발 및 특허 출원</h4>
+                                    <p class="text-gray-600">(2023.10.29 - )</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <!-- 더보기 버튼 -->
                     <div class="mt-4 text-center">
-                        <button id="toggle-experience-btn" class="text-sm font-bold text-blue-600 hover:text-blue-800 transition-colors" data-lang-key-more="careerMoreButton" data-lang-key-less="careerCollapseButton">
+                        <button id="toggle-experience-btn" class="text-sm font-bold text-blue-600 hover:text-blue-800 transition-colors">
                             더보기
                         </button>
                     </div>
@@ -224,14 +213,14 @@
 
             <!-- 포트폴리오 섹션 -->
             <section id="portfolio">
-                <h2 class="text-3xl sm:text-4xl font-bold mb-12 text-gray-900 text-center flex items-center justify-center" data-aos="fade-up"><span class="text-3xl mr-3">✨</span><span data-lang-key="projectsTitle">Projects</span></h2>
+                <h2 class="text-3xl sm:text-4xl font-bold mb-12 text-gray-900 text-center flex items-center justify-center" data-aos="fade-up"><span class="text-3xl mr-3">✨</span>Projects</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
                      <!-- 포트폴리오 아이템 1 -->
                     <div class="card portfolio-card cursor-pointer" onclick="openModal('project1')" data-aos="fade-up">
                         <img src="https://placehold.co/600x400/a5b4fc/1e293b?text=Discord+Bot+Maker" alt="디스코드 봇 메이커" class="w-full h-48 object-cover">
                         <div class="p-5">
-                            <h4 class="font-bold text-lg mb-1" data-lang-key="project1Title">디스코드 봇 메이커</h4>
-                            <p class="text-gray-600 text-sm mb-3" data-lang-key="project1Desc">파이썬 기반 디스코드 봇을 만들 수 있는 간단한 어플리케이션의 개발 및 총책임자로써 운영하였습니다.</p>
+                            <h4 class="font-bold text-lg mb-1">디스코드 봇 메이커</h4>
+                            <p class="text-gray-600 text-sm mb-3">파이썬 기반 디스코드 봇을 만들 수 있는 간단한 어플리케이션의 개발 및 총책임자로써 운영하였습니다.</p>
                             <div class="flex flex-wrap gap-2">
                                 <span class="bg-orange-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Python</span>
                                 <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">UX/UI Design</span>
@@ -244,8 +233,8 @@
                     <div class="card portfolio-card cursor-pointer" onclick="openModal('project2')" data-aos="fade-up" data-aos-delay="100">
                         <img src="https://placehold.co/600x400/93c5fd/1e293b?text=File+Upload" alt="File Upload(파일 업로드)" class="w-full h-48 object-cover">
                         <div class="p-5">
-                            <h4 class="font-bold text-lg mb-1" data-lang-key="project2Title">File Upload(파일 업로드)</h4>
-                            <p class="text-gray-600 text-sm mb-3" data-lang-key="project2Desc">웹사이트 내에서 무료로 파일 업로드를 하여 호스팅 시켜주는 사이트를 개발 및 운영하였습니다.</p>
+                            <h4 class="font-bold text-lg mb-1">File Upload(파일 업로드)</h4>
+                            <p class="text-gray-600 text-sm mb-3">웹사이트 내에서 무료로 파일 업로드를 하여 호스팅 시켜주는 사이트를 개발 및 운영하였습니다.</p>
                             <div class="flex flex-wrap gap-2">
                                 <span class="bg-purple-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">PHP</span>
                                 <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">UX/UI Design</span>
@@ -259,14 +248,14 @@
             <!-- Awards 섹션 -->
             <section id="awards" class="mt-16">
                 <hr class="border-t-2 border-gray-300/30 my-16" data-aos="fade-in">
-                <h2 class="text-3xl sm:text-4xl font-bold mb-12 text-gray-900 text-center flex items-center justify-center" data-aos="fade-up"><span class="text-3xl mr-3">🏆</span><span data-lang-key="awardsTitle">Awards</span></h2>
+                <h2 class="text-3xl sm:text-4xl font-bold mb-12 text-gray-900 text-center flex items-center justify-center" data-aos="fade-up"><span class="text-3xl mr-3">🏆</span>Awards</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
                      <!-- Award 아이템 1 -->
                     <div class="card portfolio-card cursor-pointer" onclick="openModal('award1')" data-aos="fade-up">
                         <img src="images/kawf.jpg" alt="한국예술인복지재단 예술활동증명" class="w-full h-48 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x192/e0e0e0/757575?text=Image';">
                         <div class="p-5">
-                            <h4 class="font-bold text-lg mb-1" data-lang-key="award1Title">예술활동증명</h4>
-                            <p class="text-gray-600 text-sm mb-3" data-lang-key="award1Org">한국예술인복지재단 (2023)</p>
+                            <h4 class="font-bold text-lg mb-1">예술활동증명</h4>
+                            <p class="text-gray-600 text-sm mb-3">한국예술인복지재단 (2023)</p>
                         </div>
                     </div>
 
@@ -274,8 +263,8 @@
                     <div class="card portfolio-card cursor-pointer" onclick="openModal('award2')" data-aos="fade-up" data-aos-delay="100">
                         <img src="images/ggcf.jpg" alt="경기문화재단 예술인 정책패널 위촉장" class="w-full h-48 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x192/e0e0e0/757575?text=Image';">
                         <div class="p-5">
-                            <h4 class="font-bold text-lg mb-1" data-lang-key="award2Title">예술인 정책패널 위촉장</h4>
-                            <p class="text-gray-600 text-sm mb-3" data-lang-key="award2Org">경기문화재단 (2024)</p>
+                            <h4 class="font-bold text-lg mb-1">예술인 정책패널 위촉장</h4>
+                            <p class="text-gray-600 text-sm mb-3">경기문화재단 (2024)</p>
                         </div>
                     </div>
                 </div>
@@ -283,7 +272,7 @@
 
             <!-- 푸터 -->
             <footer class="text-center text-gray-500 mt-20 pt-8 border-t-2 border-gray-300/30" data-aos="fade-in">
-                <p data-lang-key="footerText">&copy; 2025 Jeong Hyeok Kim. All Rights Reserved.</p>
+                <p>&copy; 2025 Jeong Hyeok Kim. All Rights Reserved.</p>
             </footer>
         </div>
     </div>
@@ -292,6 +281,7 @@
     <div id="modal-panel" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 opacity-0">
         <div id="modal-backdrop" class="fixed inset-0 bg-black bg-opacity-60" onclick="closeModal()"></div>
         
+        <!-- 모달 컨텐츠 -->
         <div id="modal-container" class="bg-white rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto relative z-10 opacity-0 scale-95">
             <div class="p-6 sm:p-8">
                 <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
@@ -307,356 +297,87 @@
     <!-- AOS (Animate On Scroll) 라이브러리 JS 추가 -->
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
-        // 다국어 텍스트 데이터
-        const translations = {
-            ko: {
-                serverCheckBanner: "🚨 현재 통합관리전산망 서버가 점검중입니다!",
-                announcementBanner: "📢 통합관리전산망 오픈!",
-                announcementButton: "접속하기",
-                headerTitle: "김정혁(Kim Jeong Hyeok)",
-                profileName: "김정혁",
-                profileSubName: "Kim Jeong Hyeok",
-                profileDescription: "세상에는 재밌는 것들이 많습니다. 저는 제가 관심을 보이고 좋아하는 분야라면 밤을 새더라도 완성하려는 집착과 집념이 있어요.<br><br>그런 결과 저는 개발자 이기도 하며, 작가이기도 하며, 특허를 낸 학생이기 하며, 경기문화재단 예술인 정책패널인 이기도 해요.<br><br>항상 더 재밌고 흥미진진한 삶을 만들어 나갈게요!",
-                contactEmail: "Email",
-                contactInstagram: "Instagram",
-                contactGithub: "GitHub",
-                skillsTitle: "보유 기술",
-                skillsDesign: "디자인 & 프로토타이핑",
-                skillsResearch: "사용자 리서치",
-                skillsCollab: "협업",
-                careerTitle: "경력",
-                careerDevTitle: "개발 경력",
-                careerEsoft: "이소프트, 코리아(Esoft, korea) 대표",
-                careerEsoftDate: "(2020.06.09 - 2023.08.25)",
-                careerDiscord: "디스코드 봇 메이커 개발 및 운영",
-                careerDiscordDate: "(2020.04 - 2020.10)",
-                careerHosting: "무료 파일 호스팅 개발 및 운영",
-                careerHostingDate: "(2020.01 - 2023.08)",
-                careerMoreButton: "더보기",
-                careerCollapseButton: "접기",
-                careerLiteratureTitle: "문학 활동 경력",
-                careerNovel: "단편소설 책 발간",
-                careerNovelDate: "(2023.02.14)",
-                careerCopyright: "한국저작권위원회 단편소설 책 등록",
-                careerCopyrightDate: "(2023.02.27)",
-                careerArtistCert: "한국예술인복지재단 예술활동증명",
-                careerArtistCertDate: "(2023.08.14 - 2028.08.13)",
-                careerGgcfPanel: "경기문화재단 예술인 정책패널인 위촉",
-                careerGgcfPanelDate: "(2024.09.20 - 2025.12.31)",
-                careerMcstSurvey: "문화체육관광부 2024년 예술인 실태조사 대상자",
-                careerMcstSurveyDate: "(2024.12 - 2025.01)",
-                careerGgcfYouth: "경기문화재단 청소년 자문위원단 위원",
-                careerGgcfYouthDate: "(2025.07.07 - )",
-                careerEduTitle: "예술인 교육 수료",
-                careerKocca1: "한국콘텐츠진흥원 예술인 권익보호의 이해 수료",
-                careerKocca1Date: "(2023.02.14 - 2023.11.30)",
-                careerKocca2: "한국콘텐츠진흥원 예술인 복지법과 정책 수료",
-                careerKocca2Date: "(2025.01.01 - 2023.05.21)",
-                careerKawf1: "한국예술인복지재단 문화예술분야 성희롱·성폭력 예방교육 수료",
-                careerKawf1Date: "(2025.01.01 - 2023.05.20)",
-                careerKawf2: "한국예술인복지재단 공연예술 표준계약서 활용의 이해(출연·창작) 수료",
-                careerKawf2Date: "(2025.01.01 - 2023.05.21)",
-                careerKawf3: "한국예술인복지재단 예술인권리보장법 예술인편 수료",
-                careerKawf3Date: "(2025.01.01 - 2023.05.25)",
-                careerOtherTitle: "기타 활동 경력",
-                careerPatent: "특수 생수병 뚜껑 개발 및 특허 출원",
-                careerPatentDate: "(2023.10.29 - )",
-                projectsTitle: "프로젝트",
-                project1Title: "디스코드 봇 메이커",
-                project1Desc: "파이썬 기반 디스코드 봇을 만들 수 있는 간단한 어플리케이션의 개발 및 총책임자로써 운영하였습니다.",
-                project2Title: "File Upload(파일 업로드)",
-                project2Desc: "웹사이트 내에서 무료로 파일 업로드를 하여 호스팅 시켜주는 사이트를 개발 및 운영하였습니다.",
-                awardsTitle: "수상 경력",
-                award1Title: "예술활동증명",
-                award1Org: "한국예술인복지재단 (2023)",
-                award2Title: "예술인 정책패널 위촉장",
-                award2Org: "경기문화재단 (2024)",
-                footerText: "© 2025 김정혁. 모든 권리 보유.",
-            },
-            en: {
-                serverCheckBanner: "🚨 The IMCN server is currently under inspection! (02:00 ~ 04:00 AM)",
-                announcementBanner: "📢 Integrated Management Network Open!",
-                announcementButton: "Connect",
-                headerTitle: "Kim Jeong Hyeok",
-                profileName: "Kim Jeong Hyeok",
-                profileSubName: "",
-                profileDescription: "There are many interesting things in the world. If there's a field I'm interested in and passionate about, I have the persistence and determination to work on it all night to complete it.<br><br>As a result, I am a developer, a writer, a student with a patent, and a member of the Gyeonggi Cultural Foundation's artist policy panel.<br><br>I will always strive to create a more fun and exciting life!",
-                contactEmail: "Email",
-                contactInstagram: "Instagram",
-                contactGithub: "GitHub",
-                skillsTitle: "Skills",
-                skillsDesign: "Design & Prototyping",
-                skillsResearch: "User Research",
-                skillsCollab: "Collaboration",
-                careerTitle: "Experience",
-                careerDevTitle: "Development Experience",
-                careerEsoft: "CEO, Esoft, Korea",
-                careerEsoftDate: "(2020.06.09 - 2023.08.25)",
-                careerDiscord: "Discord Bot Maker Development & Operation",
-                careerDiscordDate: "(2020.04 - 2020.10)",
-                careerHosting: "Free File Hosting Development & Operation",
-                careerHostingDate: "(2020.01 - 2023.08)",
-                careerMoreButton: "Show More",
-                careerCollapseButton: "Show Less",
-                careerLiteratureTitle: "Literary Activities",
-                careerNovel: "Published a Short Novel Collection",
-                careerNovelDate: "(2023.02.14)",
-                careerCopyright: "Registered Short Novel with Korea Copyright Commission",
-                careerCopyrightDate: "(2023.02.27)",
-                careerArtistCert: "Artistic Activity Certification by Korea Artist Welfare Foundation",
-                careerArtistCertDate: "(2023.08.14 - 2028.08.13)",
-                careerGgcfPanel: "Appointed as Artist Policy Panelist by Gyeonggi Cultural Foundation",
-                careerGgcfPanelDate: "(2024.09.20 - 2025.12.31)",
-                careerMcstSurvey: "Participant in the 2024 Survey on the Status of Artists by MCST",
-                careerMcstSurveyDate: "(2024.12 - 2025.01)",
-                careerGgcfYouth: "Member of the Youth Advisory Group at Gyeonggi Cultural Foundation",
-                careerGgcfYouthDate: "(2025.07.07 - Present)",
-                careerEduTitle: "Art-related Education Completed",
-                careerKocca1: "Completed 'Understanding Artist Rights Protection' by KOCCA",
-                careerKocca1Date: "(2023.02.14 - 2023.11.30)",
-                careerKocca2: "Completed 'Artist Welfare Act and Policies' by KOCCA",
-                careerKocca2Date: "(2025.01.01 - 2023.05.21)",
-                careerKawf1: "Completed 'Sexual Harassment/Violence Prevention in Arts' by KAWF",
-                careerKawf1Date: "(2025.01.01 - 2023.05.20)",
-                careerKawf2: "Completed 'Understanding Standard Contracts for Performing Arts' by KAWF",
-                careerKawf2Date: "(2025.01.01 - 2023.05.21)",
-                careerKawf3: "Completed 'Understanding the Artist Rights Guarantee Act' by KAWF",
-                careerKawf3Date: "(2025.01.01 - 2023.05.25)",
-                careerOtherTitle: "Other Activities",
-                careerPatent: "Developed and Patented a Special Water Bottle Cap",
-                careerPatentDate: "(2023.10.29 - Present)",
-                projectsTitle: "Projects",
-                project1Title: "Discord Bot Maker",
-                project1Desc: "Developed and operated a simple application for creating Python-based Discord bots as the project lead.",
-                project2Title: "File Upload",
-                project2Desc: "Developed and operated a website that provides free file hosting services.",
-                awardsTitle: "Awards",
-                award1Title: "Artistic Activity Certification",
-                award1Org: "Korea Artist Welfare Foundation (2023)",
-                award2Title: "Certificate of Appointment for Artist Policy Panel",
-                award2Org: "Gyeonggi Cultural Foundation (2024)",
-                footerText: "© 2025 Jeong Hyeok Kim. All Rights Reserved.",
-            },
-            ja: {
-                serverCheckBanner: "🚨 現在、統合管理電算網サーバーが点検中です！",
-                announcementBanner: "📢 統合管理ネットワークオープン！",
-                announcementButton: "接続",
-                headerTitle: "キム・ジョンヒョク(Kim Jeong Hyeok)",
-                profileName: "キム・ジョンヒョク",
-                profileSubName: "",
-                profileDescription: "世の中には面白いことがたくさんあります。私は興味を持ち、好きな分野であれば、徹夜してでも完成させようとする執着と執念があります。<br><br>その結果、私は開発者であり、作家であり、特許を取得した学生であり、京畿文化財団の芸術家政策パネルでもあります。<br><br>常にもっと面白くてわくわくする人生を作っていきます！",
-                contactEmail: "Eメール",
-                contactInstagram: "インスタグラム",
-                contactGithub: "GitHub",
-                skillsTitle: "保有技術",
-                skillsDesign: "デザイン＆プロトタイピング",
-                skillsResearch: "ユーザーリサーチ",
-                skillsCollab: "コラボレーション",
-                careerTitle: "経歴",
-                careerDevTitle: "開発経歴",
-                careerEsoft: "Esoft, korea 代表",
-                careerEsoftDate: "(2020.06.09 - 2023.08.25)",
-                careerDiscord: "Discordボットメーカーの開発及び運営",
-                careerDiscordDate: "(2020.04 - 2020.10)",
-                careerHosting: "無料ファイルホスティングの開発及び運営",
-                careerHostingDate: "(2020.01 - 2023.08)",
-                careerMoreButton: "もっと見る",
-                careerCollapseButton: "閉じる",
-                careerLiteratureTitle: "文学活動の経歴",
-                careerNovel: "短編小説集発刊",
-                careerNovelDate: "(2023.02.14)",
-                careerCopyright: "韓国著作権委員会に短編小説集登録",
-                careerCopyrightDate: "(2023.02.27)",
-                careerArtistCert: "韓国芸術家福祉財団による芸術活動証明",
-                careerArtistCertDate: "(2023.08.14 - 2028.08.13)",
-                careerGgcfPanel: "京畿文化財団の芸術家政策パネルに委嘱",
-                careerGgcfPanelDate: "(2024.09.20 - 2025.12.31)",
-                careerMcstSurvey: "文化体育観光部2024年芸術家実態調査対象者",
-                careerMcstSurveyDate: "(2024.12 - 2025.01)",
-                careerGgcfYouth: "京畿文化財団青少年諮問団委員",
-                careerGgcfYouthDate: "(2025.07.07 - )",
-                careerEduTitle: "芸術家教育修了",
-                careerKocca1: "韓国コンテンツ振興院「芸術家の権益保護の理解」修了",
-                careerKocca1Date: "(2023.02.14 - 2023.11.30)",
-                careerKocca2: "韓国コンテンツ振興院「芸術家福祉法と政策」修了",
-                careerKocca2Date: "(2025.01.01 - 2023.05.21)",
-                careerKawf1: "韓国芸術家福祉財団「文化芸術分野のセクハラ・性暴力予防教育」修了",
-                careerKawf1Date: "(2025.01.01 - 2023.05.20)",
-                careerKawf2: "韓国芸術家福祉財団「公演芸術標準契約書の活用の理解」修了",
-                careerKawf2Date: "(2025.01.01 - 2023.05.21)",
-                careerKawf3: "韓国芸術家福祉財団「芸術家権利保障法 芸術家編」修了",
-                careerKawf3Date: "(2025.01.01 - 2023.05.25)",
-                careerOtherTitle: "その他の活動経歴",
-                careerPatent: "特殊なペットボトルのキャップ開発及び特許出願",
-                careerPatentDate: "(2023.10.29 - )",
-                projectsTitle: "プロジェクト",
-                project1Title: "Discordボットメーカー",
-                project1Desc: "PythonベースのDiscordボットを作成できるシンプルなアプリケーションの開発及び総責任者として運営しました。",
-                project2Title: "ファイルアップロード",
-                project2Desc: "ウェブサイト内で無料でファイルをアップロードしてホスティングするサイトを開発及び運営しました。",
-                awardsTitle: "受賞経歴",
-                award1Title: "芸術活動証明",
-                award1Org: "韓国芸術家福祉財団 (2023)",
-                award2Title: "芸術家政策パネル委嘱状",
-                award2Org: "京畿文化財団 (2024)",
-                footerText: "© 2025 キム・ジョンヒョク. 全著作権所有.",
-            }
-        };
+        // AOS 초기화 (모바일에서는 비활성화)
+        AOS.init({
+            disable: 'mobile', // 모바일 기기에서 비활성화
+            duration: 800, // 애니메이션 지속 시간 (밀리초)
+            once: true      // 애니메이션이 한 번만 실행되도록 설정
+        });
 
-        // 프로젝트 및 Award 상세 정보 (다국어)
+        // 프로젝트 및 Award 상세 정보
         const itemDetails = {
             project1: {
+                title: "디스코드 봇 메이커 개발 및 운영",
                 image: "images/dbm.jpg",
-                ko: {
-                    title: "디스코드 봇 메이커 개발 및 운영",
-                    description: "<h4 class='text-xl font-bold mb-2'>🗒️설명</h4><p>본 어플리케이션은 이소프트, 코리아(Esoft, korea)에서 개발하고 운영하였던 어플리케이션 입니다.<br>당시 직접 디스코드 봇을 만들기 위해 텍스트 코딩하는 것이 어려운 사용자들을 위해 블록코딩을 이용하여 손쉽게 코딩할 수 있게 도와주는 어플리케이션 입니다.</p><br><h4 class='text-xl font-bold mb-2'>원리</h4><p>스케치웨어를 통해 어플리케이션을 제작하였고, 일부 자바코드를 추가하여 만들었습니다.<br>또한 Google Firebase와 연동하여 사용자들이 만든 블록코딩을 어플리케이션 내의 커뮤니티를 통해 공유할 수 있도록 구현하였습니다.</p><br><h4 class='text-xl font-bold mb-2'>느낀점</h4><p>API연결과 Google Firebase를 기반으로 한 Databse 관리, 다양한 자바언어 습득 등 나의 코딩 생활에 큰 영향을 미치게 된 프로젝트 입니다.</p>"
-                },
-                en: {
-                    title: "Discord Bot Maker Development & Operation",
-                    description: "<h4 class='text-xl font-bold mb-2'>🗒️Description</h4><p>This application was developed and operated by Esoft, Korea.<br>It was designed to help users who found text coding difficult by allowing them to easily create Discord bots using block coding.</p><br><h4 class='text-xl font-bold mb-2'>Principle</h4><p>The application was created using Sketchware with some additional Java code.<br>It was also integrated with Google Firebase to allow users to share their block-coded creations through an in-app community.</p><br><h4 class='text-xl font-bold mb-2'>What I Learned</h4><p>This project had a significant impact on my coding journey, teaching me about API integration, database management with Google Firebase, and various Java language skills.</p>"
-                },
-                ja: {
-                    title: "Discordボットメーカーの開発及び運営",
-                    description: "<h4 class='text-xl font-bold mb-2'>🗒️説明</h4><p>このアプリケーションは、Esoft, koreaで開発・運営されたアプリケーションです。<br>当時、テキストコーディングでDiscordボットを直接作成するのが難しいユーザーのために、ブロックコーディングを利用して簡単にコーディングできるように支援するアプリケーションでした。</p><br><h4 class='text-xl font-bold mb-2'>原理</h4><p>Sketchwareを通じてアプリケーションを製作し、一部Javaコードを追加して作成しました。<br>また、Google Firebaseと連携し、ユーザーが作成したブロックコーディングをアプリケーション内のコミュニティで共有できるように実装しました。</p><br><h4 class='text-xl font-bold mb-2'>学んだこと</h4><p>API連携やGoogle Firebaseベースのデータベース管理、様々なJava言語の習得など、私のコーディング生活に大きな影響を与えたプロジェクトです。</p>"
-                }
+                description: "<h4 class='text-xl font-bold mb-2'>🗒️설명</h4><p>본 어플리케이션은 이소프트, 코리아(Esoft, korea)에서 개발하고 운영하였던 어플리케이션 입니다.<br>당시 직접 디스코드 봇을 만들기 위해 텍스트 코딩하는 것이 어려운 사용자들을 위해 블록코딩을 이용하여 손쉽게 코딩할 수 있게 도와주는 어플리케이션 입니다.</p><br><h4 class='text-xl font-bold mb-2'>원리</h4><p>스케치웨어를 통해 어플리케이션을 제작하였고, 일부 자바코드를 추가하여 만들었습니다.<br>또한 Google Firebase와 연동하여 사용자들이 만든 블록코딩을 어플리케이션 내의 커뮤니티를 통해 공유할 수 있도록 구현하였습니다.</p><br><h4 class='text-xl font-bold mb-2'>느낀점</h4><p>API연결과 Google Firebase를 기반으로 한 Databse 관리, 다양한 자바언어 습득 등 나의 코딩 생활에 큰 영향을 미치게 된 프로젝트 입니다.</p>"
             },
             project2: {
+                title: "파일 업로드(File Upload) 개발 및 운영",
                 image: "images/fileupload.png",
-                ko: {
-                    title: "파일 업로드(File Upload) 개발 및 운영",
-                    description: "<h4 class='text-xl font-bold mb-2'>🗒️설명</h4><p>본 서비스는 이소프트, 코리아(Esoft, korea)에서 운영했었던 무료 파일 호스팅 서비스 입니다.<br>본 서비스의 특징은 사진 업로드시 성인물 감지 시스템을 운영하여, 국내법을 준수하고, 사용자가 안전하게 서비스를 이용할 수 있게 하였습니다.</p><br><h4 class='text-xl font-bold mb-2'>원리</h4><p>성인물 감지 시스템은 카카오 API를 이용하여 PHP로 연동하였으며 사진을 분석하여 일정수치 (0 : 성인물 아님, 1: 성인물임)를 나타내어 0.65 초과시 업로드가 되지 않도록 하였습니다.<br>또한 법적 책임 면제를 위하여 면책조항을 제시하였습니다.<br>PHP와 HTML를 적절히 사용하여 Post된 파일을 업로드 후 서버 내에서 파일을 전용 폴더로 복사, 랜덤한 영문 및 숫자로 이름을 변경하여 URL주소를 제공하였습니다.</p><br><h4 class='text-xl font-bold mb-2'>느낀점</h4><p>오랫동안 공들여 운영했던 프로그램 답게 PHP의 대한 원리와 기술이 증가하게 되었습니다.<br>또한 Apache와 PHP의 Post 용량 등 다양한 소프트웨어적 원리와 이해도 증가하게 되었습니다.</p>"
-                },
-                en: {
-                    title: "File Upload Development & Operation",
-                    description: "<h4 class='text-xl font-bold mb-2'>🗒️Description</h4><p>This was a free file hosting service operated by Esoft, Korea.<br>A key feature was an adult content detection system for image uploads to comply with domestic laws and ensure a safe user environment.</p><br><h4 class='text-xl font-bold mb-2'>Principle</h4><p>The adult content detection system was implemented using the Kakao API with PHP. It analyzed images and assigned a score (0: not adult, 1: adult), blocking uploads with a score exceeding 0.65.<br>A disclaimer was also presented to waive legal liability.<br>Using PHP and HTML, posted files were uploaded, copied to a dedicated server folder, renamed with a random alphanumeric string, and provided as a URL.</p><br><h4 class='text-xl font-bold mb-2'>What I Learned</h4><p>As a program I operated for a long time, my understanding of PHP principles and techniques grew significantly.<br>I also gained a deeper understanding of various software principles, including Apache and PHP's POST size limits.</p>"
-                },
-                ja: {
-                    title: "ファイルアップロードの開発及び運営",
-                    description: "<h4 class='text-xl font-bold mb-2'>🗒️説明</h4><p>このサービスは、Esoft, koreaで運営されていた無料のファイルホスティングサービスです。<br>このサービスの特徴は、写真アップロード時にアダルトコンテンツ検出システムを運用し、国内法を遵守し、ユーザーが安全にサービスを利用できるようにしたことです。</p><br><h4 class='text-xl font-bold mb-2'>原理</h4><p>アダルトコンテンツ検出システムは、Kakao APIを利用してPHPで連携し、写真を分析して一定の数値（0：アダルトコンテンツではない、1：アダルトコンテンツである）で評価し、0.65を超えるとアップロードできないようにしました。<br>また、法的責任を免除するための免責条項を提示しました。<br>PHPとHTMLを適切に使用し、POSTされたファイルをアップロード後、サーバー内の専用フォルダにコピーし、ランダムな英数字で名前を変更してURLを提供しました。</p><br><h4 class='text-xl font-bold mb-2'>学んだこと</h4><p>長年かけて運営したプログラムだけに、PHPの原理と技術についての理解が深まりました。<br>また、ApacheやPHPのPOST容量など、様々なソフトウェアの原理と理解も深まりました。</p>"
-                }
-            },
+                description: "<h4 class='text-xl font-bold mb-2'>🗒️설명</h4><p>본 서비스는 이소프트, 코리아(Esoft, korea)에서 운영했었던 무료 파일 호스팅 서비스 입니다.<br>본 서비스의 특징은 사진 업로드시 성인물 감지 시스템을 운영하여, 국내법을 준수하고, 사용자가 안전하게 서비스를 이용할 수 있게 하였습니다.</p><br><h4 class='text-xl font-bold mb-2'>원리</h4><p>성인물 감지 시스템은 카카오 API를 이용하여 PHP로 연동하였으며 사진을 분석하여 일정수치 (0 : 성인물 아님, 1: 성인물임)를 나타내어 0.65 초과시 업로드가 되지 않도록 하였습니다.<br>또한 법적 책임 면제를 위하여 면책조항을 제시하였습니다.<br>PHP와 HTML를 적절히 사용하여 Post된 파일을 업로드 후 서버 내에서 파일을 전용 폴더로 복사, 랜덤한 영문 및 숫자로 이름을 변경하여 URL주소를 제공하였습니다.</p><br><h4 class='text-xl font-bold mb-2'>느낀점</h4><p>오랫동안 공들여 운영했던 프로그램 답게 PHP의 대한 원리와 기술이 증가하게 되었습니다.<br>또한 Apache와 PHP의 Post 용량 등 다양한 소프트웨어적 원리와 이해도 증가하게 되었습니다.</p>"
+          },
             award1: {
+                title: "예술활동증명",
                 image: "images/kawf_1.png",
-                ko: {
-                    title: "예술활동증명",
-                    description: "<h4 class='text-xl font-bold mb-2'>한국예술인복지재단 (2023)</h4><p>소설 연재 및 책 출간을 바탕으로 한국예술인복지재단 예술인경력정보시스템에 활동증명을 신청하여 최종 통과되었습니다.</p>"
-                },
-                en: {
-                    title: "Artistic Activity Certification",
-                    description: "<h4 class='text-xl font-bold mb-2'>Korea Artist Welfare Foundation (2023)</h4><p>Based on my novel serialization and book publication, I applied for and received artistic activity certification from the Korea Artist Welfare Foundation's career information system.</p>"
-                },
-                ja: {
-                    title: "芸術活動証明",
-                    description: "<h4 class='text-xl font-bold mb-2'>韓国芸術家福祉財団 (2023)</h4><p>小説の連載と書籍の出版を基に、韓国芸術家福祉財団の芸術家経歴情報システムに活動証明を申請し、最終的に承認されました。</p>"
-                }
-            },
+            description: "<h4 class='text-xl font-bold mb-2'>한국예술인복지재단 (2023)</h4><p>소설 연재 및 책 출간을 바탕으로 한국예술인복지재단 예술인경력정보시스템에 활동증명을 신청하여 최종 통과되었습니다.</p>"
+        },
             award2: {
+                title: "에술인 정책패널 위촉장",
                 image: "images/ggcf_1.png",
-                ko: {
-                    title: "예술인 정책패널 위촉장",
-                    description: "<h4 class='text-xl font-bold mb-2'>경기문화재단 (2024)</h4><p>문화 예술 발전에 기여한 공로를 인정받아 예술인 정책패널로 위촉되었습니다.</p>"
-                },
-                en: {
-                    title: "Certificate of Appointment for Artist Policy Panel",
-                    description: "<h4 class='text-xl font-bold mb-2'>Gyeonggi Cultural Foundation (2024)</h4><p>In recognition of my contributions to the development of culture and arts, I was appointed as an artist policy panelist.</p>"
-                },
-                ja: {
-                    title: "芸術家政策パネル委嘱状",
-                    description: "<h4 class='text-xl font-bold mb-2'>京畿文化財団 (2024)</h4><p>文化芸術の発展に貢献した功労が認められ、芸術家政策パネルとして委嘱されました。</p>"
-                }
+                description: "<h4 class='text-xl font-bold mb-2'>경기문화재단 (2024)</h4><p>문화 예술 발전에 기여한 공로를 인정받아 예술인 정책패널로 위촉되었습니다.</p>"
             }
         };
 
-        // DOM Elements
-        const langSwitcherBtn = document.getElementById('lang-switcher-btn');
-        const langSwitcherDropdown = document.getElementById('lang-switcher-dropdown');
-        const currentLangText = document.getElementById('current-lang-text');
-        const toggleExperienceBtn = document.getElementById('toggle-experience-btn');
-
-        // 언어 변경 함수
-        const setLanguage = (lang) => {
-            document.documentElement.lang = lang;
-            localStorage.setItem('language', lang);
-            currentLangText.textContent = lang.toUpperCase();
-
-            document.querySelectorAll('[data-lang-key]').forEach(element => {
-                const key = element.getAttribute('data-lang-key');
-                if (translations[lang][key]) {
-                    element.innerHTML = translations[lang][key];
-                }
-            });
-
-            // 더보기/접기 버튼 텍스트 업데이트
-            const isMoreContentVisible = document.getElementById('more-experience').classList.contains('show');
-            const moreKey = toggleExperienceBtn.getAttribute('data-lang-key-more');
-            const lessKey = toggleExperienceBtn.getAttribute('data-lang-key-less');
-            toggleExperienceBtn.textContent = isMoreContentVisible ? translations[lang][lessKey] : translations[lang][moreKey];
-        };
-
-        // 언어 전환기 토글
-        langSwitcherBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            langSwitcherDropdown.classList.toggle('hidden');
-        });
-
-        // 드롭다운에서 언어 선택
-        langSwitcherDropdown.addEventListener('click', (e) => {
-            if (e.target.tagName === 'A') {
-                const lang = e.target.getAttribute('data-lang');
-                setLanguage(lang);
-                langSwitcherDropdown.classList.add('hidden');
-            }
-        });
-
-        // 다른 곳 클릭 시 드롭다운 닫기
-        document.addEventListener('click', () => {
-            if (!langSwitcherDropdown.classList.contains('hidden')) {
-                langSwitcherDropdown.classList.add('hidden');
-            }
-        });
-
-        // AOS 초기화
-        AOS.init({
-            disable: 'mobile',
-            duration: 800,
-            once: true
-        });
-
-        // 모달 제어
+        // 모달 제어 스크립트
         const modalPanel = document.getElementById('modal-panel');
         const modalContainer = document.getElementById('modal-container');
         const modalContent = document.getElementById('modal-content');
 
         function openModal(itemId) {
-            const currentLang = localStorage.getItem('language') || 'ko';
-            const details = itemDetails[itemId][currentLang];
-            const image = itemDetails[itemId].image;
+            const details = itemDetails[itemId];
             if (!details) return;
 
-            modalContent.innerHTML = `<div class="flex justify-center items-center h-48"><div class="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div></div>`;
+            // 1. 모달을 열고 스피너를 먼저 보여줍니다.
+            modalContent.innerHTML = `
+                <div class="flex justify-center items-center h-48">
+                    <div class="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+                </div>
+            `;
+            
             modalPanel.classList.remove('hidden');
             document.body.style.overflow = 'hidden';
             modalContainer.dataset.currentItem = itemId;
 
+            // 애니메이션을 위한 약간의 지연
             setTimeout(() => {
                 modalPanel.classList.remove('opacity-0');
                 modalContainer.classList.remove('opacity-0', 'scale-95');
             }, 10);
 
+            // 2. 이미지를 미리 로드합니다.
             const img = new Image();
-            img.src = image;
+            img.src = details.image;
+
+            // 3. 이미지 로딩이 완료되면 모달 내용을 업데이트합니다.
             img.onload = () => {
+                // 모달이 여전히 현재 항목에 대해 열려 있는지 확인합니다.
                 if (modalContainer.dataset.currentItem === itemId) {
                     modalContent.innerHTML = `
-                        <img src="${image}" alt="${details.title}" class="w-full h-auto object-contain rounded-lg mb-6 max-h-[60vh]" onerror="this.style.display='none'">
+                        <img src="${details.image}" alt="${details.title}" class="w-full h-auto object-contain rounded-lg mb-6 max-h-[60vh]">
                         <h3 class="text-2xl sm:text-3xl font-bold mb-4 text-center">${details.title}</h3>
                         <div class="prose max-w-none text-gray-600 text-center">${details.description || ''}</div>
                     `;
                 }
             };
+
+            // 이미지 로딩 실패 시 에러 메시지를 표시합니다.
             img.onerror = () => {
                 if (modalContainer.dataset.currentItem === itemId) {
-                    modalContent.innerHTML = `<div class="text-center text-red-500 p-8"><p>이미지를 불러오는 데 실패했습니다.</p></div>`;
+                    modalContent.innerHTML = `
+                        <div class="text-center text-red-500 p-8">
+                            <p>이미지를 불러오는 데 실패했습니다.</p>
+                        </div>
+                    `;
                 }
             };
         }
@@ -664,36 +385,41 @@
         function closeModal() {
             modalPanel.classList.add('opacity-0');
             modalContainer.classList.add('opacity-0', 'scale-95');
+            
             setTimeout(() => {
                 modalPanel.classList.add('hidden');
                 document.body.style.overflow = 'auto';
+                // 모달이 닫힐 때 내용을 비우고 현재 아이템 ID를 제거합니다.
                 modalContent.innerHTML = '';
                 modalContainer.dataset.currentItem = '';
-            }, 300);
+            }, 300); // transition 시간과 일치
         }
 
         document.addEventListener('keydown', (event) => {
-            if (event.key === 'Escape' && !modalPanel.classList.contains('hidden')) closeModal();
+            if (event.key === 'Escape' && !modalPanel.classList.contains('hidden')) {
+                closeModal();
+            }
         });
 
-        // '더보기' 기능
+        // '더보기' 기능 스크립트
+        const toggleBtn = document.getElementById('toggle-experience-btn');
         const moreContent = document.getElementById('more-experience');
-        if (toggleExperienceBtn) {
-            toggleExperienceBtn.addEventListener('click', () => {
+
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', () => {
                 const isHidden = moreContent.classList.contains('show');
-                const currentLang = localStorage.getItem('language') || 'ko';
                 
                 if (isHidden) {
                     moreContent.classList.remove('show');
-                    toggleExperienceBtn.textContent = translations[currentLang][toggleExperienceBtn.getAttribute('data-lang-key-more')];
+                    toggleBtn.textContent = '더보기';
                 } else {
                     moreContent.classList.add('show');
-                    toggleExperienceBtn.textContent = translations[currentLang][toggleExperienceBtn.getAttribute('data-lang-key-less')];
+                    toggleBtn.textContent = '접기';
                 }
             });
         }
 
-        // 페이지 로딩
+        // 페이지 로딩 스크립트
         window.onload = () => {
             const bannerContainer = document.getElementById('banner-container');
             const header = document.getElementById('main-header');
@@ -701,26 +427,22 @@
             const loader = document.getElementById('loader');
             const pageContent = document.getElementById('page-content');
 
+            // 배너 높이만큼 헤더와 메인 컨텐츠를 조정합니다.
             if (bannerContainer && header && mainContainer) {
                 const bannerHeight = bannerContainer.offsetHeight;
                 header.style.top = `${bannerHeight}px`;
+                // pt-24 클래스는 6rem (96px)의 패딩을 가집니다. 여기에 배너 높이를 더합니다.
                 mainContainer.style.paddingTop = `${96 + bannerHeight}px`;
             }
 
+            // 로더를 서서히 사라지게 함
             loader.style.opacity = '0';
-            setTimeout(() => loader.style.display = 'none', 500);
-            pageContent.style.opacity = '1';
+            setTimeout(() => {
+                loader.style.display = 'none';
+            }, 500); // opacity transition 시간과 일치
 
-            // 저장된 언어 또는 브라우저 기본 언어로 설정
-            const savedLang = localStorage.getItem('language');
-            const browserLang = navigator.language.split('-')[0];
-            let initialLang = 'ko';
-            if (savedLang) {
-                initialLang = savedLang;
-            } else if (['en', 'ja'].includes(browserLang)) {
-                initialLang = browserLang;
-            }
-            setLanguage(initialLang);
+            // 페이지 콘텐츠를 서서히 나타나게 함
+            pageContent.style.opacity = '1';
         };
 
         // 상단 헤더 스크롤 효과
