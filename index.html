@@ -46,11 +46,37 @@
 
         <!-- 상단 고정 헤더 -->
         <header id="main-header" class="fixed top-0 left-0 right-0 z-40">
-            <div class="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-                <h1 class="text-xl sm:text-2xl font-bold text-gray-800 py-3 flex items-center">
-                    <span class="text-2xl sm:text-3xl mr-3">🙋🏻​</span>
-                    <span>김정혁(Kim Jeong Hyeok)</span>
+            <div class="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
+                <!-- 로고/타이틀 -->
+                <h1 class="text-xl sm:text-2xl font-bold text-gray-800 flex items-center">
+                    <a href="#" class="flex items-center">
+                        <span class="text-2xl sm:text-3xl mr-3">🙋🏻​</span>
+                        <span>김정혁 (Kim Jeong Hyeok)</span>
+                    </a>
                 </h1>
+
+                <!-- 데스크탑 네비게이션 -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="https://imcn.dbyoujin.kr" target="_blank" rel="noopener noreferrer" class="nav-link">통합관리전산망</a>
+                    <a href="https://law.dbyoujin.kr" class="nav-link">오늘의 국회</a>
+                    <a href="#awards" class="nav-link">수상 경력</a>
+                </nav>
+
+                <!-- 모바일 메뉴 버튼 (햄버거) -->
+                <button id="mobile-menu-button" class="md:hidden z-50 flex flex-col justify-center items-center w-8 h-8">
+                    <span class="block w-6 h-0.5 bg-gray-700 rounded-full"></span>
+                    <span class="block w-6 h-0.5 bg-gray-700 rounded-full mt-1.5"></span>
+                    <span class="block w-6 h-0.5 bg-gray-700 rounded-full mt-1.5"></span>
+                </button>
+            </div>
+
+            <!-- 모바일 메뉴 -->
+            <div id="mobile-menu" class="hidden md:hidden absolute top-0 left-0 w-full bg-white/95 backdrop-blur-lg shadow-lg">
+                <nav class="flex flex-col items-center text-center space-y-6 py-8 mt-16">
+                    <a href="https://imcn.dbyoujin.kr" target="_blank" rel="noopener noreferrer" class="nav-link-mobile">통합관리전산망</a>
+                    <a href="https://law.dbyoujin.kr" class="nav-link-mobile">오늘의 국회</a>
+                    <a href="#awards" class="nav-link-mobile">수상 경력</a>
+                </nav>
             </div>
         </header>
 
@@ -352,7 +378,6 @@
             const details = itemDetails[itemId];
             if (!details) return;
 
-            // 1. 모달을 열고 스피너를 먼저 보여줍니다.
             modalContent.innerHTML = `
                 <div class="flex justify-center items-center h-48">
                     <div class="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
@@ -363,19 +388,15 @@
             document.body.style.overflow = 'hidden';
             modalContainer.dataset.currentItem = itemId;
 
-            // 애니메이션을 위한 약간의 지연
             setTimeout(() => {
                 modalPanel.classList.remove('opacity-0');
                 modalContainer.classList.remove('opacity-0', 'scale-95');
             }, 10);
 
-            // 2. 이미지를 미리 로드합니다.
             const img = new Image();
             img.src = details.image;
 
-            // 3. 이미지 로딩이 완료되면 모달 내용을 업데이트합니다.
             img.onload = () => {
-                // 모달이 여전히 현재 항목에 대해 열려 있는지 확인합니다.
                 if (modalContainer.dataset.currentItem === itemId) {
                     modalContent.innerHTML = `
                         <img src="${details.image}" alt="${details.title}" class="w-full h-auto object-contain rounded-lg mb-6 max-h-[60vh]">
@@ -385,7 +406,6 @@
                 }
             };
 
-            // 이미지 로딩 실패 시 에러 메시지를 표시합니다.
             img.onerror = () => {
                 if (modalContainer.dataset.currentItem === itemId) {
                     modalContent.innerHTML = `
@@ -404,10 +424,9 @@
             setTimeout(() => {
                 modalPanel.classList.add('hidden');
                 document.body.style.overflow = 'auto';
-                // 모달이 닫힐 때 내용을 비우고 현재 아이템 ID를 제거합니다.
                 modalContent.innerHTML = '';
                 modalContainer.dataset.currentItem = '';
-            }, 300); // transition 시간과 일치
+            }, 300);
         }
 
         document.addEventListener('keydown', (event) => {
@@ -435,42 +454,86 @@
         }
 
         // 페이지 로딩 스크립트
-        window.onload = () => {
+        window.addEventListener('load', () => {
             const bannerContainer = document.getElementById('banner-container');
             const header = document.getElementById('main-header');
             const mainContainer = document.getElementById('main-container');
             const loader = document.getElementById('loader');
             const pageContent = document.getElementById('page-content');
 
-            // 배너 높이만큼 헤더와 메인 컨텐츠를 조정합니다.
             if (bannerContainer && header && mainContainer) {
                 const bannerHeight = bannerContainer.offsetHeight;
                 header.style.top = `${bannerHeight}px`;
-                // pt-24 클래스는 6rem (96px)의 패딩을 가집니다. 여기에 배너 높이를 더합니다.
-                mainContainer.style.paddingTop = `${96 + bannerHeight}px`;
+                mainContainer.style.paddingTop = `${64 + bannerHeight + 32}px`; // header height (h-16 -> 4rem) + banner + extra padding
             }
 
-            // 로더를 서서히 사라지게 함
             loader.style.opacity = '0';
             setTimeout(() => {
                 loader.style.display = 'none';
-            }, 500); // opacity transition 시간과 일치
+            }, 500);
 
-            // 페이지 콘텐츠를 서서히 나타나게 함
             pageContent.style.opacity = '1';
-        };
+        });
 
         // 상단 헤더 스크롤 효과
         const header = document.getElementById('main-header');
+        const banner = document.getElementById('banner-container');
         window.addEventListener('scroll', () => {
+            const bannerHeight = banner ? banner.offsetHeight : 0;
             if (window.scrollY > 20) {
                 header.classList.add('scrolled');
             } else {
                 header.classList.remove('scrolled');
             }
         });
+
+        // --- 네비게이션 메뉴 스크립트 ---
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = document.querySelectorAll('.nav-link, .nav-link-mobile');
+
+        // 모바일 메뉴 토글
+        mobileMenuButton.addEventListener('click', () => {
+            const isMenuOpen = !mobileMenu.classList.contains('hidden');
+            mobileMenu.classList.toggle('hidden');
+            mobileMenuButton.classList.toggle('open');
+            // 메뉴가 열렸을 때 body 스크롤 방지
+            document.body.style.overflow = isMenuOpen ? '' : 'hidden';
+        });
+
+        // 메뉴 링크 클릭 시 부드럽게 스크롤 및 모바일 메뉴 닫기
+        navLinks.forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                // 내부 링크(#)에만 스크롤 로직 적용
+                if (href && href.startsWith('#')) {
+                    e.preventDefault();
+                    
+                    const targetElement = document.querySelector(href);
+                    if (targetElement) {
+                        const headerElement = document.getElementById('main-header');
+                        const bannerElement = document.getElementById('banner-container');
+                        const headerOffset = (headerElement ? headerElement.offsetHeight : 0) + (bannerElement ? bannerElement.offsetHeight : 0);
+                        const elementPosition = targetElement.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: "smooth"
+                        });
+                    }
+                }
+
+                // 모바일 메뉴가 열려있으면 닫기
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenuButton.classList.remove('open');
+                    document.body.style.overflow = '';
+                }
+            });
+        });
+
     </script>
 
 </body>
 </html>
-
