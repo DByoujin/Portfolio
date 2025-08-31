@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>날씨봇, 당신의 인스타그램을 위한 자동 날씨 리포터</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- 웹사이트 전체 폰트를 Noto Sans KR로 통일 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #FDFCFB; /* 더 부드러운 크림색 배경 */
+            color: #484258; 
+        }
+        .gradient-header {
+            background: linear-gradient(135deg, #fce38a 0%, #f38181 100%);
+        }
+        .soft-shadow {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.04);
+            transition: all 0.4s cubic-bezier(.25,.8,.25,1);
+        }
+        .soft-shadow:hover {
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.1);
+            transform: translateY(-6px);
+        }
+        .section-title {
+            @apply text-5xl font-bold mb-4 text-center;
+            color: #3a354f;
+            font-weight: 700; /* 제목 폰트 굵기 조정 */
+        }
+        .section-subtitle {
+            @apply text-xl text-center text-gray-500 mb-16 max-w-3xl mx-auto;
+        }
+        .tech-tag {
+            @apply text-base font-medium mr-3 mb-3 px-5 py-2 rounded-lg inline-block;
+            border: 1px solid #EAEAEA;
+            background-color: white;
+            color: #5C5470;
+            transition: all 0.2s ease-in-out;
+        }
+        .tech-tag:hover {
+            transform: scale(1.05);
+            border-color: #FF9A9E;
+        }
+        /* 페이지 로딩 애니메이션 */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* 인터랙티브 갤러리 버튼 스타일 */
+        .gallery-btn {
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid #EAEAEA;
+            background-color: #ffffff;
+            color: #5C5470;
+        }
+        .gallery-btn:hover {
+            background-color: #fef3c7; /* 부드러운 노란색 */
+            border-color: #fce38a;
+            color: #3a354f;
+        }
+        .gallery-btn.active {
+            background-color: #f38181;
+            border-color: #f38181;
+            color: white;
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header -->
+    <header class="gradient-header text-white relative overflow-hidden">
+        <div class="container mx-auto px-6 py-28 text-center">
+            <h1 class="text-7xl md:text-8xl font-black mb-4 reveal tracking-tighter">날씨봇</h1>
+            <p class="text-xl md:text-2xl max-w-3xl mx-auto reveal">매일 아침, 당신의 인스타그램에 감성 한 스푼을 더해드려요.</p>
+        </div>
+        <div class="absolute bottom-0 left-0 w-full h-24">
+            <div class="absolute bottom-0 w-full h-20" style="background: url(&quot;data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120'%3e%3cpath d='M1440 120H0V26.2268C240 80.7303 480 107.982 720 107.982C960 107.982 1200 80.7303 1440 26.2268V120Z' fill='%23FDFCFB'/%3e%3c/svg%3e&quot;) center bottom / 100% no-repeat;"></div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-20">
+
+        <!-- How it works Section -->
+        <section id="how-it-works" class="mb-28">
+            <h2 class="section-title reveal">날씨봇이 일하는 법</h2>
+            <p class="section-subtitle reveal">밤새 조용히, 하지만 부지런히 당신의 아침을 준비해요.</p>
+            <div class="grid md:grid-cols-3 gap-12 text-center relative">
+                <div class="absolute top-1/2 left-0 w-full h-1 hidden md:block" style="transform: translateY(-50%);">
+                    <svg width="100%" height="100%"><line x1="0" y1="50%" x2="100%" y2="50%" stroke-width="2" stroke="#E5E7EB" stroke-dasharray="8 8"/></svg>
+                </div>
+                <div class="relative z-10 reveal">
+                    <div class="bg-white rounded-full w-24 h-24 flex items-center justify-center mx-auto mb-4 border-4 border-amber-200 text-3xl">🛰️</div>
+                    <h3 class="text-2xl font-bold mb-2" style="color:#3a354f">1. 정보 수집</h3>
+                    <p>기상청을 통해 최신 날씨 예보를 꼼꼼히 확인해요.</p>
+                </div>
+                <div class="relative z-10 reveal">
+                    <div class="bg-white rounded-full w-24 h-24 flex items-center justify-center mx-auto mb-4 border-4 border-pink-200 text-3xl">🎨</div>
+                    <h3 class="text-2xl font-bold mb-2" style="color:#3a354f">2. 이미지 제작</h3>
+                    <p>날씨에 맞는 예쁜 옷을 입혀 감성적인 이미지로 만들어요.</p>
+                </div>
+                <div class="relative z-10 reveal">
+                    <div class="bg-white rounded-full w-24 h-24 flex items-center justify-center mx-auto mb-4 border-4 border-sky-200 text-3xl">💌</div>
+                    <h3 class="text-2xl font-bold mb-2" style="color:#3a354f">3. 자동 포스팅</h3>
+                    <p>아침 시간에 맞춰 당신의 인스타그램으로 소식을 배달해요.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section id="advisory-gallery" class="mb-28">
+            <h2 class="section-title reveal">날씨에 따라 바뀌는 얼굴</h2>
+            <p class="section-subtitle reveal">폭염, 호우, 대설 같은 특별한 날엔, 걱정하는 마음을 담아 디자인을 바꿔 알려줘요.</p>
+            
+            <!-- Main Image Viewer -->
+            <div class="max-w-xl mx-auto mb-8 reveal soft-shadow rounded-2xl">
+                <img id="gallery-image" src="DEV2_00_특보없음.jpg" alt="기상특보 예시" class="rounded-2xl w-full transition-opacity duration-300">
+            </div>
+
+            <!-- Image Selector Buttons -->
+            <div id="gallery-buttons" class="flex flex-wrap justify-center gap-3 reveal max-w-3xl mx-auto">
+                <!-- Buttons will be generated by JavaScript -->
+            </div>
+        </section>
+        
+        <!-- Tech Stack Section -->
+        <section id="tech-stack">
+            <h2 class="section-title reveal">날씨봇의 비밀 도구</h2>
+             <p class="section-subtitle reveal">이 똑똑한 친구를 만드는 데 사용된 특별한 기술들이에요.</p>
+            <div class="max-w-4xl mx-auto text-center reveal">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">Pillow</span>
+                <span class="tech-tag">기상청 API</span>
+                <span class="tech-tag">OpenWeatherMap API</span>
+                <span class="tech-tag">Instagram Graph API</span>
+                <span class="tech-tag">Requests</span>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center p-12 mt-24" style="background-color: #F8F4F0;">
+        <p class="text-gray-500">A friendly bot for your feed.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // 페이지 로딩 시 애니메이션 스크립트
+        document.addEventListener('DOMContentLoaded', () => {
+            const revealElements = document.querySelectorAll('.reveal');
+            revealElements.forEach((element, index) => {
+                // 각 요소에 순차적인 딜레이를 적용하여 애니메이션 효과를 줍니다.
+                element.style.transitionDelay = `${index * 100}ms`;
+                element.classList.add('visible');
+            });
+        });
+
+        // 인터랙티브 갤러리 스크립트
+        const galleryImages = [
+            { src: "DEV2_00_특보없음.jpg", title: "특보 없음" },
+            { src: "DEV2_01_폭염주의보.jpg", title: "폭염주의보" },
+            { src: "DEV2_02_호우주의보.jpg", title: "호우주의보" },
+            { src: "DEV2_04_폭염경보.jpg", title: "폭염경보" },
+            { src: "DEV2_05_호우경보.jpg", title: "호우경보" },
+            { src: "DEV2_07_대설주의보.jpg", title: "대설주의보" },
+            { src: "DEV2_08_대설경보.jpg", title: "대설경보" },
+            { src: "DEV2_09_건조주의보.jpg", title: "건조주의보" },
+            { src: "DEV2_03_폭염주의보_호우주의보.jpg", title: "폭염+호우 주의보" },
+            { src: "DEV2_06_폭염경보_호우경보.jpg", title: "폭염+호우 경보" }
+        ];
+
+        const mainImage = document.getElementById('gallery-image');
+        const buttonContainer = document.getElementById('gallery-buttons');
+        let activeBtn = null;
+
+        galleryImages.forEach((image, index) => {
+            const button = document.createElement('button');
+            button.textContent = image.title;
+            button.className = 'px-4 py-2 text-sm font-medium rounded-full gallery-btn';
+            
+            if (index === 0) {
+                button.classList.add('active');
+                activeBtn = button;
+            }
+
+            button.addEventListener('click', () => {
+                // 부드러운 이미지 전환 효과
+                mainImage.style.opacity = '0';
+                setTimeout(() => {
+                    mainImage.src = image.src;
+                    mainImage.alt = image.title;
+                    mainImage.style.opacity = '1';
+                }, 300);
+                
+                if (activeBtn) {
+                    activeBtn.classList.remove('active');
+                }
+                button.classList.add('active');
+                activeBtn = button;
+            });
+            
+            buttonContainer.appendChild(button);
+        });
+    </script>
+</body>
+</html>
+
