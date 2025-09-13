@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>에반게리온 논문 기반 비문학 문제</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #1a1a1d;
+            color: #c5c6c7;
+        }
+        .passage {
+            background-color: #2c2f33;
+            border-left: 4px solid #99aab5;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            white-space: pre-wrap;
+            line-height: 1.8;
+        }
+        .question-card {
+            background-color: #23272a;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            border: 1px solid #4f545c;
+        }
+        h1, h2 {
+            font-weight: 700;
+        }
+        h1 {
+            color: #66fcf1;
+            text-shadow: 0 0 8px rgba(102, 252, 241, 0.5);
+        }
+        h2 {
+            color: #45a29e;
+            border-bottom: 2px solid #45a29e;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .option {
+            background-color: #2c2f33;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 0.75rem;
+            border: 1px solid #4f545c;
+            transition: all 0.2s ease-in-out;
+        }
+        .option:hover {
+            background-color: #4f545c;
+            cursor: default;
+        }
+        summary {
+            cursor: pointer;
+            background-color: #66fcf1;
+            color: #0b0c10;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 700;
+            display: inline-block;
+            margin-top: 1.5rem;
+            transition: background-color 0.2s;
+        }
+        summary:hover {
+            background-color: #45a29e;
+        }
+        details[open] summary {
+            background-color: #45a29e;
+        }
+        .explanation {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            background-color: #1f2833;
+            border-radius: 8px;
+            border: 1px solid #66fcf1;
+        }
+        .explanation strong {
+            color: #66fcf1;
+        }
+        .difficulty-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            font-size: 0.875rem;
+        }
+        .badge-easy { background-color: #4caf50; color: white; }
+        .badge-medium { background-color: #ff9800; color: white; }
+        .badge-hard { background-color: #f44336; color: white; }
+        .badge-expert { background-color: #9c27b0; color: white; }
+    </style>
+</head>
+<body class="p-4 sm:p-6 md:p-8">
+    <div class="max-w-4xl mx-auto">
+        <header class="text-center mb-12">
+            <h1 class="text-3xl md:text-4xl font-bold mb-2">신세기 에반게리온 논문 기반</h1>
+            <p class="text-xl md:text-2xl text-gray-400">국어 비문학 문제 풀이</p>
+        </header>
+
+        <main>
+            <!-- 초등학교 6학년 수준 -->
+            <section class="question-card">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl m-0 p-0 border-none">초등학교 6학년 수준</h2>
+                    <span class="difficulty-badge badge-easy">쉬움</span>
+                </div>
+                <div class="passage">
+<span class="font-bold text-lg text-gray-300">※ 다음 글을 읽고 물음에 답하시오.</span>
+
+&lt;신세기 에반게리온&gt;은 1995년에 방영된 텔레비전 만화 영화입니다. 때는 2015년, 인류는 '사도'라고 불리는 괴생명체로부터 위협을 받고 있습니다. 국제연합의 비밀 조직 '네르프(NERV)'는 '에반게리온'이라는 거대한 로봇을 만들어 사도의 공격에 대비합니다.
+
+에반게리온의 조종사는 모두 14살 소년, 소녀들입니다. 네르프의 총사령관인 '이카리 겐도'는 오랫동안 만나지 않았던 자신의 아들 '이카리 신지'를 부릅니다. 그리고 신지에게 에반게리온 초호기의 조종사가 되어 사도와 맞서 싸우라고 명령합니다. 신지는 처음에는 아버지의 명령을 거부하고 주저하지만, 결국 에반게리온에 탑승하여 사도들과 싸워나가게 됩니다.
+                </div>
+                <div>
+                    <p class="font-bold text-lg mb-4 text-gray-300">문제. 윗글의 내용과 일치하지 않는 것은 무엇인가요?</p>
+                    <div class="space-y-3">
+                        <div class="option">① ‘사도’는 인류를 위협하는 괴생명체이다.</div>
+                        <div class="option">② ‘에반게리온’의 조종사들은 14살 소년, 소녀들이다.</div>
+                        <div class="option">③ ‘이카리 신지’는 아버지의 명령을 받자마자 기쁘게 에반게리온에 탑승했다.</div>
+                        <div class="option">④ ‘네르프’는 사도의 공격에 대비하기 위해 만들어진 비밀 조직이다.</div>
+                        <div class="option">⑤ ‘이카리 겐도’는 ‘이카리 신지’의 아버지이자 네르프의 총사령관이다.</div>
+                    </div>
+                    <details>
+                        <summary>정답 및 해설 보기</summary>
+                        <div class="explanation">
+                            <p><strong>정답: ③</strong></p>
+                            <p><strong>해설:</strong> 글에 따르면 이카리 신지는 아버지의 명령을 '처음에는 거부하고 주저하지만'이라고 나와 있습니다. 따라서 아버지의 명령을 받자마자 기쁘게 탑승했다는 설명은 글의 내용과 일치하지 않습니다.</p>
+                        </div>
+                    </details>
+                </div>
+            </section>
+
+            <!-- 중학교 3학년 수준 -->
+            <section class="question-card">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl m-0 p-0 border-none">중학교 3학년 수준</h2>
+                    <span class="difficulty-badge badge-medium">보통</span>
+                </div>
+                <div class="passage">
+<span class="font-bold text-lg text-gray-300">※ 다음 글을 읽고 물음에 답하시오.</span>
+
+&lt;신세기 에반게리온&gt;의 주요 등장인물들은 대부분 가족이 해체되는 경험을 한 인물들이다. 주인공 이카리 신지는 어머니를 사고로 잃고 아버지에게서 버려진 채 자랐으며, 다른 조종사들인 아야나미 레이는 부모가 없는 존재이고 아스카는 어머니가 정신질환을 앓다 자살하는 아픔을 겪었다. 작품 속 이러한 설정은 당시 일본의 사회적 상황과 깊은 관련이 있다.
+
+이 작품이 방영된 1990년대 일본은 거품 경제가 붕괴하며 극심한 경제 불황을 겪던 시기였다. 이로 인해 가족 공동체가 무너지는 현상이 나타났는데, 가정 내 아버지의 권위가 크게 흔들렸으며 이혼율 급증, 자녀 유기 같은 문제들이 발생했다. 즉, 아버지를 중심으로 한 전통적인 '근대가족'의 모습이 위기를 맞이했던 것이다. 결국 &lt;신세기 에반게리온&gt; 속 ㉠<u>주요 등장인물들의 불안정한 가정환경</u>은 당대 일본 사회가 겪었던 가족 해체 현상을 상징적으로 보여준다고 할 수 있다.
+                </div>
+                <div>
+                    <p class="font-bold text-lg mb-4 text-gray-300">문제. 윗글을 바탕으로 할 때, ㉠<u>'주요 등장인물들의 불안정한 가정환경'</u>이 상징하는 1990년대 일본의 시대적 상황으로 적절하지 않은 것은?</p>
+                    <div class="space-y-3">
+                        <div class="option">① 가부장적인 아버지의 권위가 이전보다 약화되었다.</div>
+                        <div class="option">② 경제 불황이 가족 공동체의 붕괴에 영향을 미쳤다.</div>
+                        <div class="option">③ 개인이 가족을 통해 안정감을 얻기가 점점 더 어려워졌다.</div>
+                        <div class="option">④ 전통적인 가족 형태를 지키려는 사회적 노력이 성공을 거두었다.</div>
+                        <div class="option">⑤ 이혼이나 자녀 양육 포기와 같은 사회 문제가 증가하고 있었다.</div>
+                    </div>
+                    <details>
+                        <summary>정답 및 해설 보기</summary>
+                        <div class="explanation">
+                            <p><strong>정답: ④</strong></p>
+                            <p><strong>해설:</strong> 이 글은 1990년대 일본 사회가 경제 불황 등으로 인해 아버지의 권위가 실추되고 이혼율이 급증하는 등 '근대가족' 관념이 위기를 맞았다고 설명하고 있습니다. 따라서 전통적인 가족 형태를 지키려는 노력이 성공을 거두었다는 보기는 글의 내용과 정반대되는 설명입니다.</p>
+                        </div>
+                    </details>
+                </div>
+            </section>
+            
+            <!-- 고등학교 1학년 수준 -->
+            <section class="question-card">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl m-0 p-0 border-none">고등학교 1학년 수준</h2>
+                    <span class="difficulty-badge badge-hard">어려움</span>
+                </div>
+                <div class="passage">
+<span class="font-bold text-lg text-gray-300">※ 다음 글을 읽고 물음에 답하시오.</span>
+
+필자는 &lt;신세기 에반게리온&gt;의 TV판 결말과 극장판 결말의 차이를 통해 작품이 담고 있는 의미가 어떻게 달라지는지 분석한다. TV판의 마지막 장면에서 주인공 신지는 주변 인물들의 격려 속에서 자아를 찾고, "아버지 고마워요. 어머니 안녕."이라는 자막과 함께 끝이 난다. 이는 어머니의 품을 떠나 아버지의 권위를 따름으로써 어른이 된다는 매우 고전적인 서사 구조를 따르는 것이다. 즉, TV판의 결말은 아버지가 상징하는 전통적인 '근대가족'의 개념에서 크게 벗어나지 못한 한계를 보여준다.
+
+하지만 극장판의 결말은 다르다. 극장판에서는 그토록 권위적이었던 아버지 이카리 겐도가 사실은 아들 신지와 다를 바 없이 나약하고 두려움에 떠는 인간이었음이 밝혀진다. 아버지의 상징적 의미가 완전히 무의미해진 것이다. 따라서 극장판에서는 "아버지 고마워요"라는 대사가 사라지고, 신지의 자립은 아버지의 권위를 따르는 방식이 아니라, 아버지의 권위 자체가 사라진 상황에서 스스로 선택해야 하는 모습으로 그려진다. 필자는 이를 통해 극장판이 '근대가족' 관념이 해체된 1990년대의 시대상을 더 명확하게 보여준다고 평가한다.
+                </div>
+                <div>
+                    <p class="font-bold text-lg mb-4 text-gray-300">문제. 윗글에 나타난 필자의 관점으로 가장 적절한 것은?</p>
+                    <div class="space-y-3">
+                        <div class="option">① TV판은 극장판과 달리 아버지의 권위를 부정하며 새로운 가족의 대안을 제시한다.</div>
+                        <div class="option">② 극장판은 TV판의 주제를 계승하여 아버지의 권위를 회복하는 과정을 그리고 있다.</div>
+                        <div class="option">③ 필자는 아버지의 권위가 무너지는 모습을 그린 극장판이 시대상을 더 잘 반영했다고 본다.</div>
+                        <div class="option">④ 필자는 TV판과 극장판 모두 아버지를 극복의 대상으로 그린다는 점에서 동일하다고 평가한다.</div>
+                        <div class="option">⑤ TV판의 고전적 서사는 극장판의 열린 결말보다 더 높은 문학적 가치를 지닌다고 본다.</div>
+                    </div>
+                    <details>
+                        <summary>정답 및 해설 보기</summary>
+                        <div class="explanation">
+                            <p><strong>정답: ③</strong></p>
+                            <p><strong>해설:</strong> 필자는 TV판 결말이 아버지의 권위를 따르는 고전적 서사에 머물렀다고 평가하는 반면, 극장판은 아버지의 권위 자체가 무의미해지는 모습을 그림으로써 '근대가족' 관념이 해체된 1990년대의 시대상을 더 명확하게 보여준다고 분석하고 있습니다. 따라서 필자의 관점은 ③과 같이 정리할 수 있습니다.</p>
+                        </div>
+                    </details>
+                </div>
+            </section>
+            
+            <!-- 수능 최고난도 수준 -->
+            <section class="question-card border-2 border-red-500/50">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl m-0 p-0 border-none text-red-400">수능 최고난도 수준</h2>
+                    <span class="difficulty-badge badge-expert">매우 어려움</span>
+                </div>
+                <div class="passage border-red-400/70">
+<span class="font-bold text-lg text-gray-300">※ 다음 글을 읽고 물음에 답하시오.</span>
+
+**(가)** 1990년대 일본 사회를 관통한 포스트모던 현상은 ‘큰 이야기’의 쇠퇴로 요약된다. 여기서 ‘큰 이야기’란 국가나 이데올로기, 전통과 같이 개인이 준거로 삼아 자신의 삶을 구성해 나가던 거대 담론을 의미한다. 근대 사회의 질서를 유지하던 ‘반듯한 어른, 반듯한 가정’이라는 규범적 모델 역시 이러한 ‘큰 이야기’의 일부였다. 일본의 ‘근대가족’은 메이지 정부에 의해 ‘이에(家)’ 제도를 바탕으로 한 가부장제가 확립된 이래, 전후(戰後) 민주화 과정 속에서도 가정 내 남성의 권위가 유지되는 형태로 존속하며 개인에게 정서적 안정감과 정체성의 기반을 제공했다. 이러한 ‘근대가족’의 중심에는 상징적 권위체로서의 ‘아버지’가 존재했다.
+
+**(나)** 에토 준은 『성숙과 상실』에서 ‘근대’의 도래가 필연적으로 ‘어머니’로 표상되는 전통적 공동체의 상실을 가져오며, 개인은 이 상실을 통해 ‘아버지’적인 것, 즉 법과 이성으로 대표되는 사회적 질서로 편입됨으로써 ‘성숙’에 이른다고 보았다. 그의 논의는 ‘어머니’의 상실을 ‘아버지’의 확립으로 나아가는 통과 의례로 규정한다. 그러나 1970년대 이후 일본은 미국과의 종속적 관계 속에서 완전한 아버지(국가)로서의 주체성 확립에 딜레마를 겪었으며, 1990년대에 이르러서는 포스트모던 사조의 확산과 경제 불황으로 인해 젊은 세대가 ‘아버지’가 되려는 욕망 자체를 상실하는 상황에 직면했다. 이는 ‘어머니의 상실’이 더 이상 ‘아버지의 확립’으로 이어지지 않고, 상실이 상실 그 자체로 남아버리는 시대, 즉 ‘성숙’의 경로가 소멸한 시대가 도래했음을 의미한다.
+
+**(다)** &lt;신세기 에반게리온&gt;은 이러한 시대적 전환을 서사적으로 구현한다. 작품의 TV판 결말은 주인공 신지가 주변의 인정을 통해 자아를 긍정하며 “아버지 고마워요”라는 말로 끝맺는다. 이는 ‘아버지’의 권위에 짓눌려 고통받던 아들이 결국 그 권위를 내면화하고 수용함으로써 ‘성숙’에 도달한다는, 에토 준이 제시한 근대적 성장 서사의 도식을 강박적으로 답습한 것에 불과하다. 즉, TV판은 아버지의 권위가 야기하는 문제를 인식하면서도 그것을 해체하지 못하고 봉합하는 한계를 노출한다.
+
+**(라)** 반면 극장판은 ‘아버지’ 이카리 겐도의 절대적 권위를 철저히 파괴한다. 그는 인류를 구원할 계획을 주도하는 초월적 존재가 아니라, 개인적 상실감에 사로잡혀 아들과 소통하기를 두려워하는 나약한 개인임이 폭로된다. 이는 단순히 한 명의 ‘잘못된 아버지’를 비판하는 것을 넘어, ‘아버지’라는 상징적 기표(記標) 자체가 공허한 것임을 드러내는 장치다. 이로써 신지는 더 이상 극복해야 할 ‘아버지’도, 도달해야 할 ‘성숙’의 목표도 없는 실존적 상황에 놓인다. 인류 재건이라는 새로운 ‘큰 이야기’의 가능성마저 “기분 나빠”라는 지극히 개인적인 감각의 언어로 거부하는 마지막 장면은, ‘아버지’가 사라진 텅 빈 공간에서 어떠한 거대 담론에도 귀속되기를 거부하는 포스트모던적 주체의 탄생을 극적으로 보여준다.
+                </div>
+                
+                <!-- 문제 1 -->
+                <div class="mt-8 pt-6 border-t border-gray-700">
+                    <p class="font-bold text-lg mb-4 text-red-300">문제 1. (나)의 관점에서 (다)의 TV판 결말을 비판적으로 분석한 내용으로 가장 적절한 것은?</p>
+                    <div class="space-y-3">
+                        <div class="option">① TV판 결말은 ‘어머니’로의 회귀를 통해 ‘아버지’의 부재가 야기하는 심리적 불안을 해소하려 한다는 점에서, ‘성숙’의 과제를 회피하고 퇴행적 안주를 선택했다는 한계를 지닌다.</div>
+                        <div class="option">② TV판 결말은 ‘어머니의 상실’을 ‘아버지의 확립’으로 이어가는 근대적 도식을 따르고 있으나, 그 과정에서 ‘아버지’의 권위가 이미 내파(內破)된 90년대의 시대적 맥락을 간과함으로써 서사적 설득력을 상실한다.</div>
+                        <div class="option">③ TV판 결말은 ‘아버지’와의 화해를 통해 ‘근대가족’의 이념을 복원하려 하지만, 이는 ‘아버지’가 되려는 욕망 자체가 소멸한 시대에 더 이상 유효하지 않은 ‘큰 이야기’를 인위적으로 재호출하는 시도에 그친다.</div>
+                        <div class="option">④ TV판 결말은 ‘어머니의 상실’을 겪지 않은 주체가 ‘아버지’의 세계로 진입하려는 모순을 보여줌으로써, 에토 준이 말한 ‘성숙’의 전제 조건 자체를 충족시키지 못했음을 드러낸다.</div>
+                        <div class="option">⑤ TV판 결말에서 신지가 도달한 ‘성숙’은 사회적 질서로의 성공적인 편입이 아니라 타인과의 관계 속에서 파편적으로 인정받는 것에 불과하므로, 이는 ‘아버지’의 부재를 개인 간의 유대로 대체하려는 불완전한 시도이다.</div>
+                    </div>
+                    <details>
+                        <summary>정답 및 해설 보기</summary>
+                        <div class="explanation">
+                            <p><strong>정답: ③</strong></p>
+                            <p><strong>해설:</strong> (나)는 90년대에 ‘아버지’가 되려는 욕망 자체가 소멸하여 에토 준의 ‘성숙’ 경로가 더 이상 유효하지 않게 되었다고 서술합니다. (다)는 TV판 결말이 이러한 시대적 변화를 담지 못하고 ‘아버지’를 수용하는 근대적 성장 서사를 답습했다고 비판합니다. 이 둘을 종합하면, TV판의 결말은 이미 효력을 잃어버린 ‘아버지’ 중심의 ‘큰 이야기’(근대가족 이념, 성숙 서사)를 90년대라는 시대적 맥락과 무관하게 인위적으로 봉합하려는 시도라는 비판이 가능합니다. 따라서 ③은 이러한 논리적 흐름을 가장 정확하게 포착하고 있습니다.</p>
+                        </div>
+                    </details>
+                </div>
+                
+                <!-- 문제 2 -->
+                <div class="mt-8 pt-6 border-t border-gray-700">
+                     <p class="font-bold text-lg mb-4 text-red-300">문제 2. 윗글의 필자가 &lt;보기&gt;의 주장에 대해 보일 반응으로 가장 적절한 것은?</p>
+                     <div class="passage border-gray-500/70 p-4 my-4">
+                        <span class="font-bold text-gray-300">&lt; 보 기 &gt;</span><br>
+                        &lt;신세기 에반게리온&gt; 극장판이 보여주는 것은 포스트모던적 해체라기보다는, 보편적인 오이디푸스 서사의 현대적 변용이다. 즉, 아들은 아버지를 살해하고 그 자리를 차지함으로써 주체로 거듭나야 하는 과업을 부여받는다. 극장판에서 이카리 겐도의 계획이 실패하고 신지가 최후의 선택권을 갖게 되는 것은, 아들이 아버지를 상징적으로 살해하고 그의 권능을 계승했음을 의미한다. 신지가 인류보완계획을 거부한 것은 아버지가 설계한 세계를 파괴하고 자신만의 세계를 선택했다는 점에서, 가장 적극적인 형태의 ‘아버지 극복’이자 새로운 주체의 탄생으로 보아야 한다.
+                    </div>
+                    <div class="space-y-3">
+                        <div class="option">① &lt;보기&gt;는 이카리 겐도의 ‘폭로’를 ‘살해’로, 신지의 ‘선택’을 ‘계승’으로 오독함으로써, ‘아버지’라는 상징 자체가 무화(無化)되는 극장판의 핵심적 의미를 간과하고 있다.</div>
+                        <div class="option">② &lt;보기&gt;는 신지의 마지막 선택이 새로운 ‘큰 이야기’의 구축으로 이어진다고 해석한다는 점에서, ‘아버지’가 사라진 자리를 ‘아들’이라는 또 다른 권위로 대체하는 순환론적 관점을 제시한다.</div>
+                        <div class="option">③ &lt;보기&gt;는 ‘아버지 극복’이라는 근대적 과업의 틀로 극장판을 해석함으로써, ‘성숙’의 경로 자체가 소멸한 시대에 나타난 새로운 주체의 실존적 조건을 설명하지 못하는 한계를 보인다.</div>
+                        <div class="option">④ &lt;보기&gt;는 이카리 겐도의 실패를 개인의 실패가 아닌 ‘아버지’라는 보편적 상징의 실패로 파악했다는 점에서는 필자와 견해를 같이하지만, 그 결과로 등장한 주체의 성격에 대해서는 상반된 결론을 내린다.</div>
+                        <div class="option">⑤ &lt;보기&gt;는 극장판의 결말을 오이디푸스 서사와 연관 지음으로써, 작품에 내재된 정신분석학적 코드를 사회문화적 맥락보다 우선시하는 해석적 오류를 범하고 있다.</div>
+                    </div>
+                    <details>
+                        <summary>정답 및 해설 보기</summary>
+                        <div class="explanation">
+                            <p><strong>정답: ③</strong></p>
+                            <p><strong>해설:</strong> 필자의 핵심 주장은 극장판이 ‘아버지’를 극복의 대상으로 상정하는 근대적 성장 서사 자체를 파괴했다는 것입니다. 즉, (나)에서 언급된 ‘성숙의 경로 자체가 소멸한 시대’를 그렸다는 점이 중요합니다. 반면 &lt;보기&gt;는 신지가 아버지를 ‘극복’하고 ‘계승’하여 새로운 주체가 되었다고 주장합니다. 이는 여전히 ‘아버지 극복’이라는 근대적 과업의 틀 안에서 작품을 해석하는 것입니다. 따라서 필자는 &lt;보기&gt;의 주장이 ‘성숙’의 개념 자체가 무의미해진 포스트모던 시대의 실존적 조건을 간과하고, 낡은 틀로 새로운 현상을 재단하는 한계를 지닌다고 비판할 것입니다. ③은 이러한 비판의 핵심을 가장 정확하게 담고 있습니다.</p>
+                        </div>
+                    </details>
+                </div>
+                
+                <!-- 문제 3 -->
+                <div class="mt-8 pt-6 border-t border-gray-700">
+                    <p class="font-bold text-lg mb-4 text-red-300">문제 3. (라)에 나타난 신지의 상황을 바탕으로, [A]와 [B]의 관계를 추론한 것으로 가장 적절한 것은?</p>
+                    <div class="passage border-gray-500/70 p-4 my-4">
+                        <p><strong>[A]</strong>: ‘아버지’의 권위가 부재한 환경에서 성장하여, 상실된 아버지상을 대체할 이상적인 대리물을 끊임없이 갈망하는 주체</p>
+                        <p><strong>[B]</strong>: 극장판 결말에서 모든 ‘큰 이야기’가 소멸한 세계에 남겨진 주체</p>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="option">① [A]가 ‘아버지’라는 기표의 의미는 보존된 채 그 지시 대상만을 상실한 상태라면, [B]는 그 기표가 담고 있던 상징적 의미 체계 자체가 붕괴된 상태이다.</div>
+                        <div class="option">② [A]에게 ‘아버지의 부재’가 극복해야 할 결핍으로 작용하는 반면, [B]에게 ‘아버지의 해체’는 새로운 공동체를 형성할 가능성의 조건으로 기능한다.</div>
+                        <div class="option">③ [A]는 ‘어머니’의 세계에 잔존하며 ‘아버지’의 세계로의 진입을 유예하는 주체이고, [B]는 ‘어머니’와 ‘아버지’의 세계를 모두 파괴하고 제3의 공간을 창조한 주체이다.</div>
+                        <div class="option">④ [A]와 [B]는 모두 ‘성숙’의 경로를 상실했다는 공통점을 지니지만, [A]는 그 경로를 재구성하려 시도하고 [B]는 경로의 부재 자체를 자신의 실존적 조건으로 받아들인다.</div>
+                        <div class="option">⑤ [A]는 ‘근대가족’의 이데올로기로부터 자유롭지만 그 온정주의를 그리워하는 모순적 상태이며, [B]는 ‘근대가족’의 폭력성을 인식하고 그것을 전면적으로 거부하는 저항적 상태이다.</div>
+                    </div>
+                    <details>
+                        <summary>정답 및 해설 보기</summary>
+                        <div class="explanation">
+                            <p><strong>정답: ①</strong></p>
+                            <p><strong>해설:</strong> [A]는 ‘아버지’가 현실에 없을 뿐, ‘아버지’라는 존재가 마땅히 있어야 할 이상적인 상징이라는 사회적 통념, 즉 의미 체계(‘아버지’라는 기표가 담고 있는 의미)는 여전히 유효한 세계의 주체입니다. 따라서 그는 부재하는 대상을 채우기 위해 대리물을 ‘갈망’합니다. 반면 (라)에서 설명하는 [B](신지)는 아버지 겐도가 나약한 개인으로 폭로됨으로써 ‘아버지’라는 상징 자체가 텅 비어버린, 즉 의미 체계가 붕괴된 세계에 놓입니다. 더 이상 추구하거나 극복할 ‘아버지’라는 개념 자체가 사라진 것입니다. ①은 이러한 차이를 ‘기표의 의미 보존 vs 의미 체계 붕괴’라는 구도를 통해 가장 정확하게 설명하고 있습니다.</p>
+                        </div>
+                    </details>
+                </div>
+
+            </section>
+        </main>
+        <footer class="text-center mt-12 mb-6 text-gray-500 text-sm">
+            <p>&copy; 2025 AI-Generated Non-fiction Problems. All rights reserved.</p>
+            <p>This content is based on the thesis "The Deconstruction of 'Modern Family' in Neon Genesis Evangelion".</p>
+        </footer>
+    </div>
+</body>
+</html>
