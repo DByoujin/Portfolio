@@ -51,10 +51,10 @@
             margin-bottom: 0.75rem;
             border: 1px solid #4f545c;
             transition: all 0.2s ease-in-out;
+            cursor: pointer;
         }
         .option:hover {
             background-color: #4f545c;
-            cursor: default;
         }
         summary {
             cursor: pointer;
@@ -94,6 +94,28 @@
         .badge-medium { background-color: #ff9800; color: white; }
         .badge-hard { background-color: #f44336; color: white; }
         .badge-expert { background-color: #9c27b0; color: white; }
+
+        /* Styles for correct/incorrect options */
+        .option.correct {
+            background-color: #28a745 !important;
+            border-color: #1a7e32 !important;
+            color: white;
+        }
+        .option.incorrect {
+            background-color: #dc3545 !important;
+            border-color: #a71d2a !important;
+            color: white;
+        }
+        .question-card.answered .option {
+            cursor: default;
+        }
+        .question-card.answered .option:not(.correct):not(.incorrect) {
+            opacity: 0.6;
+        }
+        .question-card.answered .option:hover {
+            background-color: #2c2f33;
+        }
+
     </style>
 </head>
 <body class="p-4 sm:p-6 md:p-8">
@@ -122,7 +144,7 @@
                     <div class="space-y-3">
                         <div class="option">① ‘사도’는 인류를 위협하는 괴생명체이다.</div>
                         <div class="option">② ‘에반게리온’의 조종사들은 14살 소년, 소녀들이다.</div>
-                        <div class="option">③ ‘이카리 신지’는 아버지의 명령을 받자마자 기쁘게 에반게리온에 탑승했다.</div>
+                        <div class="option" data-correct="true">③ ‘이카리 신지’는 아버지의 명령을 받자마자 기쁘게 에반게리온에 탑승했다.</div>
                         <div class="option">④ ‘네르프’는 사도의 공격에 대비하기 위해 만들어진 비밀 조직이다.</div>
                         <div class="option">⑤ ‘이카리 겐도’는 ‘이카리 신지’의 아버지이자 네르프의 총사령관이다.</div>
                     </div>
@@ -155,7 +177,7 @@
                         <div class="option">① 가부장적인 아버지의 권위가 이전보다 약화되었다.</div>
                         <div class="option">② 경제 불황이 가족 공동체의 붕괴에 영향을 미쳤다.</div>
                         <div class="option">③ 개인이 가족을 통해 안정감을 얻기가 점점 더 어려워졌다.</div>
-                        <div class="option">④ 전통적인 가족 형태를 지키려는 사회적 노력이 성공을 거두었다.</div>
+                        <div class="option" data-correct="true">④ 전통적인 가족 형태를 지키려는 사회적 노력이 성공을 거두었다.</div>
                         <div class="option">⑤ 이혼이나 자녀 양육 포기와 같은 사회 문제가 증가하고 있었다.</div>
                     </div>
                     <details>
@@ -186,7 +208,7 @@
                     <div class="space-y-3">
                         <div class="option">① TV판은 극장판과 달리 아버지의 권위를 부정하며 새로운 가족의 대안을 제시한다.</div>
                         <div class="option">② 극장판은 TV판의 주제를 계승하여 아버지의 권위를 회복하는 과정을 그리고 있다.</div>
-                        <div class="option">③ 필자는 아버지의 권위가 무너지는 모습을 그린 극장판이 시대상을 더 잘 반영했다고 본다.</div>
+                        <div class="option" data-correct="true">③ 필자는 아버지의 권위가 무너지는 모습을 그린 극장판이 시대상을 더 잘 반영했다고 본다.</div>
                         <div class="option">④ 필자는 TV판과 극장판 모두 아버지를 극복의 대상으로 그린다는 점에서 동일하다고 평가한다.</div>
                         <div class="option">⑤ TV판의 고전적 서사는 극장판의 열린 결말보다 더 높은 문학적 가치를 지닌다고 본다.</div>
                     </div>
@@ -211,7 +233,7 @@
 
 **(가)** 1990년대 일본 사회를 관통한 포스트모던 현상은 ‘큰 이야기’의 쇠퇴로 요약된다. 여기서 ‘큰 이야기’란 국가나 이데올로기, 전통과 같이 개인이 준거로 삼아 자신의 삶을 구성해 나가던 거대 담론을 의미한다. 근대 사회의 질서를 유지하던 ‘반듯한 어른, 반듯한 가정’이라는 규범적 모델 역시 이러한 ‘큰 이야기’의 일부였다. 일본의 ‘근대가족’은 메이지 정부에 의해 ‘이에(家)’ 제도를 바탕으로 한 가부장제가 확립된 이래, 전후(戰後) 민주화 과정 속에서도 가정 내 남성의 권위가 유지되는 형태로 존속하며 개인에게 정서적 안정감과 정체성의 기반을 제공했다. 이러한 ‘근대가족’의 중심에는 상징적 권위체로서의 ‘아버지’가 존재했다.
 
-**(나)** 에토 준은 『성숙과 상실』에서 ‘근대’의 도래가 필연적으로 ‘어머니’로 표상되는 전통적 공동체의 상실을 가져오며, 개인은 이 상실을 통해 ‘아버지’적인 것, 즉 법과 이성으로 대표되는 사회적 질서로 편입됨으로써 ‘성숙’에 이른다고 보았다. 그의 논의는 ‘어머니’의 상실을 ‘아버지’의 확립으로 나아가는 통과 의례로 규정한다. 그러나 1970년대 이후 일본은 미국과의 종속적 관계 속에서 완전한 아버지(국가)로서의 주체성 확립에 딜레마를 겪었으며, 1990년대에 이르러서는 포스트모던 사조의 확산과 경제 불황으로 인해 젊은 세대가 ‘아버지’가 되려는 욕망 자체를 상실하는 상황에 직면했다. 이는 ‘어머니의 상실’이 더 이상 ‘아버지의 확립’으로 이어지지 않고, 상실이 상실 그 자체로 남아버리는 시대, 즉 ‘성숙’의 경로가 소멸한 시대가 도래했음을 의미한다.
+**(나)** 에토 준은 『성숙과 상실』에서 ‘근대’의 도래가 필연적으로 ‘어머니’로 표상되는 전통적 공동체의 상실을 가져오며, 개인은 이 상실을 통해 ‘아버지’적인 것, 즉 법과 이성으로 대표되는 사회적 질서로 편입됨으로써 ‘성숙’에 이른다고 보았다. 그의 논의는 ‘어머니’의 상실을 ‘아버지’의 확립으로 나아가는 통과 의례로 규정한다. 그러나 1970년대 이후 일본은 미국과의 종속적 관계 속에서 완전한 아버지(국가)로서의 주체성 확립에 딜레마를 겪었으며, 1990년대에 이르러서는 포스트모던 사조의 확산과 경제 불황으로 인해 젊은 세대가 ‘아버지’가 되려는 욕망 자체를 상실하는 상황에 직면했다. 이는 ‘어머니의 상실’이 더 이상 ‘아버지’의 확립으로 이어지지 않고, 상실이 상실 그 자체로 남아버리는 시대, 즉 ‘성숙’의 경로가 소멸한 시대가 도래했음을 의미한다.
 
 **(다)** &lt;신세기 에반게리온&gt;은 이러한 시대적 전환을 서사적으로 구현한다. 작품의 TV판 결말은 주인공 신지가 주변의 인정을 통해 자아를 긍정하며 “아버지 고마워요”라는 말로 끝맺는다. 이는 ‘아버지’의 권위에 짓눌려 고통받던 아들이 결국 그 권위를 내면화하고 수용함으로써 ‘성숙’에 도달한다는, 에토 준이 제시한 근대적 성장 서사의 도식을 강박적으로 답습한 것에 불과하다. 즉, TV판은 아버지의 권위가 야기하는 문제를 인식하면서도 그것을 해체하지 못하고 봉합하는 한계를 노출한다.
 
@@ -223,8 +245,8 @@
                     <p class="font-bold text-lg mb-4 text-red-300">문제 1. (나)의 관점에서 (다)의 TV판 결말을 비판적으로 분석한 내용으로 가장 적절한 것은?</p>
                     <div class="space-y-3">
                         <div class="option">① TV판 결말은 ‘어머니’로의 회귀를 통해 ‘아버지’의 부재가 야기하는 심리적 불안을 해소하려 한다는 점에서, ‘성숙’의 과제를 회피하고 퇴행적 안주를 선택했다는 한계를 지닌다.</div>
-                        <div class="option">② TV판 결말은 ‘어머니의 상실’을 ‘아버지의 확립’으로 이어가는 근대적 도식을 따르고 있으나, 그 과정에서 ‘아버지’의 권위가 이미 내파(內破)된 90년대의 시대적 맥락을 간과함으로써 서사적 설득력을 상실한다.</div>
-                        <div class="option">③ TV판 결말은 ‘아버지’와의 화해를 통해 ‘근대가족’의 이념을 복원하려 하지만, 이는 ‘아버지’가 되려는 욕망 자체가 소멸한 시대에 더 이상 유효하지 않은 ‘큰 이야기’를 인위적으로 재호출하는 시도에 그친다.</div>
+                        <div class="option">② TV판 결말은 ‘어머니의 상실’을 ‘아버지’의 확립’으로 이어가는 근대적 도식을 따르고 있으나, 그 과정에서 ‘아버지’의 권위가 이미 내파(內破)된 90년대의 시대적 맥락을 간과함으로써 서사적 설득력을 상실한다.</div>
+                        <div class="option" data-correct="true">③ TV판 결말은 ‘아버지’와의 화해를 통해 ‘근대가족’의 이념을 복원하려 하지만, 이는 ‘아버지’가 되려는 욕망 자체가 소멸한 시대에 더 이상 유효하지 않은 ‘큰 이야기’를 인위적으로 재호출하는 시도에 그친다.</div>
                         <div class="option">④ TV판 결말은 ‘어머니의 상실’을 겪지 않은 주체가 ‘아버지’의 세계로 진입하려는 모순을 보여줌으로써, 에토 준이 말한 ‘성숙’의 전제 조건 자체를 충족시키지 못했음을 드러낸다.</div>
                         <div class="option">⑤ TV판 결말에서 신지가 도달한 ‘성숙’은 사회적 질서로의 성공적인 편입이 아니라 타인과의 관계 속에서 파편적으로 인정받는 것에 불과하므로, 이는 ‘아버지’의 부재를 개인 간의 유대로 대체하려는 불완전한 시도이다.</div>
                     </div>
@@ -247,7 +269,7 @@
                     <div class="space-y-3">
                         <div class="option">① &lt;보기&gt;는 이카리 겐도의 ‘폭로’를 ‘살해’로, 신지의 ‘선택’을 ‘계승’으로 오독함으로써, ‘아버지’라는 상징 자체가 무화(無化)되는 극장판의 핵심적 의미를 간과하고 있다.</div>
                         <div class="option">② &lt;보기&gt;는 신지의 마지막 선택이 새로운 ‘큰 이야기’의 구축으로 이어진다고 해석한다는 점에서, ‘아버지’가 사라진 자리를 ‘아들’이라는 또 다른 권위로 대체하는 순환론적 관점을 제시한다.</div>
-                        <div class="option">③ &lt;보기&gt;는 ‘아버지 극복’이라는 근대적 과업의 틀로 극장판을 해석함으로써, ‘성숙’의 경로 자체가 소멸한 시대에 나타난 새로운 주체의 실존적 조건을 설명하지 못하는 한계를 보인다.</div>
+                        <div class="option" data-correct="true">③ &lt;보기&gt;는 ‘아버지 극복’이라는 근대적 과업의 틀로 극장판을 해석함으로써, ‘성숙’의 경로 자체가 소멸한 시대에 나타난 새로운 주체의 실존적 조건을 설명하지 못하는 한계를 보인다.</div>
                         <div class="option">④ &lt;보기&gt;는 이카리 겐도의 실패를 개인의 실패가 아닌 ‘아버지’라는 보편적 상징의 실패로 파악했다는 점에서는 필자와 견해를 같이하지만, 그 결과로 등장한 주체의 성격에 대해서는 상반된 결론을 내린다.</div>
                         <div class="option">⑤ &lt;보기&gt;는 극장판의 결말을 오이디푸스 서사와 연관 지음으로써, 작품에 내재된 정신분석학적 코드를 사회문화적 맥락보다 우선시하는 해석적 오류를 범하고 있다.</div>
                     </div>
@@ -268,7 +290,7 @@
                         <p><strong>[B]</strong>: 극장판 결말에서 모든 ‘큰 이야기’가 소멸한 세계에 남겨진 주체</p>
                     </div>
                     <div class="space-y-3">
-                        <div class="option">① [A]가 ‘아버지’라는 기표의 의미는 보존된 채 그 지시 대상만을 상실한 상태라면, [B]는 그 기표가 담고 있던 상징적 의미 체계 자체가 붕괴된 상태이다.</div>
+                        <div class="option" data-correct="true">① [A]가 ‘아버지’라는 기표의 의미는 보존된 채 그 지시 대상만을 상실한 상태라면, [B]는 그 기표가 담고 있던 상징적 의미 체계 자체가 붕괴된 상태이다.</div>
                         <div class="option">② [A]에게 ‘아버지의 부재’가 극복해야 할 결핍으로 작용하는 반면, [B]에게 ‘아버지의 해체’는 새로운 공동체를 형성할 가능성의 조건으로 기능한다.</div>
                         <div class="option">③ [A]는 ‘어머니’의 세계에 잔존하며 ‘아버지’의 세계로의 진입을 유예하는 주체이고, [B]는 ‘어머니’와 ‘아버지’의 세계를 모두 파괴하고 제3의 공간을 창조한 주체이다.</div>
                         <div class="option">④ [A]와 [B]는 모두 ‘성숙’의 경로를 상실했다는 공통점을 지니지만, [A]는 그 경로를 재구성하려 시도하고 [B]는 경로의 부재 자체를 자신의 실존적 조건으로 받아들인다.</div>
@@ -290,5 +312,36 @@
             <p>This content is based on the thesis "The Deconstruction of 'Modern Family' in Neon Genesis Evangelion".</p>
         </footer>
     </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const options = document.querySelectorAll('.option');
+
+        options.forEach(function(option) {
+            option.addEventListener('click', function(e) {
+                const questionCard = e.target.closest('.question-card');
+
+                // If question is already answered, do nothing
+                if (questionCard.classList.contains('answered')) {
+                    return;
+                }
+
+                questionCard.classList.add('answered');
+
+                const isCorrect = option.dataset.correct === 'true';
+
+                if (isCorrect) {
+                    option.classList.add('correct');
+                } else {
+                    option.classList.add('incorrect');
+                    const correctOption = questionCard.querySelector('.option[data-correct="true"]');
+                    if (correctOption) {
+                        correctOption.classList.add('correct');
+                    }
+                }
+            });
+        });
+    });
+</script>
 </body>
 </html>
+
