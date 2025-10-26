@@ -9,21 +9,33 @@
         .container { display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 100vh; text-align: center; padding: 20px; box-sizing: border-box; }
         .title { font-size: 2.5em; color: #333; margin-bottom: 15px; font-weight: 600; }
         .subtitle { font-size: 1.1em; color: #555; margin-top: 0; margin-bottom: 20px; }
-        /* 새로고침 버튼 스타일 */
+        
+        /* 새로고침 아이콘 버튼 스타일 */
         .refresh-button {
             display: none; /* 평소엔 숨김 */
-            font-size: 1em;
-            font-weight: bold;
+            font-size: 1.5em; /* 아이콘 크기 */
             color: #fff;
             background-color: #007bff;
             border: none;
-            border-radius: 5px;
-            padding: 10px 20px;
+            /* 원형 버튼으로 만들기 */
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
             margin-bottom: 30px;
             cursor: pointer;
-            transition: background-color 0.2s;
+            /* 아이콘을 중앙에 배치 */
+            line-height: 50px;
+            text-align: center;
+            transition: background-color 0.2s, transform 0.2s;
         }
-        .refresh-button:hover { background-color: #0056b3; }
+        .refresh-button:hover {
+            background-color: #0056b3;
+            transform: rotate(90deg); /* 호버 시 회전 효과 */
+        }
+        .refresh-button:active {
+            transform: scale(0.95); /* 클릭 시 살짝 작아지는 효과 */
+        }
+
         .random-image { display: none; max-width: 90%; max-height: 70vh; border-radius: 10px; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); background-color: white; padding: 10px; border: 1px solid #ddd; }
         .copyright { display: none; margin-top: 20px; font-size: 0.9em; }
         .copyright a { color: #777; text-decoration: none; }
@@ -37,8 +49,8 @@
         <h1 class="title">엔평 올리는 사이트</h1>
         <p class="subtitle">새로고침 할때마다 랜덤으로 이미지가 바뀝니다!</p>
 
-        <!-- 1. 새로고침 버튼 추가 -->
-        <button id="refreshButton" class="refresh-button">새 이미지 🖼️</button>
+        <!-- 1. 버튼 내용을 아이콘으로 변경하고 title 속성 추가 -->
+        <button id="refreshButton" class="refresh-button" title="새 이미지 불러오기">🔄</button>
 
         <img id="randomImageElement" alt="랜덤 이미지" class="random-image">
         <div id="statusElement"><div class="loader"></div></div>
@@ -51,7 +63,7 @@
     </div>
 
     <script>
-        // 2. 이미지 로딩 로직을 함수로 분리
+        // JavaScript 로직은 변경할 필요가 없습니다.
         async function loadImage() {
             const apiUrl = 'https://cdn.dbyoujin.kr/angel_devil/index.php';
             const imageElement = document.getElementById('randomImageElement');
@@ -59,7 +71,6 @@
             const copyrightElement = document.getElementById('copyrightLink');
             const refreshButton = document.getElementById('refreshButton');
 
-            // 로딩 시작 시, 기존 이미지와 버튼을 숨기고 로딩 아이콘을 표시
             imageElement.style.display = 'none';
             refreshButton.style.display = 'none';
             copyrightElement.style.display = 'none';
@@ -78,7 +89,7 @@
                         statusElement.style.display = 'none';
                         imageElement.style.display = 'block';
                         copyrightElement.style.display = 'block';
-                        refreshButton.style.display = 'inline-block'; // 이미지가 로드되면 버튼 표시
+                        refreshButton.style.display = 'inline-block';
                     };
                     imageElement.onerror = () => {
                         statusElement.innerHTML = '이미지를 불러오는 데 실패했습니다.';
@@ -92,10 +103,7 @@
             }
         }
 
-        // 3. 페이지가 처음 로드될 때 이미지 로딩 함수 실행
         document.addEventListener('DOMContentLoaded', loadImage);
-
-        // 4. 새로고침 버튼에 클릭 이벤트 리스너 추가
         document.getElementById('refreshButton').addEventListener('click', loadImage);
     </script>
 </body>
