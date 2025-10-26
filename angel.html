@@ -5,10 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>엔평 올리는 사이트</title>
     <style>
-        body, html { margin: 0; padding: 0; width: 100%; height: 100%; background-color: #f0f2f5; font-family: sans-serif; }
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; background-color: #f0f2f5; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
         .container { display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 100vh; text-align: center; padding: 20px; box-sizing: border-box; }
-        .title { font-size: 2.5em; color: #333; margin-bottom: 30px; font-weight: 600; }
+        .title { font-size: 2.5em; color: #333; margin-bottom: 15px; font-weight: 600; }
+        /* 새로 추가된 부제 스타일 */
+        .subtitle { font-size: 1.1em; color: #555; margin-top: 0; margin-bottom: 30px; }
         .random-image { display: none; max-width: 90%; max-height: 70vh; border-radius: 10px; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); background-color: white; padding: 10px; border: 1px solid #ddd; }
+        /* 새로 추가된 저작권 링크 스타일 */
+        .copyright { display: none; /* 이미지가 로드된 후에 표시 */ margin-top: 20px; font-size: 0.9em; }
+        .copyright a { color: #777; text-decoration: none; }
+        .copyright a:hover { text-decoration: underline; }
         .loader { border: 5px solid #f3f3f3; border-top: 5px solid #3498db; border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
@@ -16,35 +22,43 @@
 <body>
     <div class="container">
         <h1 class="title">엔평 올리는 사이트</h1>
+        <!-- 1. 부제 추가 -->
+        <p class="subtitle">새로고침 할때마다 랜덤으로 이미지가 바뀝니다!</p>
+
         <img id="randomImageElement" alt="랜덤 이미지" class="random-image">
         <div id="statusElement"><div class="loader"></div></div>
+        
+        <!-- 2. 저작권 링크 추가 -->
+        <div class="copyright" id="copyrightLink">
+            <a href="https://dbyoujin.kr/copyright.html">
+                저작권침해문의 / Copyright infringement inquiries / 著作権侵害に関するお問い合わせ
+            </a>
+        </div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', async function() {
-            // 백엔드 서버의 API 엔드포인트 주소
             const apiUrl = 'https://cdn.dbyoujin.kr/angel_devil/index.php';
 
             const imageElement = document.getElementById('randomImageElement');
             const statusElement = document.getElementById('statusElement');
+            const copyrightElement = document.getElementById('copyrightLink'); // 저작권 링크 엘리먼트 선택
 
             try {
-                // 1. cdn.dbyoujin.kr에 랜덤 이미지 URL을 요청합니다.
                 const response = await fetch(apiUrl);
                 if (!response.ok) {
                     throw new Error(`API 응답 실패: ${response.status}`);
                 }
 
-                // 2. 응답받은 JSON 데이터를 파싱합니다.
                 const data = await response.json();
 
                 if (data.success && data.imageUrl) {
-                    // 3. 성공적으로 이미지 URL을 받으면 <img> 태그의 src로 설정합니다.
                     imageElement.src = data.imageUrl;
                     
                     imageElement.onload = () => {
                         statusElement.style.display = 'none';
                         imageElement.style.display = 'block';
+                        copyrightElement.style.display = 'block'; // 3. 이미지가 로드되면 저작권 링크도 표시
                     };
                     imageElement.onerror = () => {
                         statusElement.innerHTML = '이미지를 불러오는 데 실패했습니다.';
@@ -54,7 +68,6 @@
                 }
             } catch (error) {
                 console.error('오류 발생:', error);
-                // CORS 에러 등이 발생하면 브라우저 콘솔에 관련 메시지가 표시됩니다.
                 statusElement.innerHTML = '사이트와 통신할 수 없습니다. 관리자에게 문의하세요.';
             }
         });
