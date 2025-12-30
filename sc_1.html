@@ -15,6 +15,9 @@
         table { width: 100%; margin-top: 20px; border-collapse: collapse; }
         th, td { border: 1px solid #ddd; padding: 8px; text-align: center; font-size: 12px; }
         th { background: #eee; }
+        /* 진도 등급 색상 범례 스타일 */
+        .legend { margin-top: 10px; font-size: 12px; }
+        .legend span { display: inline-block; width: 12px; height: 12px; margin-right: 5px; vertical-align: middle; border-radius: 50%; }
     </style>
 </head>
 <body>
@@ -39,6 +42,14 @@
         </div>
         <button onclick="startSimulation()">지진 발생 시뮬레이션 시작</button>
 
+        <div class="legend">
+            <strong>진도 색상:</strong><br>
+            <span style="background:red;"></span>매우 강함
+            <span style="background:orange;"></span>강함
+            <span style="background:yellow;"></span>보통
+            <span style="background:green;"></span>약함
+        </div>
+
         <table id="resultTable">
             <thead>
                 <tr>
@@ -46,6 +57,7 @@
                     <th>P파 도달</th>
                     <th>S파 도달</th>
                     <th>PS시</th>
+                    <th>예상 진도</th>
                 </tr>
             </thead>
             <tbody id="resultBody"></tbody>
@@ -58,19 +70,9 @@
 <script>
 let map;
 let pCircle, sCircle;
+let cityCircles = []; // 도시별 진도 원들을 저장할 배열
 let timer;
 let startTime;
-
-// 1. 지도 초기화
-const mapContainer = document.getElementById('map');
-const mapOption = { center: new kakao.maps.LatLng(36.35, 127.38), level: 11 };
-map = new kakao.maps.Map(mapContainer, mapOption);
-
-// 지도 클릭 이벤트: 진앙 설정
-kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
-    const latlng = mouseEvent.latLng;
-    document.getElementById('latlng').value = `${latlng.getLat().toFixed(4)}, ${latlng.getLng().toFixed(4)}`;
-});
 
 const cities = [
     { name: "서울", lat: 37.5665, lng: 126.9780 },
@@ -79,8 +81,37 @@ const cities = [
     { name: "광주", lat: 35.1595, lng: 126.8526 }
 ];
 
+// 1. 지도 초기화
+const mapContainer = document.getElementById('map');
+const mapOption = { center: new kakao.maps.LatLng(36.35, 127.38), level: 11 };
+map = new kakao.maps.Map(mapContainer, mapOption);
+
+// 도시 위치에 마커 표시
+cities.forEach(city => {
+    const markerPosition  = new kakao.maps.LatLng(city.lat, city.lng); 
+    const marker = new kakao.maps.Marker({
+        position: markerPosition
+    });
+    marker.setMap(map);
+    
+    // 커스텀 오버레이로 도시 이름 표시 (선택사항)
+    const content = `<div style ="padding:5px; background:white; border:1px solid black; font-size:10px;">${city.name}</div>`;
+    const customOverlay = new kakao.maps.CustomOverlay({
+        position: markerPosition,
+        content: content,
+        yAnchor: 2.2 
+    });
+    customOverlay.setMap(map);
+});
+
+// 지도 클릭 이벤트: 진앙 설정
+kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
+    const latlng = mouseEvent.latLng;
+    document.getElementById('latlng').value = `${latlng.getLat().toFixed(4)}, ${latlng.getLng().toFixed(4)}`;
+});
+
 function getDistance(lat1, lon1, lat2, lon2) {
-    const R = 6371; // 지구 반지름
+    const R = 6371; 
     const dLat = (lat2 - lat1) * Math.PI / 180;
     const dLon = (lon2 - lon1) * Math.PI / 180;
     const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
@@ -88,13 +119,55 @@ function getDistance(lat1, lon1, lat2, lon2) {
     return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 }
 
+// 간단한 진도(Intensity) 추정 함수 (교육용 단순화 모델)
+// 규모가 클수록, 거리가 가까울수록 진도가 큼
+function calculateIntensity(magnitude, distanceKm) {
+    // 거리에 따른 감쇠 공식 (매우 단순화됨)
+    // I = (M * 1.5) - (0.01 * distance) 같은 식을 응용
+    // 500km 이상이면 거의 0에 수렴하도록 조정
+    
+    // 유효 거리 보정 (너무 가까우면 10km로 고정)
+    const dist = Math.max(distanceKm, 10);
+    
+    // 단순화된 공식: 규모 비례, 거리 로그 반비례
+    // 이 공식은 실제 과학적 공식과는 다르며 시뮬레이터 시각화를 위해 조정된 값입니다.
+    let intensity = (magnitude * 2) - (2.5 * Math.log10(dist));
+    
+    // 최소값 보정
+    if (intensity < 0) intensity = 0;
+    
+    return intensity;
+}
+
+function getIntensityColor(intensity) {
+    if (intensity >= 8) return '#FF0000'; // 빨강 (매우 강함)
+    if (intensity >= 6) return '#FF8C00'; // 주황 (강함)
+    if (intensity >= 4) return '#FFFF00'; // 노랑 (보통)
+    return '#00FF00'; // 초록 (약함/미약)
+}
+
+function getIntensityLabel(intensity) {
+    if (intensity >= 8) return '매우 강함(VIII+)';
+    if (intensity >= 6) return '강함(VI~VII)';
+    if (intensity >= 4) return '보통(IV~V)';
+    return '약함(I~III)';
+}
+
 function startSimulation() {
     if(timer) clearInterval(timer);
     if(pCircle) pCircle.setMap(null);
     if(sCircle) sCircle.setMap(null);
+    
+    // 기존 도시별 진도 원 제거
+    cityCircles.forEach(circle => circle.setMap(null));
+    cityCircles = [];
 
     const coords = document.getElementById('latlng').value.split(',');
-    const epicenter = new kakao.maps.LatLng(parseFloat(coords[0]), parseFloat(coords[1]));
+    const epiLat = parseFloat(coords[0]);
+    const epiLng = parseFloat(coords[1]);
+    const epicenter = new kakao.maps.LatLng(epiLat, epiLng);
+    
+    const mag = parseFloat(document.getElementById('mag').value);
     const depth = parseFloat(document.getElementById('depth').value);
     
     pCircle = new kakao.maps.Circle({
@@ -108,41 +181,58 @@ function startSimulation() {
     sCircle.setMap(map);
 
     startTime = Date.now();
-    updateTable(parseFloat(coords[0]), parseFloat(coords[1]), depth);
+    updateTableAndMap(epiLat, epiLng, depth, mag);
 
     timer = setInterval(() => {
-        const elapsed = (Date.now() - startTime) / 1000; // 경과 시간(초)
+        const elapsed = (Date.now() - startTime) / 1000; 
         
-        // 지진파 속도 (km/s)
         const vP = 6.0;
         const vS = 3.5;
 
-        // 화면에 그릴 반지름 (거리 = 속도 * 시간)
-        // 지형 왜곡 고려 없이 단순 구 평면상의 확산 계산
         pCircle.setOptions({ radius: elapsed * vP * 1000 });
         sCircle.setOptions({ radius: elapsed * vS * 1000 });
 
-        if(elapsed > 60) clearInterval(timer); // 1분 후 정지
+        if(elapsed > 60) clearInterval(timer); 
     }, 50);
 }
 
-function updateTable(epiLat, epiLng, depth) {
+function updateTableAndMap(epiLat, epiLng, depth, mag) {
     const tbody = document.getElementById('resultBody');
     tbody.innerHTML = "";
 
     cities.forEach(city => {
-        const k = getDistance(epiLat, epiLng, city.lat, city.lng); // 지표면 거리
-        const d = Math.sqrt(Math.pow(k, 2) + Math.pow(depth, 2)); // 실제 진원 거리
+        const k = getDistance(epiLat, epiLng, city.lat, city.lng); 
+        const d = Math.sqrt(Math.pow(k, 2) + Math.pow(depth, 2)); 
         
         const pArrival = d / 6.0;
         const sArrival = d / 3.5;
         const psTime = sArrival - pArrival;
+
+        // 진도 계산 및 색상 결정
+        const intensity = calculateIntensity(mag, d);
+        const color = getIntensityColor(intensity);
+        const label = getIntensityLabel(intensity);
+
+        // 지도에 도시별 진도 색상 원 그리기 (반경 15km 정도로 표시)
+        const cityPos = new kakao.maps.LatLng(city.lat, city.lng);
+        const intensityCircle = new kakao.maps.Circle({
+            center: cityPos,
+            radius: 15000, // 15km 반경
+            strokeWeight: 2,
+            strokeColor: color,
+            strokeOpacity: 0.8,
+            fillColor: color,
+            fillOpacity: 0.6 
+        });
+        intensityCircle.setMap(map);
+        cityCircles.push(intensityCircle);
 
         const row = `<tr>
             <td>${city.name}</td>
             <td>${pArrival.toFixed(2)}초</td>
             <td>${sArrival.toFixed(2)}초</td>
             <td><strong>${psTime.toFixed(2)}초</strong></td>
+            <td style="color:${color}; font-weight:bold; text-shadow: 1px 1px 1px #000;">${label}</td>
         </tr>`;
         tbody.innerHTML += row;
     });
