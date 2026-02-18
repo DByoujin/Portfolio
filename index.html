@@ -63,7 +63,6 @@
 
                 <!-- 데스크탑 네비게이션 -->
                 <nav class="hidden md:flex items-center space-x-8">
-                    <a href="https://imcn.dbyoujin.kr" target="_blank" class="nav-link">통합관리전산망</a>
                     <a href="https://law.dbyoujin.kr" target="_blank" class="nav-link">오늘, 국회에서는?</a>
                     <a href="https://art.dbyoujin.kr" target="_blank" class="nav-link">학생예술인협회</a>
                 </nav>
@@ -79,7 +78,6 @@
             <!-- 모바일 메뉴 -->
             <div id="mobile-menu" class="hidden md:hidden absolute top-0 left-0 w-full bg-white/95 backdrop-blur-lg shadow-lg">
                 <nav class="flex flex-col items-center text-center space-y-6 py-8 mt-16">
-                    <a href="https://imcn.dbyoujin.kr" target="_blank" class="nav-link-mobile">통합관리전산망</a>
                     <a href="https://law.dbyoujin.kr" target="_blank" class="nav-link-mobile">오늘, 국회에서는?</a>
                     <a href="https://art.dbyoujin.kr" target="_blank" class="nav-link-mobile">학생예술인협회</a>
                 </nav>
@@ -87,145 +85,171 @@
         </header>
 
         <!-- 메인 컨테이너 -->
-        <div id="main-container" class="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 pt-24 pb-16 sm:pb-24">
+        <div id="main-container" class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-32 pb-24">
             
-            <!-- 상단 그리드 섹션 -->
-            <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
+            <!-- Hero Section (Typography Centric) -->
+            <section class="mb-24 text-center" data-aos="fade-up">
+                <div class="inline-block px-4 py-1.5 mb-6 rounded-full bg-blue-50 border border-blue-100 text-blue-600 text-sm font-semibold tracking-wide uppercase">
+                    Developer & Writer & Creator
+                </div>
+                <h1 class="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight text-gray-900 mb-8 leading-tight">
+                    안녕하세요, <br class="sm:hidden">
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-pink-500 animate-gradient-x">김정혁</span>입니다.
+                </h1>
+                <p class="text-xl sm:text-2xl text-gray-600 max-w-3xl mx-auto mb-12 leading-relaxed font-light">
+                    세상에는 재밌는 것들이 많습니다.<br class="hidden sm:block"> 
+                    저는 흥미로운 아이디어를 <span class="font-semibold text-gray-800">코드</span>와 <span class="font-semibold text-gray-800">글</span>로 실현합니다.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="#portfolio" class="px-8 py-4 bg-gray-900 text-white rounded-full font-bold hover:bg-gray-800 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1 flex items-center justify-center gap-2">
+                        <span>Projects 보기</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
+                    </a>
+                    <a href="mailto:dbyoujin@dbyoujin.kr" class="px-8 py-4 bg-white text-gray-900 border border-gray-200 rounded-full font-bold hover:bg-gray-50 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1 flex items-center justify-center gap-2">
+                        <span>Contact Me</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Bento Grid Section -->
+            <section class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-24">
                 
-                <!-- Column 1: 프로필 -->
-                <div class="card p-6 flex flex-col" data-aos="fade-up">
-                    <div class="flex flex-col items-center text-center">
-                        <img class="w-72 h-72 rounded-full mb-4 object-cover ring-4 ring-white/50 shadow-lg" src="images/1.webp" alt="프로필 사진" onerror="this.onerror=null;this.src='https://placehold.co/288x288/e0e0e0/757575?text=Image';">
-                        <h1 class="text-2xl sm:text-3xl font-bold text-gray-900">김정혁</h1>
-                        <h2 class="text-md text-gray-700 mb-4">Kim Jeong Hyeok</h2>
-                        <p class="text-gray-600 leading-relaxed text-sm mb-6">
-                            세상에는 재밌는 것들이 많습니다. 저는 제가 관심을 보이고 좋아하는 분야라면 밤을 새더라도 완성하려는 집착과 집념이 있어요.<br><br>그런 결과 저는 개발자 이기도 하며, 작가이기도 하며, 특허를 낸 학생이기 하며, 경기문화재단 예술인 정책패널인 이기도 해요.<br><br>항상 더 재밌고 흥미진진한 삶을 만들어 나갈게요!
+                <!-- 1. Profile Card (Large) -->
+                <div class="card p-8 md:col-span-2 lg:col-span-2 row-span-2 flex flex-col justify-between relative overflow-hidden group" data-aos="fade-up">
+                    <div class="absolute top-0 right-0 w-64 h-64 bg-blue-100 rounded-full filter blur-3xl opacity-30 -translate-y-1/2 translate-x-1/2 group-hover:bg-blue-200 transition-colors duration-500"></div>
+                    
+                    <div>
+                        <div class="flex items-center gap-4 mb-6">
+                            <img class="w-28 h-28 rounded-full object-cover ring-4 ring-white shadow-md" src="images/1.webp" alt="Profile" onerror="this.onerror=null;this.src='https://placehold.co/100x100/e0e0e0/757575?text=ME';">
+                            <div>
+                                <h2 class="text-2xl font-bold text-gray-900">About Me</h2>
+                                <p class="text-gray-500">Developer & Writer</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 leading-relaxed mb-6 text-lg">
+                            "관심 분야라면 밤을 새워서라도 완성합니다."<br><br>
+                            개발자이자 작가, 특허 출원자, 그리고 정책 패널 위원까지.<br>
+                            경계 없는 활동으로 더 재밌고 흥미진진한 삶을 만들어가고 있습니다.
                         </p>
-                        <div class="flex justify-center flex-wrap gap-x-5 gap-y-2 text-gray-500 font-medium mt-auto pt-4">
-                            <a href="mailto:dbyoujin@dbyoujin.kr" class="contact-link flex items-center gap-1.5">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                                <span>Email</span>
-                            </a>
+                    </div>
+                    
+                    <div class="flex gap-3 mt-auto">
+                        <a href="https://github.com/dbyoujin" target="_blank" class="p-3 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors text-gray-700 hover:text-black">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                        </a>
+                        <a href="mailto:dbyoujin@dbyoujin.kr" class="p-3 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors text-gray-700 hover:text-black">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        </a>
+                        <a href="https://art.dbyoujin.kr" target="_blank" class="px-4 py-3 bg-blue-50 text-blue-600 rounded-full hover:bg-blue-100 transition-colors text-sm font-bold flex items-center ml-auto">
+                            학생예술인협회 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                        </a>
+                    </div>
+                </div>
 
-                            <a href="https://github.com/dbyoujin" target="_blank" rel="noopener noreferrer" class="contact-link flex items-center gap-1.5">
-                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-                                <span>GitHub</span>
-                            </a>
+                <!-- 2. Skills Card -->
+                <div class="card p-6 md:col-span-1 lg:col-span-2 flex flex-col justify-center" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+                        <span class="p-2 bg-orange-100 rounded-lg text-orange-600">🛠️</span> Skills
+                    </h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="space-y-2">
+                            <div class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Design</div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-2 py-1 bg-white border border-gray-200 rounded text-xs font-medium text-gray-600">Adobe Premiere Pro</span>
+                                <span class="px-2 py-1 bg-white border border-gray-200 rounded text-xs font-medium text-gray-600">Adobe Photoshop</span>
+                                <span class="px-2 py-1 bg-white border border-gray-200 rounded text-xs font-medium text-gray-600">Adobe XD</span>
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Collab</div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-2 py-1 bg-white border border-gray-200 rounded text-xs font-medium text-gray-600">Google Workspace</span>
+                                <span class="px-2 py-1 bg-white border border-gray-200 rounded text-xs font-medium text-gray-600">Slack</span>
+                                <span class="px-2 py-1 bg-white border border-gray-200 rounded text-xs font-medium text-gray-600">Notion</span>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Column 2: 보유 기술 -->
-                <div class="card p-6" data-aos="fade-up" data-aos-delay="100">
-                    <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center"><span class="text-2xl mr-3">🛠️</span>보유 기술</h3>
-                    <div class="space-y-4 text-sm">
-                        <div>
-                            <h4 class="font-semibold text-gray-700">Design & Prototyping</h4>
-                            <p class="text-gray-600">Figma, Sketch, Adobe XD, ProtoPie, Framer</p>
-                        </div>
-                        <div>
-                            <h4 class="font-semibold text-gray-700">User Research</h4>
-                            <p class="text-gray-600">Interview, Survey, Usability Test, Persona</p>
-                        </div>
-                        <div>
-                            <h4 class="font-semibold text-gray-700">Collaboration</h4>
-                            <p class="text-gray-600">Jira, Confluence, Slack</p>
-                        </div>
-                    </div>
+                <!-- 3. Current Status (Small) -->
+                <div class="card p-6 flex flex-col items-center justify-center text-center bg-gradient-to-br from-purple-500 to-indigo-600 text-white border-none" data-aos="fade-up" data-aos-delay="200">
+                    <div class="text-4xl mb-2">📚</div>
+                    <div class="font-bold text-lg opacity-90">Now Studying</div>
+                    <div class="text-sm opacity-75 mt-1">Computer Science</div>
                 </div>
-                
-                <!-- Column 3: 경력 -->
-                <div class="card p-6 flex flex-col" data-aos="fade-up" data-aos-delay="200">
-                    <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center"><span class="text-2xl mr-3">📄</span>경력</h3>
-                    <div class="space-y-5 text-sm flex-grow">
-                        <!-- 항상 보이는 항목 -->
-                        <div>
-                            <h4 class="font-bold text-gray-800 mb-2">개발 경력</h4>
-                            <div>
-                                <h4 class="font-semibold text-gray-800">이소프트, 코리아(Esoft, korea) 대표</h4>
-                                <p class="text-gray-600">(2020.06.09 - 2023.08.25)</p>
-                            </div>
-                        </div>
 
-                        <div class="space-y-5 text-sm flex-grow">
-                            <div>
-                                <div>
-                                    <h4 class="font-semibold text-gray-800">디스코드 봇 메이커 개발 및 운영</h4>
-                                    <p class="text-gray-600">(2020.04 - 2020.10)</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="space-y-5 text-sm flex-grow">
-                            <div>
-                                <div>
-                                    <h4 class="font-semibold text-gray-800">무료 파일 호스팅 개발 및 운영</h4>
-                                    <p class="text-gray-600">(2020.01 - 2023.08)</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div>
-                            <h4 class="font-bold text-gray-800 mb-2">문학 활동 경력</h4>
-                            <div>
-                                <h4 class="font-semibold text-gray-800">학생예술인협회 대표</h4>
-                                <p class="text-gray-600">(2025.12.01 - 2026.01.17)</p>
-                            </div>
-                        </div>
-
-                        <div class="space-y-5 text-sm flex-grow">
-                            <div>
-                                <div>
-                                    <h4 class="font-semibold text-gray-800">학생예술인협회 사무국장</h4>
-                                    <p class="text-gray-600">(2026.01.19 - )</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- '더보기'로 숨겨질 부분 -->
-                        <div id="more-experience" class="space-y-5">
-                             <div class="pt-5 border-t border-gray-200/60">
-                                <h4 class="font-bold text-gray-800 mb-3">문학 활동 경력</h4>
-                                <div>
-                                    <h4 class="font-semibold text-gray-800">단편소설 책 발간</h4>
-                                    <p class="text-gray-600">(2023.02.14)</p>
-                                </div>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-gray-800">한국저작권위원회 단편소설 책 등록</h4>
-                                <p class="text-gray-600">(2023.02.27)</p>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-gray-800">한국예술인복지재단 예술활동증명</h4>
-                                <p class="text-gray-600">(2023.08.14 - 2028.08.13)</p>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-gray-800">경기문화재단 예술인 정책패널인 위촉</h4>
-                                <p class="text-gray-600">(2024.09.20 - 2025.12.31)</p>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-gray-800">문화체육관광부 2024년 예술인 실태조사 대상자</h4>
-                                <p class="text-gray-600">(2024.12 - 2025.01)</p>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-gray-800">경기문화재단 청소년 자문위원단 위원</h4>
-                                <p class="text-gray-600">(2025.07.31 - 2025.11.30)</p>
-                            </div>
-
-                             <div class="pt-5 border-t border-gray-200/60">
-                                <h4 class="font-bold text-gray-800 mb-3">기타 활동 경력</h4>
-                                <div>
-                                    <h4 class="font-semibold text-gray-800">특수 생수병 뚜껑 개발 및 특허 출원</h4>
-                                    <p class="text-gray-600">(2023.10.29 - )</p>
-                                </div>
-                            </div>
-                        </div>
+                <!-- 4. Location (Small) -->
+                <div class="card p-6 flex flex-col items-center justify-center text-center group hover:bg-green-50 transition-colors" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center text- green-600 mb-3 group-hover:scale-110 transition-transform">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-600"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
                     </div>
-                    <!-- 더보기 버튼 -->
-                    <div class="mt-4 text-center">
-                        <button id="toggle-experience-btn" class="text-sm font-bold text-blue-600 hover:text-blue-800 transition-colors">
-                            더보기
-                        </button>
+                    <div class="font-bold text-gray-800">Based in</div>
+                    <div class="text-sm text-gray-500">South Korea</div>
+                </div>
+
+                <!-- 5. Experience (Wide) -->
+                <div class="card p-8 md:col-span-3 lg:col-span-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="flex justify-between items-center mb-8">
+                        <h3 class="text-2xl font-bold text-gray-900 flex items-center gap-3">
+                            <span class="p-2 bg-blue-100 rounded-xl text-blue-600 text-xl">🚀</span> Experience
+                        </h3>
+                    </div>
+                    
+                    <div class="relative pl-8 border-l-2 border-gray-200 space-y-10">
+                        <!-- Item 1 -->
+                        <div class="relative">
+                            <div class="absolute -left-[41px] top-1 w-5 h-5 bg-blue-500 rounded-full border-4 border-white shadow-sm"></div>
+                            <div class="flex flex-col sm:flex-row sm:items-baseline justify-between mb-2">
+                                <h4 class="text-lg font-bold text-gray-900">이소프트, 코리아(Esoft, korea) 대표</h4>
+                                <span class="text-sm font-medium text-blue-600 bg-blue-50 px-3 py-1 rounded-full">2020.06 - 2023.08</span>
+                            </div>
+                            <p class="text-gray-600 mb-3">소프트웨어 개발 및 서비스 운영 총괄</p>
+                            <ul class="list-disc list-inside text-sm text-gray-500 space-y-1 ml-1">
+                                <li>디스코드 봇 메이커 개발 및 운영</li>
+                                <li>무료 파일 호스팅 서비스 개발 (PHP, Apache)</li>
+                                <li>사용자 경험(UX) 개선 및 커뮤니티 관리</li>
+                            </ul>
+                        </div>
+
+                        <!-- Item 2 -->
+                        <div class="relative">
+                             <div class="absolute -left-[41px] top-1 w-5 h-5 bg-purple-500 rounded-full border-4 border-white shadow-sm"></div>
+                            <div class="flex flex-col sm:flex-row sm:items-baseline justify-between mb-2">
+                                <h4 class="text-lg font-bold text-gray-900">학생예술인협회</h4>
+                                <span class="text-sm font-medium text-purple-600 bg-purple-50 px-3 py-1 rounded-full">2025.12 - Present</span>
+                            </div>
+                            <p class="text-gray-600 mb-2">대표 (2025.12 - 2026.01) → 사무국장 (2026.01 - )</p>
+                             <ul class="list-disc list-inside text-sm text-gray-500 space-y-1 ml-1">
+                                <li>협회 설립 및 초기 운영 기획</li>
+                                <li>예술인 권익 보호 활동 및 정책 제안</li>
+                            </ul>
+                        </div>
+                        
+                         <!-- Item 3 -->
+                        <div class="relative">
+                             <div class="absolute -left-[41px] top-1 w-5 h-5 bg-green-500 rounded-full border-4 border-white shadow-sm"></div>
+                            <div class="flex flex-col sm:flex-row sm:items-baseline justify-between mb-2">
+                                <h4 class="text-lg font-bold text-gray-900">기타 활동 및 수상</h4>
+                                <span class="text-sm font-medium text-green-600 bg-green-50 px-3 py-1 rounded-full">Various</span>
+                            </div>
+                           
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+                                <div class="bg-gray-50 p-4 rounded-xl">
+                                    <div class="font-semibold text-gray-800">경기문화재단</div>
+                                    <div class="text-sm text-gray-500">예술인 정책패널 & 청소년 자문위원</div>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-xl">
+                                    <div class="font-semibold text-gray-800">특허 출원</div>
+                                    <div class="text-sm text-gray-500">특수 생수병 뚜껑 개발</div>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-xl">
+                                    <div class="font-semibold text-gray-800">문학 활동</div>
+                                    <div class="text-sm text-gray-500">단편소설 발간 및 저작권 등록</div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </section>
@@ -234,87 +258,89 @@
             <hr class="border-t-2 border-gray-300/30 my-16" data-aos="fade-in">
 
             <!-- 예술인 교육 수료 섹션 -->
-            <section id="education">
-                 <h2 class="text-3xl sm:text-4xl font-bold mb-12 text-gray-900 text-center flex items-center justify-center" data-aos="fade-up"><span class="text-3xl mr-3">🎓</span>Arts Education</h2>
+            <section id="education" class="mb-24">
+                 <h2 class="text-3xl sm:text-4xl font-bold mb-12 text-gray-900 text-center flex items-center justify-center" data-aos="fade-up">
+                    <span class="mr-3 p-2 bg-pink-100 rounded-xl text-pink-500 text-2xl">🎓</span> Arts Education
+                 </h2>
                  
                  <div class="card p-8" data-aos="fade-up">
-                    <h3 class="text-xl font-bold text-gray-900 mb-6 flex items-center"><span class="text-2xl mr-3">📖</span>예술인 교육 수료</h3>
+                    <h3 class="text-xl font-bold text-gray-900 mb-8 flex items-center">
+                        <span class="w-2 h-8 bg-blue-500 rounded-full mr-3"></span>
+                        주요 교육 수료 내역
+                    </h3>
                     
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
-                        <!-- Left Column -->
-                        <div class="space-y-6">
-                            <div>
-                                <h4 class="font-semibold text-gray-800">한국콘텐츠진흥원 ｢예술인 권익보호의 이해｣ 수료</h4>
-                                <p class="text-gray-600 text-sm mt-1">(2023.02.14 - 2023.11.30)</p>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-gray-800">한국콘텐츠진흥원 ｢예술인 복지법과 정책｣ 수료</h4>
-                                <p class="text-gray-600 text-sm mt-1">(2025.01.01 - 2025.05.21)</p>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-gray-800">한국예술인복지재단 ｢문화예술분야 성희롱·성폭력 예방교육｣ 수료</h4>
-                                <p class="text-gray-600 text-sm mt-1">(2025.01.01 - 2025.05.20)</p>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-gray-800">한국예술인복지재단 ｢공연예술 표준계약서 활용의 이해(출연·창작)｣ 수료</h4>
-                                <p class="text-gray-600 text-sm mt-1">(2025.01.01 - 2025.05.21)</p>
-                            </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Item Style -->
+                        <div class="p-4 rounded-2xl bg-white/50 border border-gray-100 hover:bg-white hover:shadow-md transition-all">
+                            <h4 class="font-semibold text-gray-800 mb-1">예술인 권익보호의 이해</h4>
+                            <p class="text-xs text-gray-500">한국콘텐츠진흥원 | 2023.02 - 2023.11</p>
                         </div>
-
-                        <!-- Right Column -->
-                        <div class="space-y-6">
-                            <div>
-                                <h4 class="font-semibold text-gray-800">한국예술인복지재단 ｢예술인권리보장법 예술인편｣ 수료</h4>
-                                <p class="text-gray-600 text-sm mt-1">(2025.01.01 - 2025.05.25)</p>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-gray-800">한국예술인복지재단 ｢공연예술 표준계약서 활용의 이해(기술지원 근로·용역)｣ 수료</h4>
-                                <p class="text-gray-600 text-sm mt-1">(2025.01.01 - 2025.12.05)</p>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-gray-800">한국예술인복지재단 ｢예술 계약의 이해(상), (하)｣ 수료</h4>
-                                <p class="text-gray-600 text-sm mt-1">(2025.01.01 - 2025.12.13)</p>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold text-gray-800">한국예술인복지재단 ｢예술인권리보장법 국가기관·지방자치단체편｣ 수료</h4>
-                                <p class="text-gray-600 text-sm mt-1">(2025.01.01 - 2025.12.22)</p>
-                            </div>
+                        <div class="p-4 rounded-2xl bg-white/50 border border-gray-100 hover:bg-white hover:shadow-md transition-all">
+                            <h4 class="font-semibold text-gray-800 mb-1">예술인 복지법과 정책</h4>
+                            <p class="text-xs text-gray-500">한국콘텐츠진흥원 | 2025.01 - 2025.05</p>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-white/50 border border-gray-100 hover:bg-white hover:shadow-md transition-all">
+                            <h4 class="font-semibold text-gray-800 mb-1">문화예술분야 성희롱·성폭력 예방교육</h4>
+                            <p class="text-xs text-gray-500">한국예술인복지재단 | 2025.01 - 2025.05</p>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-white/50 border border-gray-100 hover:bg-white hover:shadow-md transition-all">
+                            <h4 class="font-semibold text-gray-800 mb-1">공연예술 표준계약서 활용의 이해(출연·창작)</h4>
+                            <p class="text-xs text-gray-500">한국예술인복지재단 | 2025.01 - 2025.05</p>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-white/50 border border-gray-100 hover:bg-white hover:shadow-md transition-all">
+                            <h4 class="font-semibold text-gray-800 mb-1">예술인권리보장법 (예술인편)</h4>
+                            <p class="text-xs text-gray-500">한국예술인복지재단 | 2025.01 - 2025.05</p>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-white/50 border border-gray-100 hover:bg-white hover:shadow-md transition-all">
+                            <h4 class="font-semibold text-gray-800 mb-1">공연예술 표준계약서 활용의 이해(기술지원 근로·용역)</h4>
+                            <p class="text-xs text-gray-500">한국예술인복지재단 | 2025.01 - 2025.12</p>
+                        </div>
+                         <div class="p-4 rounded-2xl bg-white/50 border border-gray-100 hover:bg-white hover:shadow-md transition-all">
+                            <h4 class="font-semibold text-gray-800 mb-1">예술 계약의 이해</h4>
+                            <p class="text-xs text-gray-500">한국예술인복지재단 | 2025.01 - 2025.12</p>
+                        </div>
+                         <div class="p-4 rounded-2xl bg-white/50 border border-gray-100 hover:bg-white hover:shadow-md transition-all">
+                            <h4 class="font-semibold text-gray-800 mb-1">예술인권리보장법 국가기관·지방자치단체편</h4>
+                            <p class="text-xs text-gray-500">한국예술인복지재단 | 2025.01 - 2025.12</p>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- 구분선 -->
-            <hr class="border-t-2 border-gray-300/30 my-16" data-aos="fade-in">
-
             <!-- 포트폴리오 섹션 -->
-            <section id="portfolio">
-                <h2 class="text-3xl sm:text-4xl font-bold mb-12 text-gray-900 text-center flex items-center justify-center" data-aos="fade-up"><span class="text-3xl mr-3">✨</span>Projects</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+            <section id="portfolio" class="mb-24">
+                <h2 class="text-3xl sm:text-4xl font-bold mb-12 text-gray-900 text-center flex items-center justify-center" data-aos="fade-up">
+                    <span class="mr-3 p-2 bg-blue-100 rounded-xl text-blue-500 text-2xl">✨</span> Projects
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                      <!-- 포트폴리오 아이템 1 -->
-                    <div class="card portfolio-card cursor-pointer" onclick="openModal('project1')" data-aos="fade-up">
-                        <img src="https://placehold.co/600x400/a5b4fc/1e293b?text=Discord+Bot+Maker" alt="디스코드 봇 메이커" class="w-full h-48 object-cover">
-                        <div class="p-5">
-                            <h4 class="font-bold text-lg mb-1">디스코드 봇 메이커</h4>
-                            <p class="text-gray-600 text-sm mb-3">파이썬 기반 디스코드 봇을 만들 수 있는 간단한 어플리케이션의 개발 및 총책임자로써 운영하였습니다.</p>
+                    <div class="card portfolio-card cursor-pointer group rounded-3xl overflow-hidden" onclick="openModal('project1')" data-aos="fade-up">
+                        <div class="overflow-hidden">
+                            <img src="https://placehold.co/600x400/a5b4fc/1e293b?text=Discord+Bot+Maker" alt="디스코드 봇 메이커" class="w-full h-56 object-cover transition-transform duration-500 group-hover:scale-110">
+                        </div>
+                        <div class="p-6">
+                            <h4 class="font-bold text-xl mb-2 text-gray-900">디스코드 봇 메이커</h4>
+                            <p class="text-gray-600 text-sm mb-4 line-clamp-2">파이썬 기반 디스코드 봇을 만들 수 있는 간단한 어플리케이션의 개발 및 총책임자로써 운영하였습니다.</p>
                             <div class="flex flex-wrap gap-2">
-                                <span class="bg-orange-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Python</span>
-                                <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">UX/UI Design</span>
-                                <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Operation</span>
+                                <span class="bg-gray-100 text-gray-700 text-xs font-semibold px-3 py-1 rounded-full">Python</span>
+                                <span class="bg-gray-100 text-gray-700 text-xs font-semibold px-3 py-1 rounded-full">UX/UI</span>
+                                <span class="bg-gray-100 text-gray-700 text-xs font-semibold px-3 py-1 rounded-full">Operation</span>
                             </div>
                         </div>
                     </div>
 
                     <!-- 포트폴리오 아이템 2 -->
-                    <div class="card portfolio-card cursor-pointer" onclick="openModal('project2')" data-aos="fade-up" data-aos-delay="100">
-                        <img src="https://placehold.co/600x400/93c5fd/1e293b?text=File+Upload" alt="File Upload(파일 업로드)" class="w-full h-48 object-cover">
-                        <div class="p-5">
-                            <h4 class="font-bold text-lg mb-1">File Upload(파일 업로드)</h4>
-                            <p class="text-gray-600 text-sm mb-3">웹사이트 내에서 무료로 파일 업로드를 하여 호스팅 시켜주는 사이트를 개발 및 운영하였습니다.</p>
+                    <div class="card portfolio-card cursor-pointer group rounded-3xl overflow-hidden" onclick="openModal('project2')" data-aos="fade-up" data-aos-delay="100">
+                        <div class="overflow-hidden">
+                            <img src="https://placehold.co/600x400/93c5fd/1e293b?text=File+Upload" alt="File Upload(파일 업로드)" class="w-full h-56 object-cover transition-transform duration-500 group-hover:scale-110">
+                        </div>
+                        <div class="p-6">
+                            <h4 class="font-bold text-xl mb-2 text-gray-900">File Upload(파일 업로드)</h4>
+                            <p class="text-gray-600 text-sm mb-4 line-clamp-2">웹사이트 내에서 무료로 파일 업로드를 하여 호스팅 시켜주는 사이트를 개발 및 운영하였습니다.</p>
                             <div class="flex flex-wrap gap-2">
-                                <span class="bg-purple-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">PHP</span>
-                                <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">UX/UI Design</span>
-                                <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Operation</span>
+                                <span class="bg-gray-100 text-gray-700 text-xs font-semibold px-3 py-1 rounded-full">PHP</span>
+                                <span class="bg-gray-100 text-gray-700 text-xs font-semibold px-3 py-1 rounded-full">UX/UI</span>
+                                <span class="bg-gray-100 text-gray-700 text-xs font-semibold px-3 py-1 rounded-full">Operation</span>
                             </div>
                         </div>
                     </div>
@@ -322,34 +348,41 @@
             </section>
 
             <!-- Awards 섹션 -->
-            <section id="awards" class="mt-16">
-                <hr class="border-t-2 border-gray-300/30 my-16" data-aos="fade-in">
-                <h2 class="text-3xl sm:text-4xl font-bold mb-12 text-gray-900 text-center flex items-center justify-center" data-aos="fade-up"><span class="text-3xl mr-3">🏆</span>Awards</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+            <section id="awards" class="mb-24">
+                <h2 class="text-3xl sm:text-4xl font-bold mb-12 text-gray-900 text-center flex items-center justify-center" data-aos="fade-up">
+                    <span class="mr-3 p-2 bg-yellow-100 rounded-xl text-yellow-500 text-2xl">🏆</span> Awards
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                      <!-- Award 아이템 1 -->
-                    <div class="card portfolio-card cursor-pointer" onclick="openModal('award1')" data-aos="fade-up">
-                        <img src="images/kawf.jpg" alt="한국예술인복지재단 예술활동증명" class="w-full h-48 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x192/e0e0e0/757575?text=Image';">
-                        <div class="p-5">
-                            <h4 class="font-bold text-lg mb-1">예술활동증명</h4>
-                            <p class="text-gray-600 text-sm mb-3">한국예술인복지재단 (2023)</p>
+                    <div class="card portfolio-card cursor-pointer group rounded-3xl hover:bg-yellow-50/50 transition-colors" onclick="openModal('award1')" data-aos="fade-up">
+                        <div class="relative overflow-hidden rounded-t-3xl ">
+                             <img src="images/kawf.jpg" alt="한국예술인복지재단 예술활동증명" class="w-full h-40 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x192/e0e0e0/757575?text=Image';">
+                        </div>
+                        <div class="p-6">
+                            <h4 class="font-bold text-lg mb-1 text-gray-900">예술활동증명</h4>
+                            <p class="text-gray-500 text-sm">한국예술인복지재단 | 2023</p>
                         </div>
                     </div>
 
                      <!-- Award 아이템 2 -->
-                    <div class="card portfolio-card cursor-pointer" onclick="openModal('award2')" data-aos="fade-up" data-aos-delay="100">
-                        <img src="images/ggcf.jpg" alt="경기문화재단 예술인 정책패널 위촉장" class="w-full h-48 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x192/e0e0e0/757575?text=Image';">
-                        <div class="p-5">
-                            <h4 class="font-bold text-lg mb-1">예술인 정책패널 위촉장</h4>
-                            <p class="text-gray-600 text-sm mb-3">경기문화재단 (2024)</p>
+                    <div class="card portfolio-card cursor-pointer group rounded-3xl hover:bg-yellow-50/50 transition-colors" onclick="openModal('award2')" data-aos="fade-up" data-aos-delay="100">
+                        <div class="relative overflow-hidden rounded-t-3xl">
+                            <img src="images/ggcf.jpg" alt="경기문화재단 예술인 정책패널 위촉장" class="w-full h-40 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x192/e0e0e0/757575?text=Image';">
+                        </div>
+                        <div class="p-6">
+                            <h4 class="font-bold text-lg mb-1 text-gray-900">예술인 정책패널</h4>
+                            <p class="text-gray-500 text-sm">경기문화재단 | 2024</p>
                         </div>
                     </div>
 
                      <!-- Award 아이템 3 -->
-                    <div class="card portfolio-card cursor-pointer" onclick="openModal('award3')" data-aos="fade-up" data-aos-delay="100">
-                        <img src="images/ggcf.jpg" alt="경기문화재단 청소년 자문위원단 위촉장" class="w-full h-48 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x192/e0e0e0/757575?text=Image';">
-                        <div class="p-5">
-                            <h4 class="font-bold text-lg mb-1">청소년 자문위원단 위촉장</h4>
-                            <p class="text-gray-600 text-sm mb-3">경기문화재단 (2025)</p>
+                    <div class="card portfolio-card cursor-pointer group rounded-3xl hover:bg-yellow-50/50 transition-colors" onclick="openModal('award3')" data-aos="fade-up" data-aos-delay="200">
+                        <div class="relative overflow-hidden rounded-t-3xl">
+                            <img src="images/ggcf.jpg" alt="경기문화재단 청소년 자문위원단 위촉장" class="w-full h-40 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x192/e0e0e0/757575?text=Image';">
+                        </div>
+                        <div class="p-6">
+                            <h4 class="font-bold text-lg mb-1 text-gray-900">청소년 자문위원단</h4>
+                            <p class="text-gray-500 text-sm">경기문화재단 | 2025</p>
                         </div>
                     </div>
 
@@ -357,7 +390,7 @@
             </section>
 
             <!-- 푸터 -->
-            <footer class="text-center text-gray-500 mt-20 pt-8 border-t-2 border-gray-300/30" data-aos="fade-in">
+            <footer class="text-center text-gray-400 mt-24 pb-12 font-light text-sm" data-aos="fade-in">
                 <p>&copy; 2025 Jeong Hyeok Kim. All Rights Reserved.</p>
             </footer>
         </div>
@@ -485,7 +518,8 @@
             }
         });
 
-        // '더보기' 기능 스크립트
+        // '더보기' 기능 스크립트 (사용 안함)
+        /*
         const toggleBtn = document.getElementById('toggle-experience-btn');
         const moreContent = document.getElementById('more-experience');
 
@@ -502,6 +536,7 @@
                 }
             });
         }
+        */
 
         // 페이지 로딩 스크립트
         window.addEventListener('load', () => {
