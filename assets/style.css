@@ -40,7 +40,7 @@ body {
     overflow: hidden;
 }
 #more-experience.show {
-    max-height: 1000px; /* 충분한 높이 값 */
+    max-height: 2000px; /* 충분한 높이 값 */
     opacity: 1;
 }
 /* 움직이는 배경 블롭 스타일 */
