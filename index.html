@@ -352,7 +352,7 @@
                         </div>
                         <div class="p-5">
                             <h4 class="font-bold text-lg mb-2 text-gray-900">오늘, 국회에서는?</h4>
-                            <p class="text-gray-600 text-xs mb-3 line-clamp-2">국회 Open API를 활용하여, 실시간으로 발의된 법률안을 확인하고 투표권을 행사해보는 사이트입니다.</p>
+                            <p class="text-gray-600 text-xs mb-3 line-clamp-2">국회 Open API를 활용하여, 실시간으로 발의된 법률안을 확인하고 정당별 투표 내용 등을 확인해볼 수 있는 사이트입니다.</p>
                             <div class="flex flex-wrap gap-1.5">
                                 <span class="bg-gray-100 text-gray-700 text-[10px] font-semibold px-2.5 py-0.5 rounded-full">HTML</span>
                                 <span class="bg-gray-100 text-gray-700 text-[10px] font-semibold px-2.5 py-0.5 rounded-full">PHP</span>
@@ -557,7 +557,7 @@
                             </h4>
                             <p class="text-gray-700 leading-relaxed">
                                 <strong>"내가 뽑은 국회의원은 오늘 무슨 법을 만들었을까?"</strong><br>
-                                대한민국 국회 Open API를 활용하여 실시간으로 발의된 법률안을 쉽게 확인하고, 시민들이 직접 찬성/반대 투표를 통해 의견을 나눌 수 있는 참여형 플랫폼입니다.
+                                대한민국 국회 Open API를 활용하여 실시간으로 발의된 법률안을 쉽게 확인하고, 정당별 투표내역, 진영별 투표내역, 가결·부결·폐기 등을 다양하게 확인할 수 있는 웹기반 플랫폼 입니다.
                             </p>
                         </div>
 
@@ -569,7 +569,7 @@
                                 <ul class="list-disc list-inside text-gray-600 space-y-1 text-sm">
                                     <li>국회 의안정보 시스템 실시간 연동</li>
                                     <li>법률안 상세 내용 및 제안 이유 제공</li>
-                                    <li>사용자 찬반 투표 및 댓글 토론</li>
+                                    <li>정당별·진영별 투표내역 확인 가능</li>
                                     <li>반응형 웹 디자인 적용</li>
                                 </ul>
                             </div>
@@ -578,7 +578,7 @@
                                     <span class="bg-gray-200 text-gray-700 rounded-lg p-1 mr-2 text-sm">🔧</span> 기술적 도전
                                 </h4>
                                 <p class="text-gray-600 text-sm leading-relaxed">
-                                    방대한 양의 공공데이터(XML)를 파싱하여 DB에 효율적으로 저장하고 출력하는 구조를 설계했습니다. 그누보드 프레임워크를 기반으로 커스텀 플러그인을 개발하여 확장성을 높였습니다.
+                                    방대한 양의 공공데이터(JSON)를 파싱하여 DB에 효율적으로 저장하고 출력하는 구조를 설계했습니다. 또한, API의 불안정성에 대비하여 캐싱 시스템을 구축하여 사용자 경험을 개선하였습니다.
                                 </p>
                             </div>
                         </div>
@@ -606,8 +606,8 @@
                             </h4>
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2">
                                 <div class="bg-white p-3 rounded-lg border border-gray-100 shadow-sm">
-                                    <h5 class="font-bold text-gray-700 text-sm mb-1">본인 인증 시스템</h5>
-                                    <p class="text-xs text-gray-500">허위 가입 방지를 위해 휴대폰 본인 인증 모듈을 연동하여 실명 회원제를 구현했습니다.</p>
+                                    <h5 class="font-bold text-gray-700 text-sm mb-1">문자 인증 시스템</h5>
+                                    <p class="text-xs text-gray-500">주요 접근 기능에 문자 인증 시스템을 적용하여 보안성을 강화했습니다.</p>
                                 </div>
                                 <div class="bg-white p-3 rounded-lg border border-gray-100 shadow-sm">
                                     <h5 class="font-bold text-gray-700 text-sm mb-1">웹 표준 & 보안</h5>
