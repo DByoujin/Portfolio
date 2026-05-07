@@ -8,204 +8,176 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Pretendard', 'sans-serif'] },
+                    colors: {
+                        primary: '#0d9488', // Teal 600
+                        primaryHover: '#0f766e', // Teal 700
+                        surface: '#ffffff',
+                        background: '#f8fafc', // Slate 50
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        body {
-            font-family: 'Noto Sans KR', sans-serif;
-        }
-        .result-table th, .result-table td {
-            text-align: center;
-            padding: 0.75rem;
-            border: 1px solid #e2e8f0;
-        }
-        .result-table th {
-            background-color: #f8fafc;
-        }
-        .mic-fail {
-            background-color: #fef2f2;
-            color: #dc2626;
-            font-weight: bold;
-        }
-        .mic-success {
-            color: #16a34a;
-        }
-        .formula-box {
-            background-color: #eff6ff;
-            border: 1px solid #dbeafe;
-            padding: 1rem;
-            border-radius: 0.5rem;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 0.9rem;
-            line-height: 1.6;
-            color: #1e40af;
-        }
-        /* Tooltip 스타일 */
-        .tooltip {
-            position: relative;
-            cursor: help;
-            border-bottom: 1px dotted #3b82f6;
-        }
-        .tooltip::after { /* 툴팁 박스 */
-            content: attr(data-tooltip);
-            position: absolute;
-            bottom: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            margin-bottom: 5px;
-            min-width: 280px; /* 너비 조정 */
-            padding: 10px 12px;
-            border-radius: 8px;
-            background-color: #1f2937;
-            color: #fff;
-            font-size: 0.875rem;
-            line-height: 1.5;
-            text-align: left;
-            visibility: hidden;
-            opacity: 0;
-            transition: opacity 0.2s, visibility 0.2s;
-            z-index: 10;
-            font-family: 'Noto Sans KR', sans-serif;
-            font-weight: 400;
-        }
-        .tooltip::before { /* 툴팁 화살표 */
-            content: '';
-            position: absolute;
-            bottom: 100%;
-            left: 50%;
-            transform: translateX(-50%) translateY(5px);
-            border: 8px solid transparent;
-            border-top-color: #1f2937;
-            visibility: hidden;
-            opacity: 0;
-            transition: opacity 0.2s, visibility 0.2s;
-            z-index: 10;
-        }
-        .tooltip:hover::after,
-        .tooltip:hover::before {
-            visibility: visible;
-            opacity: 1;
-        }
+        body { font-family: 'Pretendard', sans-serif; background-color: #f8fafc; }
+        
+        /* 테이블 커스텀 디자인 */
+        .modern-table th { background-color: #f1f5f9; color: #334155; font-weight: 600; letter-spacing: -0.02em; }
+        .modern-table td, .modern-table th { border-bottom: 1px solid #e2e8f0; padding: 1rem 0.75rem; text-align: center; }
+        .modern-table tbody tr:hover { background-color: #f8fafc; transition: background-color 0.2s; }
+        .modern-table tbody tr:last-child td { border-bottom: none; }
+        
+        .mic-fail { color: #ef4444; font-weight: 500; }
+        .mic-success { color: #059669; font-weight: 500; }
+        
+        /* 커스텀 스크롤바 */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        
+        /* 툴팁 트랜지션 */
+        .tooltip-content { transition: opacity 0.2s ease, transform 0.2s ease; transform: translateY(4px); }
+        .group:hover .tooltip-content { transform: translateY(0); }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body class="text-slate-800 antialiased selection:bg-teal-100 selection:text-teal-900">
 
-    <div class="container mx-auto p-8 max-w-4xl">
-        <header class="text-center mb-8">
-            <h1 class="text-3xl font-bold text-blue-600">아목시실린 농도 시뮬레이터</h1>
-            <p class="mt-2 text-gray-600">아목시실린의 복용 간격이 체내 약물 농도에 미치는 영향을 그래프 및 표로 분석합니다.</p>
+    <div class="container mx-auto px-4 py-12 max-w-5xl">
+        <header class="text-center mb-10">
+            <div class="inline-block mb-3 px-3 py-1 bg-teal-50 text-teal-700 rounded-full text-sm font-semibold tracking-wide">
+                Pharmacokinetic Simulator
+            </div>
+            <h1 class="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight">아목시실린 농도 시뮬레이터</h1>
+            <p class="mt-3 text-slate-500 max-w-2xl mx-auto">복용 간격과 신체 조건이 체내 약물 농도에 미치는 영향을 직관적인 그래프와 데이터로 분석합니다.</p>
         </header>
 
-        <main>
-            <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
-                <h2 class="text-xl font-semibold mb-4 border-b pb-2">시뮬레이션 조건 입력</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <div>
-                        <label for="dose" class="block text-sm font-medium text-gray-700 mb-1">아목시실린 복용량 (1 ~ 2000mg)</label>
-                        <input type="number" id="dose" value="500" min="1" max="2000" step="0.1" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
-                    </div>
-                    <div>
-                        <label for="weight" class="block text-sm font-medium text-gray-700 mb-1">체중 (40 ~ 80kg)</label>
-                        <input type="number" id="weight" value="70" min="40" max="80" step="0.1" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
-                    </div>
-                    <div>
-                        <label for="mic" class="block text-sm font-medium text-gray-700 mb-1">
-                            <span class="tooltip" data-tooltip="최소억제농도(Minimum Inhibitory Concentration). 세균의 증식을 억제하는 데 필요한 최소한의 약물 농도입니다. 이 농도 이상으로 유지하는 것이 치료의 목표입니다.">목표 MIC</span> (0.01 ~ 5µg/mL)
-                        </label>
-                        <input type="number" id="mic" step="0.01" value="0.1" min="0.01" max="5" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
-                    </div>
-                    <div>
-                        <label for="interval" class="block text-sm font-medium text-gray-700 mb-1">사용자 설정 복용 간격 (1 ~ 24시간)</label>
-                        <input type="number" id="interval" value="12" min="1" max="24" step="1" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
-                    </div>
+        <main class="space-y-8">
+            <section class="bg-surface p-6 md:p-8 rounded-2xl shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)] border border-slate-100">
+                <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-100">
+                    <h2 class="text-xl font-semibold text-slate-800">시뮬레이션 조건 설정</h2>
                 </div>
-
-                <div class="mt-6 p-4 text-center text-sm bg-yellow-50 border border-yellow-200 text-yellow-800 rounded-lg">
-                    <p><strong>주의:</strong> 본 시뮬레이터는 아목시실린(항생제)의 체내 약물 농도를 이해하기 위한 교육용 도구입니다. 실제 처방 및 복용은 반드시 의사 또는 약사의 지시에 따라야 합니다.</p>
-                </div>
-
-                <div class="mt-6 flex justify-center">
-                    <button id="simulateBtn" class="w-48 h-10 flex items-center justify-center bg-blue-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-blue-700 transition-colors shadow-md disabled:opacity-75">
-                        <svg id="spinner" class="animate-spin h-5 w-5 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                        </svg>
-                        <span id="buttonText">시뮬레이션 시작</span>
-                    </button>
-                </div>
-            </div>
-            
-            <div id="formula-section" class="mt-8 bg-white p-6 rounded-xl shadow-lg border border-gray-200 hidden">
-                 <h2 class="text-xl font-semibold mb-4 border-b pb-2">적용된 계산 공식</h2>
-                 <div id="formulas" class="formula-box"></div>
-            </div>
-
-            <div id="results" class="mt-8 bg-white p-6 rounded-xl shadow-lg border border-gray-200 hidden">
-                <h2 class="text-xl font-semibold mb-4 border-b pb-2">시뮬레이션 결과</h2>
                 
-                <div id="result-summary" class="mb-8 text-center"></div>
-
-                <div class="mb-8">
-                    <h3 class="text-lg font-semibold mb-2 text-center">체내 농도 변화 그래프 (최대 24시간)</h3>
-                    <div class="relative h-96">
-                        <canvas id="concentrationChart"></canvas>
+                <form id="simulationForm">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="space-y-1.5">
+                            <label for="dose" class="block text-sm font-medium text-slate-700">복용량 <span class="text-slate-400 font-normal">(mg)</span></label>
+                            <input type="number" id="dose" value="500" min="1" max="2000" step="0.1" required
+                                class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-teal-500 focus:bg-white transition-all outline-none">
+                        </div>
+                        <div class="space-y-1.5">
+                            <label for="weight" class="block text-sm font-medium text-slate-700">체중 <span class="text-slate-400 font-normal">(kg)</span></label>
+                            <input type="number" id="weight" value="70" min="40" max="80" step="0.1" required
+                                class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-teal-500 focus:bg-white transition-all outline-none">
+                        </div>
+                        <div class="space-y-1.5">
+                            <div class="flex items-center gap-1.5">
+                                <label for="mic" class="block text-sm font-medium text-slate-700">목표 MIC <span class="text-slate-400 font-normal">(µg/mL)</span></label>
+                                <div class="relative group cursor-help flex items-center">
+                                    <svg class="w-4 h-4 text-slate-400 hover:text-teal-600 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <div class="tooltip-content absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-64 p-3 bg-slate-800 text-white text-xs rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible z-10 shadow-xl">
+                                        세균 증식을 억제하는 데 필요한 최소 약물 농도입니다. 이 농도 이상을 유지하는 것이 치료의 핵심입니다.
+                                        <div class="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-slate-800"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="number" id="mic" step="0.01" value="0.1" min="0.01" max="5" required
+                                class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-teal-500 focus:bg-white transition-all outline-none">
+                        </div>
+                        <div class="space-y-1.5">
+                            <label for="interval" class="block text-sm font-medium text-slate-700">비교할 복용 간격 <span class="text-slate-400 font-normal">(시간)</span></label>
+                            <input type="number" id="interval" value="12" min="1" max="24" step="1" required
+                                class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-teal-500 focus:bg-white transition-all outline-none">
+                        </div>
                     </div>
+
+                    <div class="mt-6 flex items-start gap-3 p-4 bg-amber-50/50 border border-amber-100 rounded-xl text-sm text-amber-800">
+                        <svg class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                        <p class="leading-relaxed"><strong>의학적 주의:</strong> 본 시뮬레이터는 약동학적 원리를 이해하기 위한 교육용 도구입니다. 실제 처방 및 복용은 반드시 전문 의료진의 지시를 따라야 합니다.</p>
+                    </div>
+
+                    <div class="mt-8 flex justify-center">
+                        <button type="submit" id="simulateBtn" class="w-full sm:w-auto min-w-[200px] h-12 flex items-center justify-center gap-2 bg-primary text-white font-medium px-8 rounded-xl hover:bg-primaryHover transition-all shadow-[0_4px_14px_0_rgba(13,148,136,0.3)] hover:shadow-[0_6px_20px_rgba(13,148,136,0.23)] disabled:opacity-70 disabled:cursor-not-allowed">
+                            <svg id="spinner" class="animate-spin h-5 w-5 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                            <span id="buttonText">시뮬레이션 분석 시작</span>
+                        </button>
+                    </div>
+                </form>
+            </section>
+            
+            <div id="resultsWrapper" class="hidden space-y-8">
+                
+                <section class="grid grid-cols-1 md:grid-cols-2 gap-6" id="result-summary"></section>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <section class="lg:col-span-2 bg-surface p-6 rounded-2xl shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)] border border-slate-100">
+                        <h3 class="text-lg font-semibold text-slate-800 mb-4">체내 약물 농도 추이 <span class="text-sm font-normal text-slate-400 ml-2">(24시간 기준)</span></h3>
+                        <div class="relative h-[300px] w-full">
+                            <canvas id="concentrationChart"></canvas>
+                        </div>
+                    </section>
+                    
+                    <section class="bg-slate-800 text-slate-300 p-6 rounded-2xl shadow-lg flex flex-col justify-center">
+                        <h3 class="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                            <svg class="w-5 h-5 text-teal-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                            적용된 수리 모델
+                        </h3>
+                        <div id="formulas" class="space-y-4 text-sm font-mono leading-relaxed bg-slate-900/50 p-4 rounded-xl border border-slate-700">
+                            </div>
+                    </section>
                 </div>
 
-                <div>
-                    <h3 class="text-lg font-semibold mb-2 text-center">시간대별 체내 농도 변화표 (최대 48시간)</h3>
-                    <div class="overflow-x-auto rounded-lg">
-                        <table id="resultTable" class="w-full border-collapse result-table">
-                        </table>
+                <section class="bg-surface p-6 rounded-2xl shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)] border border-slate-100">
+                    <h3 class="text-lg font-semibold text-slate-800 mb-4">시간대별 세부 데이터 <span class="text-sm font-normal text-slate-400 ml-2">(48시간 시뮬레이션)</span></h3>
+                    <div class="overflow-x-auto rounded-xl border border-slate-200">
+                        <table id="resultTable" class="w-full border-collapse modern-table whitespace-nowrap">
+                            </table>
                     </div>
-                </div>
+                </section>
             </div>
         </main>
         
-        <footer class="mt-12 text-center text-sm text-gray-500">
+        <footer class="mt-16 text-center text-sm text-slate-400">
              <p>&copy; 2025 김정혁. All Rights Reserved.</p>
         </footer>
-
     </div>
 
     <script>
+        const form = document.getElementById('simulationForm');
         const simulateBtn = document.getElementById('simulateBtn');
         const buttonText = document.getElementById('buttonText');
         const spinner = document.getElementById('spinner');
-        const formulaSectionDiv = document.getElementById('formula-section');
-        const resultsDiv = document.getElementById('results');
-        const inputs = document.querySelectorAll('#dose, #weight, #mic, #interval');
+        const resultsWrapper = document.getElementById('resultsWrapper');
         let concentrationChart = null;
-        
-        // --- START: Added Code ---
-        // Add event listener to all input fields to handle 'Enter' key press
-        inputs.forEach(input => {
-            input.addEventListener('keydown', (event) => {
-                if (event.key === 'Enter') {
-                    event.preventDefault(); // Prevent default action
-                    simulateBtn.click(); // Trigger simulation button click
-                }
-            });
-        });
-        // --- END: Added Code ---
 
-        simulateBtn.addEventListener('click', () => {
+        // Chart.js 글로벌 폰트 설정
+        Chart.defaults.font.family = "'Pretendard', sans-serif";
+        Chart.defaults.color = '#64748b';
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault(); // 폼 기본 제출 방지
+
             const dose = parseFloat(document.getElementById('dose').value);
             const weight = parseFloat(document.getElementById('weight').value);
             const mic = parseFloat(document.getElementById('mic').value);
             const customInterval = parseFloat(document.getElementById('interval').value);
 
-            if (isNaN(dose) || dose < 1 || dose > 2000) { alert("복용량은 1에서 2000 사이의 값으로 입력해주세요."); return; }
-            if (isNaN(weight) || weight < 40 || weight > 80) { alert("체중은 40에서 80 사이의 값으로 입력해주세요."); return; }
-            if (isNaN(mic) || mic < 0.01 || mic > 5) { alert("목표 최소 약물 농도(MIC)는 0.01에서 5 사이의 값으로 입력해주세요."); return; }
-            if (isNaN(customInterval) || customInterval < 1 || customInterval > 24 || !Number.isInteger(customInterval)) { alert("사용자 설정 복용 간격은 1에서 24 사이의 자연수만 입력할 수 있습니다."); return; }
-            
-            // 로딩 시작
+            // 로딩 UI 처리
             simulateBtn.disabled = true;
-            buttonText.classList.add('hidden');
+            buttonText.innerText = '분석 중...';
             spinner.classList.remove('hidden');
-            formulaSectionDiv.classList.add('hidden');
-            resultsDiv.classList.add('hidden');
+            resultsWrapper.classList.add('hidden');
 
+            // 실제론 즉시 계산되지만, 분석하는 듯한 체감 경험(UX)을 위해 약간의 딜레이 부여
             setTimeout(() => {
                 const halfLife = 1.5;
                 const totalHours = 48;
@@ -219,13 +191,15 @@
                 displayResults(standardResults, customResults, mic, customInterval);
 
                 // 로딩 종료 및 결과 표시
-                formulaSectionDiv.classList.remove('hidden');
-                resultsDiv.classList.remove('hidden');
+                resultsWrapper.classList.remove('hidden');
                 simulateBtn.disabled = false;
-                buttonText.classList.remove('hidden');
+                buttonText.innerText = '시뮬레이션 분석 시작';
                 spinner.classList.add('hidden');
+                
+                // 결과 영역으로 부드럽게 스크롤
+                document.getElementById('result-summary').scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-            }, 1000); // 1초 딜레이
+            }, 600);
         });
 
         function runSimulation(cMax, interval, halfLife, totalHours, timeStep) {
@@ -235,7 +209,8 @@
 
             for (let t = 0; t <= totalHours; t += timeStep) {
                 let isDoseTime = false;
-                if (t >= timeOfLastDose + interval) {
+                // 미세한 부동소수점 오차 방지를 위해 약간의 마진 추가
+                if (t >= timeOfLastDose + interval - 0.001) {
                     currentConcentration += cMax;
                     timeOfLastDose = t;
                     isDoseTime = true;
@@ -249,16 +224,17 @@
 
         function displayFormulas(dose, weight, halfLife) {
             const formulasDiv = document.getElementById('formulas');
-            const cMaxFormula = `Cmax = (${dose}mg / 500mg) * (70kg / ${weight}kg) * 7.0 µg/mL`;
-            const decayFormula = `다음 농도 = 현재 농도 * 0.5 ^ (시간 간격 / ${halfLife}h)`;
-            const micRatioFormula = `비율(%) = (MIC 유지 시간 / 총 시간) * 100`;
-            const cMaxExplanation = `* 7.0 µg/mL은 70kg 표준 체중의 성인이 아목시실린 500mg을 복용했을 때 나타나는 평균적인 최고 혈중 농도로, 여러 임상 연구 데이터를 기반으로 설정된 기준값입니다.`;
-
             formulasDiv.innerHTML = `
-                <p><strong><span class="tooltip" data-tooltip="약을 복용한 후 체내 약물 농도가 가장 높을 때의 수치입니다. 복용량, 체중 등에 따라 달라집니다.">최고 혈중 농도 (Cmax)</span>:</strong><br>${cMaxFormula}</p>
-                <p class="mt-2 text-xs">${cMaxExplanation}</p>
-                <p class="mt-4"><strong><span class="tooltip" data-tooltip="반감기(Half-life)는 체내 약물 농도가 절반으로 줄어드는 데 걸리는 시간입니다. 이 시뮬레이터에서는 1.5시간으로 고정되어 있습니다.">농도 감소 (반감기)</span>:</strong><br>${decayFormula}</p>
-                <p class="mt-4"><strong><span class="tooltip" data-tooltip="전체 시뮬레이션 시간 중 약물 농도가 목표 최소 약물 농도(MIC) 이상으로 유지된 시간의 비율을 계산합니다.">최소 약물 농도(MIC) 유지 시간 비율</span>:</strong><br>${micRatioFormula}</p>
+                <div>
+                    <span class="text-teal-400">Cmax (최고혈중농도)</span><br>
+                    = (${dose} / 500) × (70 / ${weight}) × 7.0<br>
+                    <span class="text-slate-500 text-xs mt-1 block">※ 7.0µg/mL: 70kg 성인 500mg 기준치</span>
+                </div>
+                <div class="h-px bg-slate-700 my-2"></div>
+                <div>
+                    <span class="text-teal-400">농도 감소 (반감기 ${halfLife}h)</span><br>
+                    = 현재농도 × 0.5 ^ (Δt / ${halfLife})
+                </div>
             `;
         }
 
@@ -270,99 +246,141 @@
             const stdSuccessRate = (stdSuccessTime / totalTime) * 100;
             const customSuccessRate = (customSuccessTime / totalTime) * 100;
 
-            const successTooltip = "총 시뮬레이션 시간(48시간) 중에서 혈중 약물 농도가 목표 MIC 이상으로 유지된 시간의 비율입니다. 이 비율이 95% 이상일 때 이상적인 치료 효과를 기대할 수 있습니다.";
-
-            summaryDiv.innerHTML = `
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div class="p-4 rounded-lg ${stdSuccessRate > 95 ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}">
-                        <h4 class="font-bold text-lg">8시간 간격</h4>
-                        <p class="text-3xl font-bold">${stdSuccessRate.toFixed(1)}%</p>
-                        <p><span class="tooltip" data-tooltip="${successTooltip}">MIC 유지 시간 비율</span></p>
-                        <p class="mt-1 font-semibold">${stdSuccessRate > 95 ? '치료 성공' : '치료 실패 위험'}</p>
+            const createCard = (title, rate, isSuccess) => `
+                <div class="p-6 rounded-2xl border ${isSuccess ? 'bg-teal-50 border-teal-100' : 'bg-rose-50 border-rose-100'} flex flex-col justify-center relative overflow-hidden">
+                    <div class="absolute -right-4 -top-4 w-24 h-24 rounded-full ${isSuccess ? 'bg-teal-100/50' : 'bg-rose-100/50'}"></div>
+                    <p class="text-sm font-semibold ${isSuccess ? 'text-teal-600' : 'text-rose-600'} mb-1">${title}</p>
+                    <div class="flex items-end gap-2 z-10">
+                        <h4 class="text-4xl font-bold ${isSuccess ? 'text-teal-700' : 'text-rose-700'}">${rate.toFixed(1)}%</h4>
+                        <span class="text-sm mb-1 ${isSuccess ? 'text-teal-600/80' : 'text-rose-600/80'}">MIC 달성률</span>
                     </div>
-                    <div class="p-4 rounded-lg ${customSuccessRate > 95 ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}">
-                        <h4 class="font-bold text-lg">${customInterval}시간 간격</h4>
-                        <p class="text-3xl font-bold">${customSuccessRate.toFixed(1)}%</p>
-                        <p><span class="tooltip" data-tooltip="${successTooltip}">MIC 유지 시간 비율</span></p>
-                        <p class="mt-1 font-semibold">${customSuccessRate > 95 ? '치료 성공' : '치료 실패 위험'}</p>
-                    </div>
+                    <p class="mt-3 text-sm font-medium flex items-center gap-1.5 ${isSuccess ? 'text-teal-700' : 'text-rose-700'} z-10">
+                        <span class="inline-block w-2 h-2 rounded-full ${isSuccess ? 'bg-teal-500' : 'bg-rose-500'}"></span>
+                        ${isSuccess ? '목표 도달 (안정적)' : '치료 실패 위험 (간격 조정 필요)'}
+                    </p>
                 </div>
             `;
+
+            summaryDiv.innerHTML = createCard('표준 (8시간 간격)', stdSuccessRate, stdSuccessRate >= 95) +
+                                   createCard(`사용자 설정 (${customInterval}시간 간격)`, customSuccessRate, customSuccessRate >= 95);
 
             const table = document.getElementById('resultTable');
             let tableHTML = `
                 <thead>
                     <tr>
-                        <th rowspan="2">시간 (h)</th>
-                        <th colspan="2">8시간 간격</th>
-                        <th colspan="2">${customInterval}시간 간격</th>
+                        <th rowspan="2" class="border-r border-slate-200">경과 시간</th>
+                        <th colspan="2" class="border-r border-slate-200 text-teal-800">표준 (8시간 간격)</th>
+                        <th colspan="2" class="text-indigo-800">사용자 설정 (${customInterval}시간 간격)</th>
                     </tr>
-                    <tr>
+                    <tr class="text-sm">
                         <th>농도 (µg/mL)</th>
-                        <th>MIC 유지</th>
+                        <th class="border-r border-slate-200">상태</th>
                         <th>농도 (µg/mL)</th>
-                        <th>MIC 유지</th>
+                        <th>상태</th>
                     </tr>
                 </thead>
                 <tbody>
             `;
             
+            // 테이블 렌더링 (1시간 단위로 표시하여 표 길이 조절)
             for (let i = 0; i < standardData.length; i++) {
                 if (i % 2 !== 0 && i !== standardData.length -1) continue;
+                
                 const time = standardData[i].time;
-                const stdConcentration = standardData[i].concentration;
-                const customConcentration = customData[i].concentration;
-                const stdStatus = stdConcentration >= mic;
-                const customStatus = customConcentration >= mic;
+                const stdConc = standardData[i].concentration;
+                const customConc = customData[i].concentration;
+                const stdStatus = stdConc >= mic;
+                const customStatus = customConc >= mic;
 
-                const stdDoseText = standardData[i].isDoseTime ? " <span class='text-xs text-gray-500 font-normal'>(복용)</span>" : "";
-                const customDoseText = customData[i].isDoseTime ? " <span class='text-xs text-gray-500 font-normal'>(복용)</span>" : "";
+                const stdDoseBadge = standardData[i].isDoseTime ? `<span class="ml-2 inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-medium bg-teal-100 text-teal-800">복용</span>` : "";
+                const customDoseBadge = customData[i].isDoseTime ? `<span class="ml-2 inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-medium bg-indigo-100 text-indigo-800">복용</span>` : "";
 
                 tableHTML += `
                     <tr>
-                        <td>${time}</td>
-                        <td class="${stdStatus ? 'mic-success' : 'mic-fail'}">${stdConcentration.toFixed(3)}${stdDoseText}</td>
-                        <td class="${stdStatus ? 'mic-success' : 'mic-fail'}">${stdStatus ? '성공' : '실패'}</td>
-                        <td class="${customStatus ? 'mic-success' : 'mic-fail'}">${customConcentration.toFixed(3)}${customDoseText}</td>
-                        <td class="${customStatus ? 'mic-success' : 'mic-fail'}">${customStatus ? '성공' : '실패'}</td>
+                        <td class="font-medium text-slate-600 border-r border-slate-100 bg-slate-50/50">${time}h</td>
+                        <td class="${stdStatus ? 'text-slate-700' : 'mic-fail'}">${stdConc.toFixed(2)}${stdDoseBadge}</td>
+                        <td class="${stdStatus ? 'mic-success' : 'mic-fail'} border-r border-slate-100">${stdStatus ? '유지됨' : '미달'}</td>
+                        <td class="${customStatus ? 'text-slate-700' : 'mic-fail'}">${customConc.toFixed(2)}${customDoseBadge}</td>
+                        <td class="${customStatus ? 'mic-success' : 'mic-fail'}">${customStatus ? '유지됨' : '미달'}</td>
                     </tr>
                 `;
             }
             tableHTML += '</tbody>';
             table.innerHTML = tableHTML;
 
+            // 차트 렌더링
             const chartDataStd = standardData.filter(d => d.time <= 24);
             const chartDataCustom = customData.filter(d => d.time <= 24);
             const ctx = document.getElementById('concentrationChart').getContext('2d');
+            
             if (concentrationChart) {
                 concentrationChart.destroy();
             }
+            
             concentrationChart = new Chart(ctx, {
                 type: 'line',
                 data: {
                     labels: chartDataStd.map(d => d.time),
                     datasets: [
-                        { label: '8시간 간격', data: chartDataStd.map(d => d.concentration), borderColor: 'rgb(59, 130, 246)', backgroundColor: 'rgba(59, 130, 246, 0.1)', borderWidth: 2, pointRadius: 0, tension: 0.1, fill: true },
-                        { label: `${customInterval}시간 간격`, data: chartDataCustom.map(d => d.concentration), borderColor: 'rgb(239, 68, 68)', backgroundColor: 'rgba(239, 68, 68, 0.1)', borderWidth: 2, pointRadius: 0, tension: 0.1, fill: true },
-                        { label: '목표 MIC', data: Array(chartDataStd.length).fill(mic), borderColor: 'rgb(22, 163, 74)', borderWidth: 2, pointRadius: 0, borderDash: [5, 5], fill: false }
+                        { 
+                            label: '표준 (8h)', 
+                            data: chartDataStd.map(d => d.concentration), 
+                            borderColor: '#0d9488', // teal-600
+                            backgroundColor: 'rgba(13, 148, 136, 0.05)', 
+                            borderWidth: 2, 
+                            pointRadius: 0, 
+                            pointHoverRadius: 4,
+                            tension: 0.3, 
+                            fill: true 
+                        },
+                        { 
+                            label: `사용자 (${customInterval}h)`, 
+                            data: chartDataCustom.map(d => d.concentration), 
+                            borderColor: '#6366f1', // indigo-500
+                            backgroundColor: 'transparent', 
+                            borderWidth: 2, 
+                            pointRadius: 0,
+                            pointHoverRadius: 4,
+                            borderDash: [5, 5],
+                            tension: 0.3, 
+                            fill: false 
+                        },
+                        { 
+                            label: '목표 MIC', 
+                            data: Array(chartDataStd.length).fill(mic), 
+                            borderColor: '#f43f5e', // rose-500
+                            borderWidth: 1.5, 
+                            pointRadius: 0, 
+                            borderDash: [2, 4], 
+                            fill: false 
+                        }
                     ]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
+                    interaction: { mode: 'index', intersect: false },
                     scales: {
                         x: { 
-                            title: { display: true, text: '시간 (Hours)' }, 
-                            max: 24
+                            title: { display: true, text: '경과 시간 (h)', font: {size: 12} },
+                            grid: { display: false }
                         },
                         y: { 
-                            title: { display: true, text: '혈중 농도 (µg/mL)' }, 
-                            beginAtZero: true 
+                            title: { display: true, text: '혈중 농도 (µg/mL)', font: {size: 12} }, 
+                            beginAtZero: true,
+                            border: { display: false },
+                            grid: { color: '#f1f5f9' }
                         }
                     },
                     plugins: {
-                        tooltip: { mode: 'index', intersect: false, },
-                        legend: { position: 'top' }
+                        legend: { position: 'top', labels: { usePointStyle: true, boxWidth: 8 } },
+                        tooltip: {
+                            backgroundColor: 'rgba(15, 23, 42, 0.9)',
+                            titleFont: { size: 13 },
+                            bodyFont: { size: 12 },
+                            padding: 10,
+                            cornerRadius: 8
+                        }
                     }
                 }
             });
