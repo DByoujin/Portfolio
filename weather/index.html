@@ -11,150 +11,178 @@
     <style>
         body {
             font-family: 'Noto Sans KR', sans-serif;
-            background-color: #FDFCFB; /* 더 부드러운 크림색 배경 */
-            color: #484258; 
+            background-color: #F8FAFC; 
+            color: #334155; 
         }
-        .gradient-header {
-            background: linear-gradient(135deg, #fce38a 0%, #f38181 100%);
+        .gradient-bg {
+            background: linear-gradient(135deg, #3B82F6 0%, #4F46E5 100%);
         }
-        .soft-shadow {
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.04);
-            transition: all 0.4s cubic-bezier(.25,.8,.25,1);
+        .card-shadow {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            transition: all 0.25s ease-in-out;
         }
-        .soft-shadow:hover {
-            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.1);
-            transform: translateY(-6px);
+        .card-shadow:hover {
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.06);
+            transform: translateY(-2px);
         }
-        .section-title {
-            @apply text-5xl font-bold mb-4 text-center;
-            color: #3a354f;
-            font-weight: 700; /* 제목 폰트 굵기 조정 */
-        }
-        .section-subtitle {
-            @apply text-xl text-center text-gray-500 mb-16 max-w-3xl mx-auto;
-        }
-        .tech-tag {
-            @apply text-base font-medium mr-3 mb-3 px-5 py-2 rounded-lg inline-block;
-            border: 1px solid #EAEAEA;
-            background-color: white;
-            color: #5C5470;
-            transition: all 0.2s ease-in-out;
-        }
-        .tech-tag:hover {
-            transform: scale(1.05);
-            border-color: #FF9A9E;
-        }
-        /* 페이지 로딩 애니메이션 */
         .reveal {
             opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            transform: translateY(16px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
         .reveal.visible {
             opacity: 1;
             transform: translateY(0);
         }
-        /* 인터랙티브 갤러리 버튼 스타일 */
-        .gallery-btn {
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: 1px solid #EAEAEA;
-            background-color: #ffffff;
-            color: #5C5470;
+        .chip-btn {
+            transition: all 0.15s ease-in-out;
+            border: 1px solid #E2E8F0;
+            background-color: #FFFFFF;
+            color: #64748B;
         }
-        .gallery-btn:hover {
-            background-color: #fef3c7; /* 부드러운 노란색 */
-            border-color: #fce38a;
-            color: #3a354f;
+        .chip-btn:hover {
+            background-color: #F8FAFC;
+            border-color: #CBD5E1;
+            color: #1E293B;
         }
-        .gallery-btn.active {
-            background-color: #f38181;
-            border-color: #f38181;
-            color: white;
-            transform: scale(1.05);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        .chip-btn.active {
+            background-color: #4F46E5;
+            border-color: #4F46E5;
+            color: #FFFFFF;
         }
     </style>
 </head>
-<body class="antialiased">
+<body class="antialiased min-h-screen flex flex-col justify-between">
 
     <!-- Header -->
-    <header class="gradient-header text-white relative overflow-hidden">
-        <div class="container mx-auto px-6 py-28 text-center">
-            <h1 class="text-7xl md:text-8xl font-black mb-4 reveal tracking-tighter">날씨봇</h1>
-            <p class="text-xl md:text-2xl max-w-3xl mx-auto reveal">매일 아침, 당신의 인스타그램에 날씨를 알려드려요</p>
+    <header class="gradient-bg text-white relative">
+        <div class="container mx-auto px-6 py-20 text-center relative z-10">
+            <span class="inline-block bg-white/10 text-white text-xs font-semibold px-3 py-1 rounded-full mb-4">
+                고림고 학생들을 위한 날씨 알리미
+            </span>
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-4 tracking-tight reveal">
+                아침 등교길 날씨,<br class="md:hidden"> 인스타로 바로 확인하세요
+            </h1>
+            <p class="text-base md:text-lg text-slate-100 max-w-xl mx-auto font-light leading-relaxed reveal">
+                매번 기상청 들어가기 귀찮으셨죠? <br>
+                오늘 무슨 옷을 입을지, 우산은 챙겨야 할지 정리해서 올려드려요.
+            </p>
         </div>
-        <div class="absolute bottom-0 left-0 w-full h-24">
-            <div class="absolute bottom-0 w-full h-20" style="background: url(&quot;data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120'%3e%3cpath d='M1440 120H0V26.2268C240 80.7303 480 107.982 720 107.982C960 107.982 1200 80.7303 1440 26.2268V120Z' fill='%23FDFCFB'/%3e%3c/svg%3e&quot;) center bottom / 100% no-repeat;"></div>
+        <!-- Wave Divider -->
+        <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] transform rotate-180">
+            <svg viewBox="0 0 1200 120" preserveAspectRatio="none" class="relative block w-full h-[24px] text-[#F8FAFC] fill-current">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"></path>
+            </svg>
         </div>
     </header>
     
     <!-- Main Content -->
-    <main class="container mx-auto px-6 py-20">
+    <main class="container mx-auto px-6 py-12 flex-grow max-w-5xl">
 
         <!-- How it works Section -->
-        <section id="how-it-works" class="mb-28">
-            <h2 class="section-title reveal">날씨봇이 일하는 법</h2>
-            <p class="section-subtitle reveal">밤새 조용히, 하지만 부지런히 당신의 아침을 준비해요.</p>
-            <div class="grid md:grid-cols-3 gap-12 text-center relative">
-                <div class="absolute top-1/2 left-0 w-full h-1 hidden md:block" style="transform: translateY(-50%);">
-                    <svg width="100%" height="100%"><line x1="0" y1="50%" x2="100%" y2="50%" stroke-width="2" stroke="#E5E7EB" stroke-dasharray="8 8"/></svg>
+        <section id="how-it-works" class="mb-24">
+            <div class="text-center mb-12">
+                <h2 class="text-2xl md:text-3xl font-bold text-slate-900 reveal">날씨봇은 어떻게 작동하나요?</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-white rounded-xl p-6 card-shadow border border-slate-100 reveal">
+                    <div class="text-xl mb-4">🔍</div>
+                    <h3 class="text-lg font-bold mb-2 text-slate-900">1. 오늘 날씨 확인</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed">매일 새벽, 기상청에 등록된 고림동 동네예보 정보를 알아서 확인합니다.</p>
                 </div>
-                <div class="relative z-10 reveal">
-                    <div class="bg-white rounded-full w-24 h-24 flex items-center justify-center mx-auto mb-4 border-4 border-amber-200 text-3xl">🛰️</div>
-                    <h3 class="text-2xl font-bold mb-2" style="color:#3a354f">1. 정보 수집</h3>
-                    <p>기상청이 발표한 내용을 통해 최신 날씨 예보를 꼼꼼히 확인해요.</p>
+                <!-- Card 2 -->
+                <div class="bg-white rounded-xl p-6 card-shadow border border-slate-100 reveal">
+                    <div class="text-xl mb-4">🎨</div>
+                    <h3 class="text-lg font-bold mb-2 text-slate-900">2. 카드 뉴스 제작</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed">비가 오거나 눈이 내리는 날씨에 맞춰 보기 편한 카드 뉴스 이미지를 자동으로 만듭니다.</p>
                 </div>
-                <div class="relative z-10 reveal">
-                    <div class="bg-white rounded-full w-24 h-24 flex items-center justify-center mx-auto mb-4 border-4 border-pink-200 text-3xl">🎨</div>
-                    <h3 class="text-2xl font-bold mb-2" style="color:#3a354f">2. 이미지 제작</h3>
-                    <p>날씨에 맞는 예쁜 옷을 입혀 보기좋은 이미지로 만들어요.</p>
-                </div>
-                <div class="relative z-10 reveal">
-                    <div class="bg-white rounded-full w-24 h-24 flex items-center justify-center mx-auto mb-4 border-4 border-sky-200 text-3xl">💌</div>
-                    <h3 class="text-2xl font-bold mb-2" style="color:#3a354f">3. 자동 포스팅</h3>
-                    <p>아침 시간에 맞춰 당신의 인스타그램으로 소식을 배달해요.</p>
+                <!-- Card 3 -->
+                <div class="bg-white rounded-xl p-6 card-shadow border border-slate-100 reveal">
+                    <div class="text-xl mb-4">📤</div>
+                    <h3 class="text-lg font-bold mb-2 text-slate-900">3. 등교 전 자동 업로드</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed">집에서 나가기 전에 바로 볼 수 있도록 정해진 시간마다 인스타그램에 업로드합니다.</p>
                 </div>
             </div>
         </section>
 
         <!-- Gallery Section -->
-        <section id="advisory-gallery" class="mb-28">
-            <h2 class="section-title reveal">날씨에 따라 바뀌는 얼굴</h2>
-            <p class="section-subtitle reveal">폭염, 호우, 대설 같은 특별한 날엔, 걱정하는 마음을 담아 디자인을 바꿔 알려줘요.</p>
-            
-            <!-- Main Image Viewer -->
-            <div class="max-w-xl mx-auto mb-8 reveal soft-shadow rounded-2xl">
-                <img id="gallery-image" src="DEV2_00_특보없음.jpg" alt="기상특보 예시" class="rounded-2xl w-full transition-opacity duration-300">
+        <section id="advisory-gallery" class="mb-12">
+            <div class="text-center mb-10">
+                <h2 class="text-2xl md:text-3xl font-bold text-slate-900 reveal mb-3">이런 카드가 올라가요</h2>
+                <p class="text-slate-500 max-w-xl mx-auto text-sm reveal">폭염이나 폭우, 대설 등 주의보가 내린 날에는 한눈에 알아볼 수 있게 디자인이 바뀝니다.</p>
             </div>
+            
+            <div class="grid lg:grid-cols-12 gap-8 items-start">
+                <!-- Buttons -->
+                <div class="lg:col-span-5 flex flex-col gap-2 order-2 lg:order-1">
+                    <span class="text-xs font-semibold text-slate-400 mb-1 px-1">상황별 카드 예시</span>
+                    <div id="gallery-buttons" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-1 gap-1.5">
+                        <!-- Buttons injected via JS -->
+                    </div>
+                </div>
 
-            <!-- Image Selector Buttons -->
-            <div id="gallery-buttons" class="flex flex-wrap justify-center gap-3 reveal max-w-3xl mx-auto">
-                <!-- Buttons will be generated by JavaScript -->
+                <!-- Instagram Feed Mockup -->
+                <div class="lg:col-span-7 flex justify-center order-1 lg:order-2">
+                    <div class="bg-white rounded-xl border border-slate-200/60 shadow-lg overflow-hidden w-full max-w-[380px] reveal">
+                        <!-- Header -->
+                        <div class="flex items-center justify-between px-4 py-2.5 border-b border-slate-100">
+                            <div class="flex items-center gap-2">
+                                <div class="w-7 h-7 rounded-full bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600 p-[1.5px] flex items-center justify-center">
+                                    <div class="bg-white w-full h-full rounded-full flex items-center justify-center text-xs">☀️</div>
+                                </div>
+                                <div>
+                                    <span class="text-xs font-bold text-slate-800 block">gorim_weather_bot</span>
+                                    <span class="text-[10px] text-slate-400 block -mt-1">고림고등학교</span>
+                                </div>
+                            </div>
+                            <svg class="w-4 h-4 text-slate-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
+                        </div>
+                        <!-- Image -->
+                        <div class="aspect-square bg-slate-50 relative overflow-hidden">
+                            <img id="gallery-image" src="DEV2_00_특보없음.jpg" alt="기상특보 예시" class="w-full h-full object-cover transition-all duration-200">
+                        </div>
+                        <!-- Actions -->
+                        <div class="p-3 border-t border-slate-100">
+                            <div class="flex items-center justify-between mb-2">
+                                <div class="flex gap-3 text-slate-700">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+                                </div>
+                                <svg class="w-5 h-5 text-slate-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/></svg>
+                            </div>
+                            <div class="text-xs text-slate-600 leading-relaxed">
+                                <span class="font-bold text-slate-800 mr-1">gorim_weather_bot</span>오늘 우리 학교 날씨입니다. 등교할 때 옷차림 참고하세요! 🎒🌦️ <br>
+                                <span class="text-sky-600">#고림고 #고림고날씨 #날씨봇</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
 
     <!-- Footer -->
-    <footer class="text-center p-12 mt-24" style="background-color: #F8F4F0;">
-        <p class="text-gray-500">A friendly bot for your feed.</p>
+    <footer class="bg-slate-900 text-slate-500 text-center py-8 border-t border-slate-800">
+        <div class="container mx-auto px-6 max-w-5xl flex flex-col md:flex-row items-center justify-between gap-2">
+            <span class="text-xs font-semibold text-slate-300">고림고등학교 날씨봇</span>
+            <p class="text-[11px]">학교 인스타그램 날씨 알림이 서비스</p>
+        </div>
     </footer>
 
     <!-- Scripts -->
     <script>
-        // 페이지 로딩 시 애니메이션 스크립트
         document.addEventListener('DOMContentLoaded', () => {
             const revealElements = document.querySelectorAll('.reveal');
             revealElements.forEach((element, index) => {
-                // 각 요소에 순차적인 딜레이를 적용하여 애니메이션 효과를 줍니다.
-                element.style.transitionDelay = `${index * 100}ms`;
+                element.style.transitionDelay = `${index * 60}ms`;
                 element.classList.add('visible');
             });
         });
 
-        // 인터랙티브 갤러리 스크립트
         const galleryImages = [
-            { src: "DEV2_00_특보없음.jpg", title: "특보 없음" },
+            { src: "DEV2_00_특보없음.jpg", title: "평소 (특보 없음)" },
             { src: "DEV2_01_폭염주의보.jpg", title: "폭염주의보" },
             { src: "DEV2_04_폭염경보.jpg", title: "폭염경보" },
             { src: "DEV2_02_호우주의보.jpg", title: "호우주의보" },
@@ -163,8 +191,8 @@
             { src: "DEV2_08_대설경보.jpg", title: "대설경보" },
             { src: "DEV2_09_건조주의보.jpg", title: "건조주의보" },
             { src: "DEV2_10_건조경보.jpg", title: "건조경보" },
-            { src: "DEV2_03_폭염주의보_호우주의보.jpg", title: "폭염+호우 주의보" },
-            { src: "DEV2_06_폭염경보_호우경보.jpg", title: "폭염+호우 경보" }
+            { src: "DEV2_03_폭염주의보_호우주의보.jpg", title: "폭염 + 호우주의보" },
+            { src: "DEV2_06_폭염경보_호우경보.jpg", title: "폭염 + 호우경보" }
         ];
 
         const mainImage = document.getElementById('gallery-image');
@@ -174,7 +202,7 @@
         galleryImages.forEach((image, index) => {
             const button = document.createElement('button');
             button.textContent = image.title;
-            button.className = 'px-4 py-2 text-sm font-medium rounded-full gallery-btn';
+            button.className = 'px-3 py-2 text-xs font-medium rounded-lg chip-btn text-left transition-all duration-150';
             
             if (index === 0) {
                 button.classList.add('active');
@@ -182,13 +210,13 @@
             }
 
             button.addEventListener('click', () => {
-                // 부드러운 이미지 전환 효과
-                mainImage.style.opacity = '0';
+                mainImage.style.opacity = '0.3';
+                
                 setTimeout(() => {
                     mainImage.src = image.src;
                     mainImage.alt = image.title;
                     mainImage.style.opacity = '1';
-                }, 300);
+                }, 100);
                 
                 if (activeBtn) {
                     activeBtn.classList.remove('active');
@@ -202,4 +230,3 @@
     </script>
 </body>
 </html>
-
